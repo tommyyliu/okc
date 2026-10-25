@@ -2,6 +2,18 @@
 
 Read TASK.md first: it has the problem, its bounds, the rules, and how to submit. This adds what an agent needs.
 
+## Project layout
+
+Read README.md for the current workflow. Edit `projection/` and regenerate
+`submission.py` with `python -m tools.build`; do not edit the generated file.
+`projection/configs.py` has explicit settings for all thirty scored cases.
+PDL is the measured default; combined and TMA remain experimental. Preserve
+that distinction when reporting performance. Run `python -m unittest discover
+-s tests -v` and `python -m tools.build --check` after a refactor. CPU checks do
+not establish GPU correctness. Historical attempts and compiler artifacts are
+available at the `pre-reorganization` Git tag; new temporary outputs belong in
+the ignored `build/` directory, and retained evidence belongs in `results/`.
+
 ## Working
 
 ```bash

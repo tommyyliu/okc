@@ -1,6 +1,0 @@
-ptxas info    : 0 bytes gmem
-ptxas info    : Compiling entry function '_gemm' for 'sm_90a'
-ptxas info    : Function properties for _gemm
-    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
-ptxas info    : Used 64 registers, used 1 barriers
-ptxas info    : Compile time = 39.199 ms

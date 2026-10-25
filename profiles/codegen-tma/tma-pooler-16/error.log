@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj/inspect_codegen.py", line 297, in audit
-    raise RuntimeError("TMA/WGMMA instructions missing from generated kernel")
-RuntimeError: TMA/WGMMA instructions missing from generated kernel
