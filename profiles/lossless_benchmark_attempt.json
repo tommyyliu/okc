@@ -1,0 +1,5 @@
+{
+  "status": "blocked",
+  "error": "GPU benchmark dependencies unavailable: No module named 'torch'",
+  "cases": []
+}

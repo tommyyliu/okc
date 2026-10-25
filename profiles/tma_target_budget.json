@@ -1,0 +1,14 @@
+{
+  "source_result": "submission-8",
+  "target_speedup": 1.61,
+  "source_speedup": 1.2310593903390596,
+  "scenarios": {
+    "tma_shapes_10pct_less_latency": 1.3154038352995798,
+    "tma_shapes_20pct_less_latency": 1.4136825202767194,
+    "tma_shapes_30pct_less_latency": 1.5298298613174104,
+    "tma_shapes_40pct_less_latency": 1.669460609809598,
+    "tma_shapes_at_reported_floor": 1.5902042963660885
+  },
+  "scope": "Hypothetical score sensitivity, not kernel predictions. Floors use the task-reported hardware limits.",
+  "remaining_latency_reduction": 0.23536683829872074
+}

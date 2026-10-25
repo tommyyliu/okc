@@ -1,0 +1,7 @@
+ptxas warning : Registers are spilled to local memory in function '_lossless_gemm', 24 bytes spill stores, 24 bytes spill loads
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_lossless_gemm' for 'sm_90a'
+ptxas info    : Function properties for _lossless_gemm
+    24 bytes stack frame, 24 bytes spill stores, 24 bytes spill loads
+ptxas info    : Used 255 registers, used 1 barriers, 24 bytes cumulative stack size
+ptxas info    : Compile time = 478.581 ms

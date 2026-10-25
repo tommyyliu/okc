@@ -1,0 +1,1858 @@
+{
+  "created_at": "2026-10-24T21:59:05.468465+00:00",
+  "target": "cuda:90:32 (sm_90a)",
+  "status": "ok",
+  "planned_jobs": [
+    {
+      "name": "gemv-qkv-raw",
+      "source": "selective",
+      "kernel": "_gemv_full",
+      "signature": {
+        "X": "*bf16",
+        "W": "*bf16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "N": 2304,
+        "K": 8192,
+        "ROWS": 1,
+        "BLOCK_K": 8192
+      },
+      "num_warps": 4,
+      "num_stages": 3
+    },
+    {
+      "name": "gemv-qkv-lossless",
+      "source": "lossless",
+      "kernel": "_lossless_gemv",
+      "signature": {
+        "X": "*bf16",
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "N": 2304,
+        "K": 8192,
+        "ROWS": 1,
+        "GROUPS_K": 32
+      },
+      "num_warps": 4,
+      "num_stages": 3
+    },
+    {
+      "name": "gemv-pooler-raw",
+      "source": "selective",
+      "kernel": "_gemv_full",
+      "signature": {
+        "X": "*bf16",
+        "W": "*bf16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "N": 4096,
+        "K": 8192,
+        "ROWS": 1,
+        "BLOCK_K": 8192
+      },
+      "num_warps": 4,
+      "num_stages": 3
+    },
+    {
+      "name": "gemv-pooler-lossless",
+      "source": "lossless",
+      "kernel": "_lossless_gemv",
+      "signature": {
+        "X": "*bf16",
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "N": 4096,
+        "K": 8192,
+        "ROWS": 1,
+        "GROUPS_K": 32
+      },
+      "num_warps": 4,
+      "num_stages": 3
+    },
+    {
+      "name": "gemm-pooler-16-raw",
+      "source": "selective",
+      "kernel": "_stream_gemm",
+      "signature": {
+        "X": "*bf16",
+        "W": "*bf16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 16,
+        "N": 4096,
+        "K": 8192,
+        "S": 4,
+        "BM": 16,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 4,
+      "num_stages": 3
+    },
+    {
+      "name": "gemm-pooler-16-lossless",
+      "source": "lossless",
+      "kernel": "_lossless_gemm",
+      "signature": {
+        "X": "*bf16",
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 16,
+        "N": 4096,
+        "K": 8192,
+        "S": 4,
+        "BM": 16,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 4,
+      "num_stages": 3
+    },
+    {
+      "name": "gemm-pooler-256-raw",
+      "source": "selective",
+      "kernel": "_stream_gemm",
+      "signature": {
+        "X": "*bf16",
+        "W": "*bf16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 256,
+        "N": 4096,
+        "K": 8192,
+        "S": 2,
+        "BM": 128,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 8,
+      "num_stages": 3
+    },
+    {
+      "name": "gemm-pooler-256-lossless",
+      "source": "lossless",
+      "kernel": "_lossless_gemm",
+      "signature": {
+        "X": "*bf16",
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 256,
+        "N": 4096,
+        "K": 8192,
+        "S": 2,
+        "BM": 128,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 8,
+      "num_stages": 3
+    },
+    {
+      "name": "gemm-unpooler-128-raw",
+      "source": "selective",
+      "kernel": "_stream_gemm",
+      "signature": {
+        "X": "*bf16",
+        "W": "*bf16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 128,
+        "N": 8192,
+        "K": 4096,
+        "S": 2,
+        "BM": 128,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 8,
+      "num_stages": 3
+    },
+    {
+      "name": "gemm-unpooler-128-lossless",
+      "source": "lossless",
+      "kernel": "_lossless_gemm",
+      "signature": {
+        "X": "*bf16",
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 128,
+        "N": 8192,
+        "K": 4096,
+        "S": 2,
+        "BM": 128,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 8,
+      "num_stages": 3
+    },
+    {
+      "name": "decoder-original",
+      "source": "probes",
+      "kernel": "_decode_matrix",
+      "signature": {
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "GROUPS": 131072,
+        "G": 4,
+        "ALIGNED": false
+      },
+      "num_warps": 4,
+      "num_stages": 1
+    },
+    {
+      "name": "decoder-aligned",
+      "source": "probes",
+      "kernel": "_decode_matrix",
+      "signature": {
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "GROUPS": 131072,
+        "G": 4,
+        "ALIGNED": true
+      },
+      "num_warps": 4,
+      "num_stages": 1
+    },
+    {
+      "name": "decoder-group-branch",
+      "source": "probes",
+      "kernel": "_decode_group",
+      "signature": {
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16"
+      },
+      "constants": {},
+      "num_warps": 4,
+      "num_stages": 1
+    },
+    {
+      "name": "raw-copy",
+      "source": "probes",
+      "kernel": "_copy_matrix",
+      "signature": {
+        "W": "*bf16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "TOTAL": 33554432,
+        "BLOCK": 1024
+      },
+      "num_warps": 4,
+      "num_stages": 1
+    }
+  ],
+  "jobs": [
+    {
+      "name": "gemv-qkv-raw",
+      "source": "selective",
+      "kernel": "_gemv_full",
+      "signature": {
+        "X": "*bf16",
+        "W": "*bf16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "N": 2304,
+        "K": 8192,
+        "ROWS": 1,
+        "BLOCK_K": 8192
+      },
+      "num_warps": 4,
+      "num_stages": 3,
+      "source_sha256": {
+        "submission_triton_selective.py": "6c3bf8a7554abcb372647b1192b5babd279d7fd0d48e8a51b223cc2c2af0286b"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/tmp/okc-aot-dqgwm9ex/venv/lib64/python3.14/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "939cca10114fc80330e3ede52bbf306b148a07e84fd0d0a8c79ce169bb21228a",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": null,
+        "name": "_gemv_full",
+        "num_ctas": 1,
+        "num_stages": 3,
+        "num_warps": 4,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 16,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {
+          "ld.global.v4.b32": 16
+        },
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "ld.shared.b32": 1
+        },
+        "mma_instructions": {},
+        "cp_async_instructions": {},
+        "shuffle_instructions": {
+          "shfl.sync.bfly.b32": 7
+        },
+        "layout_conversions_in_ir": 2,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "ptxas": {
+        "command": [
+          "/tmp/okc-aot-dqgwm9ex/venv/lib/python3.14/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "profiles/codegen-triton380/gemv-qkv-raw/kernel.ptx",
+          "--output-file",
+          "profiles/codegen-triton380/gemv-qkv-raw/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 52,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "gemv-qkv-lossless",
+      "source": "lossless",
+      "kernel": "_lossless_gemv",
+      "signature": {
+        "X": "*bf16",
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "N": 2304,
+        "K": 8192,
+        "ROWS": 1,
+        "GROUPS_K": 32
+      },
+      "num_warps": 4,
+      "num_stages": 3,
+      "source_sha256": {
+        "submission_triton_lossless.py": "3b5f1c8c25bdb94112087c545efdf9af0452eb681a1fcfad10f4df87a62ece25"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/tmp/okc-aot-dqgwm9ex/venv/lib64/python3.14/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "969401d4bea72d58c4d37aaa4d1bf70345079a19d6f62914eab0bfd68df6ca6d",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": null,
+        "name": "_lossless_gemv",
+        "num_ctas": 1,
+        "num_stages": 3,
+        "num_warps": 4,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 4096,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {
+          "ld.global.v4.b32": 20,
+          "ld.global.b8": 128
+        },
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "ld.shared.b32": 1
+        },
+        "mma_instructions": {},
+        "cp_async_instructions": {},
+        "shuffle_instructions": {
+          "shfl.sync.bfly.b32": 7
+        },
+        "layout_conversions_in_ir": 2,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "ptxas": {
+        "command": [
+          "/tmp/okc-aot-dqgwm9ex/venv/lib/python3.14/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "profiles/codegen-triton380/gemv-qkv-lossless/kernel.ptx",
+          "--output-file",
+          "profiles/codegen-triton380/gemv-qkv-lossless/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 188,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "gemv-pooler-raw",
+      "source": "selective",
+      "kernel": "_gemv_full",
+      "signature": {
+        "X": "*bf16",
+        "W": "*bf16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "N": 4096,
+        "K": 8192,
+        "ROWS": 1,
+        "BLOCK_K": 8192
+      },
+      "num_warps": 4,
+      "num_stages": 3,
+      "source_sha256": {
+        "submission_triton_selective.py": "6c3bf8a7554abcb372647b1192b5babd279d7fd0d48e8a51b223cc2c2af0286b"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/tmp/okc-aot-dqgwm9ex/venv/lib64/python3.14/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "ae010e1aefc05eaf2baf3d0a1f6c48c7e02f8e13ed8ff9662f2a97ec3d7a3485",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": null,
+        "name": "_gemv_full",
+        "num_ctas": 1,
+        "num_stages": 3,
+        "num_warps": 4,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 16,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {
+          "ld.global.v4.b32": 16
+        },
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "ld.shared.b32": 1
+        },
+        "mma_instructions": {},
+        "cp_async_instructions": {},
+        "shuffle_instructions": {
+          "shfl.sync.bfly.b32": 7
+        },
+        "layout_conversions_in_ir": 2,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "ptxas": {
+        "command": [
+          "/tmp/okc-aot-dqgwm9ex/venv/lib/python3.14/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "profiles/codegen-triton380/gemv-pooler-raw/kernel.ptx",
+          "--output-file",
+          "profiles/codegen-triton380/gemv-pooler-raw/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 52,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "gemv-pooler-lossless",
+      "source": "lossless",
+      "kernel": "_lossless_gemv",
+      "signature": {
+        "X": "*bf16",
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "N": 4096,
+        "K": 8192,
+        "ROWS": 1,
+        "GROUPS_K": 32
+      },
+      "num_warps": 4,
+      "num_stages": 3,
+      "source_sha256": {
+        "submission_triton_lossless.py": "3b5f1c8c25bdb94112087c545efdf9af0452eb681a1fcfad10f4df87a62ece25"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/tmp/okc-aot-dqgwm9ex/venv/lib64/python3.14/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "cf515fafb322a92dc729f6f9b63a9a92861c22d6ac31ac86a7b8fb66cbc5603b",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": null,
+        "name": "_lossless_gemv",
+        "num_ctas": 1,
+        "num_stages": 3,
+        "num_warps": 4,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 4096,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {
+          "ld.global.v4.b32": 20,
+          "ld.global.b8": 128
+        },
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "ld.shared.b32": 1
+        },
+        "mma_instructions": {},
+        "cp_async_instructions": {},
+        "shuffle_instructions": {
+          "shfl.sync.bfly.b32": 7
+        },
+        "layout_conversions_in_ir": 2,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "ptxas": {
+        "command": [
+          "/tmp/okc-aot-dqgwm9ex/venv/lib/python3.14/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "profiles/codegen-triton380/gemv-pooler-lossless/kernel.ptx",
+          "--output-file",
+          "profiles/codegen-triton380/gemv-pooler-lossless/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 188,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "gemm-pooler-16-raw",
+      "source": "selective",
+      "kernel": "_stream_gemm",
+      "signature": {
+        "X": "*bf16",
+        "W": "*bf16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 16,
+        "N": 4096,
+        "K": 8192,
+        "S": 4,
+        "BM": 16,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 4,
+      "num_stages": 3,
+      "source_sha256": {
+        "submission_triton_selective.py": "6c3bf8a7554abcb372647b1192b5babd279d7fd0d48e8a51b223cc2c2af0286b"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/tmp/okc-aot-dqgwm9ex/venv/lib64/python3.14/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "8b91ff0e0ba1e701619fa830527b6f723a2dfc74c83670368691519e44dc7873",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": null,
+        "name": "_stream_gemm",
+        "num_ctas": 1,
+        "num_stages": 3,
+        "num_warps": 4,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 40960,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {},
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "ld.shared.v4.b32": 2
+        },
+        "mma_instructions": {
+          "mma.sync.aligned.m16n8k16.row.col.f32.bf16.bf16.f32": 16
+        },
+        "cp_async_instructions": {
+          "cp.async.cg.shared.global": 30,
+          "cp.async.wait_group": 2
+        },
+        "shuffle_instructions": {},
+        "layout_conversions_in_ir": 1,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "ptxas": {
+        "command": [
+          "/tmp/okc-aot-dqgwm9ex/venv/lib/python3.14/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "profiles/codegen-triton380/gemm-pooler-16-raw/kernel.ptx",
+          "--output-file",
+          "profiles/codegen-triton380/gemm-pooler-16-raw/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 40,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "gemm-pooler-16-lossless",
+      "source": "lossless",
+      "kernel": "_lossless_gemm",
+      "signature": {
+        "X": "*bf16",
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 16,
+        "N": 4096,
+        "K": 8192,
+        "S": 4,
+        "BM": 16,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 4,
+      "num_stages": 3,
+      "source_sha256": {
+        "submission_triton_lossless.py": "3b5f1c8c25bdb94112087c545efdf9af0452eb681a1fcfad10f4df87a62ece25"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/tmp/okc-aot-dqgwm9ex/venv/lib64/python3.14/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "ece22c0d1afc55843165d323cbc81423a1502ebc72fdf2b3a7b1697c463f2f90",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": null,
+        "name": "_lossless_gemm",
+        "num_ctas": 1,
+        "num_stages": 3,
+        "num_warps": 4,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 24576,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {
+          "ld.global.b32": 64,
+          "ld.global.b16": 64,
+          "ld.global.b8": 128
+        },
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "ld.shared.v2.b32": 32,
+          "ld.shared.v4.b32": 2
+        },
+        "mma_instructions": {
+          "mma.sync.aligned.m16n8k16.row.col.f32.bf16.bf16.f32": 16
+        },
+        "cp_async_instructions": {
+          "cp.async.cg.shared.global": 6,
+          "cp.async.wait_group": 2
+        },
+        "shuffle_instructions": {},
+        "layout_conversions_in_ir": 1,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "ptxas": {
+        "command": [
+          "/tmp/okc-aot-dqgwm9ex/venv/lib/python3.14/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "profiles/codegen-triton380/gemm-pooler-16-lossless/kernel.ptx",
+          "--output-file",
+          "profiles/codegen-triton380/gemm-pooler-16-lossless/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 255,
+        "stack_frame_bytes": 24,
+        "spill_store_bytes": 24,
+        "spill_load_bytes": 24
+      },
+      "status": "ok"
+    },
+    {
+      "name": "gemm-pooler-256-raw",
+      "source": "selective",
+      "kernel": "_stream_gemm",
+      "signature": {
+        "X": "*bf16",
+        "W": "*bf16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 256,
+        "N": 4096,
+        "K": 8192,
+        "S": 2,
+        "BM": 128,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 8,
+      "num_stages": 3,
+      "source_sha256": {
+        "submission_triton_selective.py": "6c3bf8a7554abcb372647b1192b5babd279d7fd0d48e8a51b223cc2c2af0286b"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/tmp/okc-aot-dqgwm9ex/venv/lib64/python3.14/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "9d3a293695efd6b382624a3e5eca58f397dfb0dec4e7d8003166672209fbe5c4",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": null,
+        "name": "_stream_gemm",
+        "num_ctas": 1,
+        "num_stages": 3,
+        "num_warps": 8,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 147456,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {},
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "ld.shared.v2.b32": 16
+        },
+        "mma_instructions": {
+          "wgmma.mma_async.sync.aligned.m64n64k16.f32.bf16.bf16": 8,
+          "wgmma.wait_group.sync.aligned": 2
+        },
+        "cp_async_instructions": {
+          "cp.async.cg.shared.global": 36,
+          "cp.async.wait_group": 2
+        },
+        "shuffle_instructions": {
+          "shfl.sync.idx.b32": 1
+        },
+        "layout_conversions_in_ir": 1,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "ptxas": {
+        "command": [
+          "/tmp/okc-aot-dqgwm9ex/venv/lib/python3.14/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "profiles/codegen-triton380/gemm-pooler-256-raw/kernel.ptx",
+          "--output-file",
+          "profiles/codegen-triton380/gemm-pooler-256-raw/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 94,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "gemm-pooler-256-lossless",
+      "source": "lossless",
+      "kernel": "_lossless_gemm",
+      "signature": {
+        "X": "*bf16",
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 256,
+        "N": 4096,
+        "K": 8192,
+        "S": 2,
+        "BM": 128,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 8,
+      "num_stages": 3,
+      "source_sha256": {
+        "submission_triton_lossless.py": "3b5f1c8c25bdb94112087c545efdf9af0452eb681a1fcfad10f4df87a62ece25"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/tmp/okc-aot-dqgwm9ex/venv/lib64/python3.14/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "84eee4e3fc4cb103a88814a8872859cf0dd28ddab1076adac8df6f38dbf9038f",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": null,
+        "name": "_lossless_gemm",
+        "num_ctas": 1,
+        "num_stages": 3,
+        "num_warps": 8,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 114688,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {
+          "ld.global.b32": 32,
+          "ld.global.b16": 32,
+          "ld.global.b8": 64
+        },
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "ld.shared.v2.b32": 16
+        },
+        "mma_instructions": {
+          "wgmma.mma_async.sync.aligned.m64n64k16.f32.bf16.bf16": 8,
+          "wgmma.wait_group.sync.aligned": 1
+        },
+        "cp_async_instructions": {
+          "cp.async.cg.shared.global": 24,
+          "cp.async.wait_group": 2
+        },
+        "shuffle_instructions": {
+          "shfl.sync.idx.b32": 1
+        },
+        "layout_conversions_in_ir": 1,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "ptxas": {
+        "command": [
+          "/tmp/okc-aot-dqgwm9ex/venv/lib/python3.14/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "profiles/codegen-triton380/gemm-pooler-256-lossless/kernel.ptx",
+          "--output-file",
+          "profiles/codegen-triton380/gemm-pooler-256-lossless/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 255,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "gemm-unpooler-128-raw",
+      "source": "selective",
+      "kernel": "_stream_gemm",
+      "signature": {
+        "X": "*bf16",
+        "W": "*bf16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 128,
+        "N": 8192,
+        "K": 4096,
+        "S": 2,
+        "BM": 128,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 8,
+      "num_stages": 3,
+      "source_sha256": {
+        "submission_triton_selective.py": "6c3bf8a7554abcb372647b1192b5babd279d7fd0d48e8a51b223cc2c2af0286b"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/tmp/okc-aot-dqgwm9ex/venv/lib64/python3.14/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "319b27ff81f5d9fc82908023c85c4935e2746f5e6151728054201964cef2acea",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": null,
+        "name": "_stream_gemm",
+        "num_ctas": 1,
+        "num_stages": 3,
+        "num_warps": 8,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 147456,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {},
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "ld.shared.v2.b32": 16
+        },
+        "mma_instructions": {
+          "wgmma.mma_async.sync.aligned.m64n64k16.f32.bf16.bf16": 8,
+          "wgmma.wait_group.sync.aligned": 2
+        },
+        "cp_async_instructions": {
+          "cp.async.cg.shared.global": 36,
+          "cp.async.wait_group": 2
+        },
+        "shuffle_instructions": {
+          "shfl.sync.idx.b32": 1
+        },
+        "layout_conversions_in_ir": 1,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "ptxas": {
+        "command": [
+          "/tmp/okc-aot-dqgwm9ex/venv/lib/python3.14/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "profiles/codegen-triton380/gemm-unpooler-128-raw/kernel.ptx",
+          "--output-file",
+          "profiles/codegen-triton380/gemm-unpooler-128-raw/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 78,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "gemm-unpooler-128-lossless",
+      "source": "lossless",
+      "kernel": "_lossless_gemm",
+      "signature": {
+        "X": "*bf16",
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 128,
+        "N": 8192,
+        "K": 4096,
+        "S": 2,
+        "BM": 128,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 8,
+      "num_stages": 3,
+      "source_sha256": {
+        "submission_triton_lossless.py": "3b5f1c8c25bdb94112087c545efdf9af0452eb681a1fcfad10f4df87a62ece25"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/tmp/okc-aot-dqgwm9ex/venv/lib64/python3.14/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "59081d73590b648ca625229e0051dedfa46b5a9bce8111f0cad23d6e2194eeed",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": null,
+        "name": "_lossless_gemm",
+        "num_ctas": 1,
+        "num_stages": 3,
+        "num_warps": 8,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 114688,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {
+          "ld.global.b32": 32,
+          "ld.global.b16": 32,
+          "ld.global.b8": 64
+        },
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "ld.shared.v2.b32": 16
+        },
+        "mma_instructions": {
+          "wgmma.mma_async.sync.aligned.m64n64k16.f32.bf16.bf16": 8,
+          "wgmma.wait_group.sync.aligned": 1
+        },
+        "cp_async_instructions": {
+          "cp.async.cg.shared.global": 24,
+          "cp.async.wait_group": 2
+        },
+        "shuffle_instructions": {
+          "shfl.sync.idx.b32": 1
+        },
+        "layout_conversions_in_ir": 1,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "ptxas": {
+        "command": [
+          "/tmp/okc-aot-dqgwm9ex/venv/lib/python3.14/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "profiles/codegen-triton380/gemm-unpooler-128-lossless/kernel.ptx",
+          "--output-file",
+          "profiles/codegen-triton380/gemm-unpooler-128-lossless/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 193,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "decoder-original",
+      "source": "probes",
+      "kernel": "_decode_matrix",
+      "signature": {
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "GROUPS": 131072,
+        "G": 4,
+        "ALIGNED": false
+      },
+      "num_warps": 4,
+      "num_stages": 1,
+      "source_sha256": {
+        "submission_triton_lossless.py": "3b5f1c8c25bdb94112087c545efdf9af0452eb681a1fcfad10f4df87a62ece25",
+        "lossless_probes.py": "b9115b7154f6fc8911f94558c08330bbf1bfddfc49d6218d0259e58bf94188db"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/tmp/okc-aot-dqgwm9ex/venv/lib64/python3.14/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "0b6b1fe06ee810a5fa256a2a3c99fb1d33221693067542d1156851e41a43236e",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": null,
+        "name": "_decode_matrix",
+        "num_ctas": 1,
+        "num_stages": 1,
+        "num_warps": 4,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 0,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {
+          "ld.global.b32": 8,
+          "ld.global.b16": 8,
+          "ld.global.b8": 16
+        },
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {},
+        "mma_instructions": {},
+        "cp_async_instructions": {},
+        "shuffle_instructions": {},
+        "layout_conversions_in_ir": 0,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "ptxas": {
+        "command": [
+          "/tmp/okc-aot-dqgwm9ex/venv/lib/python3.14/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "profiles/codegen-triton380/decoder-original/kernel.ptx",
+          "--output-file",
+          "profiles/codegen-triton380/decoder-original/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 27,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "decoder-aligned",
+      "source": "probes",
+      "kernel": "_decode_matrix",
+      "signature": {
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "GROUPS": 131072,
+        "G": 4,
+        "ALIGNED": true
+      },
+      "num_warps": 4,
+      "num_stages": 1,
+      "source_sha256": {
+        "submission_triton_lossless.py": "3b5f1c8c25bdb94112087c545efdf9af0452eb681a1fcfad10f4df87a62ece25",
+        "lossless_probes.py": "b9115b7154f6fc8911f94558c08330bbf1bfddfc49d6218d0259e58bf94188db"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/tmp/okc-aot-dqgwm9ex/venv/lib64/python3.14/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "7ffb9db0df4e81d49c099b89f3af94fc65e6aa4ccdd15f576c114d0e11040864",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": null,
+        "name": "_decode_matrix",
+        "num_ctas": 1,
+        "num_stages": 1,
+        "num_warps": 4,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 0,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {
+          "ld.global.b32": 8,
+          "ld.global.b16": 8,
+          "ld.global.v2.b32": 1,
+          "ld.global.b8": 8
+        },
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {},
+        "mma_instructions": {},
+        "cp_async_instructions": {},
+        "shuffle_instructions": {},
+        "layout_conversions_in_ir": 0,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "ptxas": {
+        "command": [
+          "/tmp/okc-aot-dqgwm9ex/venv/lib/python3.14/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "profiles/codegen-triton380/decoder-aligned/kernel.ptx",
+          "--output-file",
+          "profiles/codegen-triton380/decoder-aligned/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 30,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "decoder-group-branch",
+      "source": "probes",
+      "kernel": "_decode_group",
+      "signature": {
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16"
+      },
+      "constants": {},
+      "num_warps": 4,
+      "num_stages": 1,
+      "source_sha256": {
+        "submission_triton_lossless.py": "3b5f1c8c25bdb94112087c545efdf9af0452eb681a1fcfad10f4df87a62ece25",
+        "lossless_probes.py": "b9115b7154f6fc8911f94558c08330bbf1bfddfc49d6218d0259e58bf94188db"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/tmp/okc-aot-dqgwm9ex/venv/lib64/python3.14/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "8e25fdfa51c18912c666a70effd313a979c01ea043b5263a7753186dc5e8aac0",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": null,
+        "name": "_decode_group",
+        "num_ctas": 1,
+        "num_stages": 1,
+        "num_warps": 4,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 0,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {
+          "ld.global.b32": 1,
+          "ld.global.b16": 3,
+          "ld.global.b8": 1
+        },
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {},
+        "mma_instructions": {},
+        "cp_async_instructions": {},
+        "shuffle_instructions": {},
+        "layout_conversions_in_ir": 1,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "ptxas": {
+        "command": [
+          "/tmp/okc-aot-dqgwm9ex/venv/lib/python3.14/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "profiles/codegen-triton380/decoder-group-branch/kernel.ptx",
+          "--output-file",
+          "profiles/codegen-triton380/decoder-group-branch/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 18,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "raw-copy",
+      "source": "probes",
+      "kernel": "_copy_matrix",
+      "signature": {
+        "W": "*bf16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "TOTAL": 33554432,
+        "BLOCK": 1024
+      },
+      "num_warps": 4,
+      "num_stages": 1,
+      "source_sha256": {
+        "submission_triton_lossless.py": "3b5f1c8c25bdb94112087c545efdf9af0452eb681a1fcfad10f4df87a62ece25",
+        "lossless_probes.py": "b9115b7154f6fc8911f94558c08330bbf1bfddfc49d6218d0259e58bf94188db"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/tmp/okc-aot-dqgwm9ex/venv/lib64/python3.14/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "ba527c816713094b9b871f7f0d5e5d0b77cc03968ed517fe6f094b7428a585b9",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": null,
+        "name": "_copy_matrix",
+        "num_ctas": 1,
+        "num_stages": 1,
+        "num_warps": 4,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 0,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {
+          "ld.global.v4.b32": 1
+        },
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {},
+        "mma_instructions": {},
+        "cp_async_instructions": {},
+        "shuffle_instructions": {},
+        "layout_conversions_in_ir": 0,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "ptxas": {
+        "command": [
+          "/tmp/okc-aot-dqgwm9ex/venv/lib/python3.14/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "profiles/codegen-triton380/raw-copy/kernel.ptx",
+          "--output-file",
+          "profiles/codegen-triton380/raw-copy/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 14,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    }
+  ],
+  "timing_claims": false,
+  "triton_version": "3.8.0",
+  "ptxas_version": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Tue_May_27_02:18:05_PDT_2025\nCuda compilation tools, release 12.9, V12.9.86\nBuild cuda_12.9.r12.9/compiler.36037853_0\n"
+}

@@ -1,0 +1,290 @@
+{
+  "created_at": "2026-10-24T21:04:57.356602+00:00",
+  "target": "cuda:90:32 (sm_90a)",
+  "status": "blocked",
+  "planned_jobs": [
+    {
+      "name": "gemv-qkv-raw",
+      "source": "selective",
+      "kernel": "_gemv_full",
+      "signature": {
+        "X": "*bf16",
+        "W": "*bf16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "N": 2304,
+        "K": 8192,
+        "ROWS": 1,
+        "BLOCK_K": 8192
+      },
+      "num_warps": 4,
+      "num_stages": 1
+    },
+    {
+      "name": "gemv-qkv-lossless",
+      "source": "lossless",
+      "kernel": "_lossless_gemv",
+      "signature": {
+        "X": "*bf16",
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "N": 2304,
+        "K": 8192,
+        "ROWS": 1,
+        "GROUPS_K": 32
+      },
+      "num_warps": 4,
+      "num_stages": 1
+    },
+    {
+      "name": "gemv-pooler-raw",
+      "source": "selective",
+      "kernel": "_gemv_full",
+      "signature": {
+        "X": "*bf16",
+        "W": "*bf16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "N": 4096,
+        "K": 8192,
+        "ROWS": 1,
+        "BLOCK_K": 8192
+      },
+      "num_warps": 4,
+      "num_stages": 1
+    },
+    {
+      "name": "gemv-pooler-lossless",
+      "source": "lossless",
+      "kernel": "_lossless_gemv",
+      "signature": {
+        "X": "*bf16",
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "N": 4096,
+        "K": 8192,
+        "ROWS": 1,
+        "GROUPS_K": 32
+      },
+      "num_warps": 4,
+      "num_stages": 1
+    },
+    {
+      "name": "gemm-pooler-16-raw",
+      "source": "selective",
+      "kernel": "_stream_gemm",
+      "signature": {
+        "X": "*bf16",
+        "W": "*bf16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 16,
+        "N": 4096,
+        "K": 8192,
+        "S": 4,
+        "BM": 16,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 4,
+      "num_stages": 3
+    },
+    {
+      "name": "gemm-pooler-16-lossless",
+      "source": "lossless",
+      "kernel": "_lossless_gemm",
+      "signature": {
+        "X": "*bf16",
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 16,
+        "N": 4096,
+        "K": 8192,
+        "S": 4,
+        "BM": 16,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 4,
+      "num_stages": 3
+    },
+    {
+      "name": "gemm-pooler-256-raw",
+      "source": "selective",
+      "kernel": "_stream_gemm",
+      "signature": {
+        "X": "*bf16",
+        "W": "*bf16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 256,
+        "N": 4096,
+        "K": 8192,
+        "S": 2,
+        "BM": 128,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 8,
+      "num_stages": 3
+    },
+    {
+      "name": "gemm-pooler-256-lossless",
+      "source": "lossless",
+      "kernel": "_lossless_gemm",
+      "signature": {
+        "X": "*bf16",
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 256,
+        "N": 4096,
+        "K": 8192,
+        "S": 2,
+        "BM": 128,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 8,
+      "num_stages": 3
+    },
+    {
+      "name": "gemm-unpooler-128-raw",
+      "source": "selective",
+      "kernel": "_stream_gemm",
+      "signature": {
+        "X": "*bf16",
+        "W": "*bf16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 128,
+        "N": 8192,
+        "K": 4096,
+        "S": 2,
+        "BM": 128,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 8,
+      "num_stages": 3
+    },
+    {
+      "name": "gemm-unpooler-128-lossless",
+      "source": "lossless",
+      "kernel": "_lossless_gemm",
+      "signature": {
+        "X": "*bf16",
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16",
+        "P": "*fp32"
+      },
+      "constants": {
+        "M": 128,
+        "N": 8192,
+        "K": 4096,
+        "S": 2,
+        "BM": 128,
+        "BN": 64,
+        "BK": 128
+      },
+      "num_warps": 8,
+      "num_stages": 3
+    },
+    {
+      "name": "decoder-original",
+      "source": "probes",
+      "kernel": "_decode_matrix",
+      "signature": {
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "GROUPS": 131072,
+        "G": 4,
+        "ALIGNED": false
+      },
+      "num_warps": 4,
+      "num_stages": 1
+    },
+    {
+      "name": "decoder-aligned",
+      "source": "probes",
+      "kernel": "_decode_matrix",
+      "signature": {
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "GROUPS": 131072,
+        "G": 4,
+        "ALIGNED": true
+      },
+      "num_warps": 4,
+      "num_stages": 1
+    },
+    {
+      "name": "decoder-group-branch",
+      "source": "probes",
+      "kernel": "_decode_group",
+      "signature": {
+        "Payload": "*u8",
+        "Offsets": "*i32",
+        "Bases": "*i16",
+        "Y": "*bf16"
+      },
+      "constants": {},
+      "num_warps": 4,
+      "num_stages": 1
+    },
+    {
+      "name": "raw-copy",
+      "source": "probes",
+      "kernel": "_copy_matrix",
+      "signature": {
+        "W": "*bf16",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "TOTAL": 33554432,
+        "BLOCK": 1024
+      },
+      "num_warps": 4,
+      "num_stages": 1
+    }
+  ],
+  "jobs": [],
+  "timing_claims": false,
+  "error": "No module named 'triton'",
+  "remedy": "Install Triton with its NVIDIA backend on a CPU or GPU machine, then rerun. No GPU is required."
+}

@@ -1,0 +1,15 @@
+{
+  "started_at": "2026-10-24T20:13:09.505909+00:00",
+  "command": [
+    "/home/tommy/.okc/bin/okc",
+    "check",
+    "submission_triton_streaming.py",
+    "--json"
+  ],
+  "cwd": "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj",
+  "source_sha256": "609cc037e4c12db283afe89f8d21cba40cd6c4a41eb7026ee4d505f3a3e5a07a",
+  "finished_at": "2026-10-24T20:13:09.512054+00:00",
+  "returncode": 1,
+  "stdout": "profiles/submission_triton_streaming.check.20261024T201309Z.json",
+  "stderr": "profiles/submission_triton_streaming.check.20261024T201309Z.stderr.log"
+}

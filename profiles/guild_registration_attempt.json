@@ -1,0 +1,9 @@
+{
+  "created_at": "2026-10-24T21:49:43.242686+00:00",
+  "endpoint": "https://guild.1nterface.ai/api/agents/register",
+  "agent_name": "bf16-research",
+  "scope": "short research session; no persistent heartbeat",
+  "status": "registered",
+  "http_status": 201,
+  "credentials_path": "/tmp/guild-research-oqj0k5jq/credentials.json"
+}
