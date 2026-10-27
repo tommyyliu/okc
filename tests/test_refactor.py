@@ -38,11 +38,13 @@ class RefactorTests(unittest.TestCase):
                 digest = hashlib.sha256(json.dumps(normalize(result), sort_keys=True).encode()).hexdigest()
                 self.assertEqual(digest, expected, (preset, case, result))
 
-    def test_gpu_math_and_preparation_are_unchanged(self):
+    def test_gpu_math_and_original_preparation_are_unchanged(self):
         tree = ast.parse(build_source())
         functions = {n.name: n for n in tree.body if isinstance(n, ast.FunctionDef)}
         for name, expected in self.fixture['kernels'].items():
-            actual = hashlib.sha256(ast.dump(functions[name]).encode()).hexdigest()
+            original = copy.deepcopy(functions['_prepare_weights'] if name == 'prepare' else functions[name])
+            original.name = name
+            actual = hashlib.sha256(ast.dump(original).encode()).hexdigest()
             self.assertEqual(actual, expected, name)
 
     def test_generated_submission_is_current_and_standalone(self):
@@ -82,6 +84,51 @@ class RefactorTests(unittest.TestCase):
         wd, xd = candidate.calls[0][2][:2]
         self.assertIs(wd.base, clone['weights']['unpooler'])
         self.assertIs(xd.base, candidate.last_data['x'])
+
+    def test_pooler_experiment_changes_only_large_pooler(self):
+        control = HostCandidate(build_source('pdl'))
+        experiment = HostCandidate(build_source('pooler_tma'))
+        tma = HostCandidate(build_source('tma'))
+        for m in (1, 7, 8, 16, 31, 32, 33, 64, 65, 127, 128, 129, 130,
+                  255, 256, 257, 512, 1000):
+            for layer in SHAPES:
+                expected = control.run(m, layer)
+                actual = experiment.run(m, layer)
+                if layer == 'pooler' and 32 < m <= 256:
+                    if m in (128, 256):
+                        self.assertEqual(actual, tma.run(m, layer), (layer, m))
+                    self.assertEqual(actual[0].shape, expected[0].shape)
+                    self.assertEqual(len(actual[1]), 1)
+                    self.assertEqual(actual[1][0][0], '_tma_weight_major')
+                    self.assertEqual(actual[1][0][2][7], 1)  # S: no split-K
+                else:
+                    self.assertEqual(actual, expected, (layer, m))
+
+    def test_pooler_splitk_scope_partitions_and_dependency(self):
+        control = HostCandidate(build_source('pdl'))
+        candidate = HostCandidate(build_source('pooler_splitk'))
+        for m in (1, 8, 16, 32, 33, 64, 65, 127, 128, 129, 130,
+                  192, 193, 255, 256, 257, 1000):
+            for layer in SHAPES:
+                expected = control.run(m, layer)
+                actual = candidate.run(m, layer)
+                if layer != 'pooler' or not 32 < m <= 256:
+                    self.assertEqual(actual, expected, (layer, m))
+                    continue
+                out, calls = actual
+                self.assertEqual(out.shape, expected[0].shape)
+                self.assertEqual(out.dtype, 'bf16')
+                self.assertEqual([c[0] for c in calls], ['_tma_weight_major', '_reduce'])
+                _, grid, args, launch = calls[0]
+                splits = args[7]
+                self.assertEqual(args[6] % (splits * launch['BK']), 0)
+                self.assertEqual(args[3].shape, (splits, m, 4096))
+                self.assertEqual(args[3].dtype, 'fp32')
+                self.assertEqual(calls[1][2][2:4], (m * 4096, splits))
+                self.assertTrue(calls[1][3]['launch_pdl'])
+                if m in (128, 256):
+                    self.assertEqual(grid[0] * grid[1], 512)
+                    self.assertEqual(splits, 4 if m == 128 else 2)
 
 
 if __name__ == '__main__':

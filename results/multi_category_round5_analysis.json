@@ -1,0 +1,190 @@
+{
+  "job": "6456b973b73a4a26",
+  "score_us": 4321.590211012793,
+  "speedup": 1.1178292628693896,
+  "speedup_ci": [
+    1.1010618239263488,
+    1.1345967018124303
+  ],
+  "passed": true,
+  "comparison": "Cross-run comparison of official paired per-case ratios against same-run SGLang; predecessor configurations match each changed group.",
+  "rows": [
+    {
+      "layer": "qkv_gate",
+      "m": 1,
+      "group": "gemv8",
+      "comparison_job": "0fe4f6662e1d458a",
+      "prior_effective_us": 11.335143025386833,
+      "new_effective_us": 10.387992462950992,
+      "normalized_latency_change_pct": -7.406738765182541,
+      "change_vs_older_runs_pct": {
+        "67a1b145d83b4f89": -3.6535042806003393,
+        "9515208aace4455e": -3.421196888899669,
+        "0fe4f6662e1d458a": -7.406738765182541
+      }
+    },
+    {
+      "layer": "pooler",
+      "m": 1,
+      "group": "gemv8",
+      "comparison_job": "0fe4f6662e1d458a",
+      "prior_effective_us": 18.120946283981528,
+      "new_effective_us": 17.257453695929534,
+      "normalized_latency_change_pct": -4.6236599550723785,
+      "change_vs_older_runs_pct": {
+        "67a1b145d83b4f89": -4.5565003562115125,
+        "9515208aace4455e": -3.9886887078947497,
+        "0fe4f6662e1d458a": -4.6236599550723785
+      }
+    },
+    {
+      "layer": "unpooler",
+      "m": 1,
+      "group": "gemv8",
+      "comparison_job": "0fe4f6662e1d458a",
+      "prior_effective_us": 3.956053232437466,
+      "new_effective_us": 3.6462300157800724,
+      "normalized_latency_change_pct": -4.802612110271975,
+      "change_vs_older_runs_pct": {
+        "67a1b145d83b4f89": -3.9440923704965547,
+        "9515208aace4455e": -5.885026750636701,
+        "0fe4f6662e1d458a": -4.802612110271975
+      }
+    },
+    {
+      "layer": "router",
+      "m": 1,
+      "group": "gemv8",
+      "comparison_job": "0fe4f6662e1d458a",
+      "prior_effective_us": 4.995604650484003,
+      "new_effective_us": 4.635813089473334,
+      "normalized_latency_change_pct": -7.63715561129038,
+      "change_vs_older_runs_pct": {
+        "67a1b145d83b4f89": -9.663735572385546,
+        "9515208aace4455e": -8.457132723174265,
+        "0fe4f6662e1d458a": -7.63715561129038
+      }
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 16,
+      "group": "unroll2",
+      "comparison_job": "327bb5b2fdc6423a",
+      "prior_effective_us": 12.841053122788361,
+      "new_effective_us": 15.131887154028819,
+      "normalized_latency_change_pct": 20.837006980113216
+    },
+    {
+      "layer": "pooler",
+      "m": 16,
+      "group": "unroll2",
+      "comparison_job": "327bb5b2fdc6423a",
+      "prior_effective_us": 19.01531042806128,
+      "new_effective_us": 21.04129867141225,
+      "normalized_latency_change_pct": 9.512060582136694
+    },
+    {
+      "layer": "router",
+      "m": 16,
+      "group": "direct_router",
+      "comparison_job": "9515208aace4455e",
+      "prior_effective_us": 6.378957634004693,
+      "new_effective_us": 16.021258339542147,
+      "normalized_latency_change_pct": 151.699228900665
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 32,
+      "group": "unroll2",
+      "comparison_job": "327bb5b2fdc6423a",
+      "prior_effective_us": 13.066638189092732,
+      "new_effective_us": 16.113881318471734,
+      "normalized_latency_change_pct": 25.134339868059374
+    },
+    {
+      "layer": "pooler",
+      "m": 32,
+      "group": "unroll2",
+      "comparison_job": "327bb5b2fdc6423a",
+      "prior_effective_us": 19.46188885546538,
+      "new_effective_us": 21.3876189153073,
+      "normalized_latency_change_pct": 9.73492214815721
+    },
+    {
+      "layer": "router",
+      "m": 32,
+      "group": "direct_router",
+      "comparison_job": "9515208aace4455e",
+      "prior_effective_us": 6.695948572545798,
+      "new_effective_us": 28.336477494601645,
+      "normalized_latency_change_pct": 329.91989350332796
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 8,
+      "group": "unroll2",
+      "comparison_job": "327bb5b2fdc6423a",
+      "prior_effective_us": 12.591127155210264,
+      "new_effective_us": 14.965001497131057,
+      "normalized_latency_change_pct": 20.995067029443646
+    },
+    {
+      "layer": "pooler",
+      "m": 8,
+      "group": "unroll2",
+      "comparison_job": "327bb5b2fdc6423a",
+      "prior_effective_us": 18.831477570129085,
+      "new_effective_us": 20.916942519726607,
+      "normalized_latency_change_pct": 10.331111914010837
+    },
+    {
+      "layer": "router",
+      "m": 8,
+      "group": "direct_router",
+      "comparison_job": "9515208aace4455e",
+      "prior_effective_us": 5.8309319129455925,
+      "new_effective_us": 9.852899648279907,
+      "normalized_latency_change_pct": 67.94481907407122
+    }
+  ],
+  "same_config_controls_vs_round4": {
+    "cases": [
+      {
+        "layer": "o",
+        "m": 1
+      },
+      {
+        "layer": "o",
+        "m": 128
+      },
+      {
+        "layer": "o",
+        "m": 256
+      },
+      {
+        "layer": "pooler",
+        "m": 128
+      },
+      {
+        "layer": "pooler",
+        "m": 256
+      },
+      {
+        "layer": "unpooler",
+        "m": 8
+      }
+    ],
+    "min_pct": -3.070183453002495,
+    "max_pct": 2.967915415264333,
+    "median_pct": 0.9336883398988749
+  },
+  "decisions": {
+    "gemv8": "Carry forward all four cases for repeat confirmation. Coherent gains against three previous four-warp runs.",
+    "unroll2": "Reject this hint on all six measured configurations. Timing alone does not reveal compiler/resource cause.",
+    "direct_router": "Reject at all three sizes. Direct FP32 per-token-pair reduction loses strongly to split tensor-core hi/lo."
+  },
+  "hypothetical_clean_score_us": 3830.2665629470603,
+  "hypothetical_is_measured": false,
+  "clean_candidate_already_available": "build/multi-category-round5/isolated/gemv8.py",
+  "missing_information": "Compiler registers/spills/shared-memory metrics were not captured; do not attribute losses specifically to spills or occupancy."
+}

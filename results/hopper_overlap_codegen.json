@@ -1,0 +1,1192 @@
+{
+  "created_at": "2026-10-26T16:49:38.801156+00:00",
+  "target": "cuda:90:32 (sm_90a)",
+  "source": "build/agent-round7/hopper-overlap.py",
+  "status": "ok",
+  "planned_jobs": [
+    {
+      "name": "pdl-qkv_gate-128",
+      "source": "pdl",
+      "language": "gluon",
+      "maxnreg": 96,
+      "kernel": "_hopper_overlap_gemm",
+      "signature": {
+        "Y": "*bf16",
+        "P": "*fp32",
+        "WD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>",
+        "XD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>"
+      },
+      "constants": {
+        "M": 128,
+        "N": 2304,
+        "K": 8192,
+        "BM": 64,
+        "BN": 64,
+        "BK": 128,
+        "S": 2,
+        "BUFFERS": 2
+      },
+      "num_warps": 4,
+      "num_stages": 1
+    },
+    {
+      "name": "pdl-qkv_gate-128-reduce",
+      "source": "pdl",
+      "kernel": "_reduce",
+      "signature": {
+        "P": "*fp32",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "TOTAL": 294912,
+        "S": 2,
+        "B": 256
+      },
+      "num_warps": 4,
+      "num_stages": 3,
+      "launch_pdl": true
+    },
+    {
+      "name": "pdl-qkv_gate-256",
+      "source": "pdl",
+      "language": "gluon",
+      "maxnreg": 96,
+      "kernel": "_hopper_overlap_gemm",
+      "signature": {
+        "Y": "*bf16",
+        "P": "*fp32",
+        "WD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>",
+        "XD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>"
+      },
+      "constants": {
+        "M": 256,
+        "N": 2304,
+        "K": 8192,
+        "BM": 64,
+        "BN": 64,
+        "BK": 128,
+        "S": 1,
+        "BUFFERS": 2
+      },
+      "num_warps": 4,
+      "num_stages": 1
+    },
+    {
+      "name": "pdl-qkv_gate-512",
+      "source": "pdl",
+      "language": "gluon",
+      "maxnreg": 96,
+      "kernel": "_hopper_overlap_gemm",
+      "signature": {
+        "Y": "*bf16",
+        "P": "*fp32",
+        "WD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>",
+        "XD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>"
+      },
+      "constants": {
+        "M": 512,
+        "N": 2304,
+        "K": 8192,
+        "BM": 64,
+        "BN": 64,
+        "BK": 128,
+        "S": 1,
+        "BUFFERS": 2
+      },
+      "num_warps": 4,
+      "num_stages": 1
+    },
+    {
+      "name": "pdl-pooler-128",
+      "source": "pdl",
+      "language": "gluon",
+      "maxnreg": 96,
+      "kernel": "_hopper_overlap_gemm",
+      "signature": {
+        "Y": "*bf16",
+        "P": "*fp32",
+        "WD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>",
+        "XD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>"
+      },
+      "constants": {
+        "M": 128,
+        "N": 4096,
+        "K": 8192,
+        "BM": 64,
+        "BN": 64,
+        "BK": 128,
+        "S": 1,
+        "BUFFERS": 2
+      },
+      "num_warps": 4,
+      "num_stages": 1
+    },
+    {
+      "name": "pdl-pooler-256",
+      "source": "pdl",
+      "language": "gluon",
+      "maxnreg": 96,
+      "kernel": "_hopper_overlap_gemm",
+      "signature": {
+        "Y": "*bf16",
+        "P": "*fp32",
+        "WD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>",
+        "XD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>"
+      },
+      "constants": {
+        "M": 256,
+        "N": 4096,
+        "K": 8192,
+        "BM": 64,
+        "BN": 64,
+        "BK": 128,
+        "S": 1,
+        "BUFFERS": 2
+      },
+      "num_warps": 4,
+      "num_stages": 1
+    },
+    {
+      "name": "pdl-pooler-512",
+      "source": "pdl",
+      "language": "gluon",
+      "maxnreg": 96,
+      "kernel": "_hopper_overlap_gemm",
+      "signature": {
+        "Y": "*bf16",
+        "P": "*fp32",
+        "WD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>",
+        "XD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>"
+      },
+      "constants": {
+        "M": 512,
+        "N": 4096,
+        "K": 8192,
+        "BM": 64,
+        "BN": 64,
+        "BK": 128,
+        "S": 1,
+        "BUFFERS": 2
+      },
+      "num_warps": 4,
+      "num_stages": 1
+    }
+  ],
+  "jobs": [
+    {
+      "name": "pdl-qkv_gate-128",
+      "source": "pdl",
+      "language": "gluon",
+      "maxnreg": 96,
+      "kernel": "_hopper_overlap_gemm",
+      "signature": {
+        "Y": "*bf16",
+        "P": "*fp32",
+        "WD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>",
+        "XD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>"
+      },
+      "constants": {
+        "M": 128,
+        "N": 2304,
+        "K": 8192,
+        "BM": 64,
+        "BN": 64,
+        "BK": 128,
+        "S": 2,
+        "BUFFERS": 2
+      },
+      "num_warps": 4,
+      "num_stages": 1,
+      "source_sha256": {
+        "hopper-overlap.py": "1f876b5052e32846eee49808330d90efe4ab3088538037fbbe471c7d83145f26"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj/build/compiler-env/lib/python3.13/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "4b7854bec60f0a48199d8fc4e563a35e3005297517084db4a8acbcebe60c3e67",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": 96,
+        "name": "_hopper_overlap_gemm",
+        "num_ctas": 1,
+        "num_stages": 1,
+        "num_warps": 8,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 73764,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [
+          {
+            "swizzle": 3,
+            "elem_size": 2,
+            "elem_type": 10,
+            "block_size": [
+              64,
+              64
+            ],
+            "fp4_padded": false,
+            "is_im2col": false
+          },
+          {
+            "swizzle": 3,
+            "elem_size": 2,
+            "elem_type": 10,
+            "block_size": [
+              64,
+              64
+            ],
+            "fp4_padded": false,
+            "is_im2col": false
+          }
+        ],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {},
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "st.shared.b32": 2,
+          "st.shared::cta.v4.b32": 8,
+          "ld.shared.v4.b32": 8,
+          "ld.shared.b8": 1
+        },
+        "mma_instructions": {
+          "wgmma.fence.sync.aligned": 1,
+          "wgmma.mma_async.sync.aligned.m64n64k16.f32.bf16.bf16": 8,
+          "wgmma.commit_group.sync.aligned": 1,
+          "wgmma.wait_group.sync.aligned": 2
+        },
+        "cp_async_instructions": {
+          "cp.async.bulk.tensor.2d.shared::cta.global.mbarrier::complete_tx::bytes": 4
+        },
+        "shuffle_instructions": {
+          "shfl.sync.idx.b32": 1
+        },
+        "grid_dependency_instructions": {
+          "griddepcontrol.launch_dependents": 1
+        },
+        "layout_conversions_in_ir": 1,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "uses_tma_and_wgmma": true,
+      "dependency_order": {
+        "release_present": true,
+        "producer_uses_normal_launch": true
+      },
+      "dependency_order_note": "Partition CFG requires protocol review; text order is not a proof.",
+      "ptxas": {
+        "command": [
+          "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj/build/compiler-env/lib/python3.13/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "build/agent-round7/hopper-overlap-codegen/pdl-qkv_gate-128/kernel.ptx",
+          "--output-file",
+          "build/agent-round7/hopper-overlap-codegen/pdl-qkv_gate-128/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 96,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "pdl-qkv_gate-128-reduce",
+      "source": "pdl",
+      "kernel": "_reduce",
+      "signature": {
+        "P": "*fp32",
+        "Y": "*bf16"
+      },
+      "constants": {
+        "TOTAL": 294912,
+        "S": 2,
+        "B": 256
+      },
+      "num_warps": 4,
+      "num_stages": 3,
+      "launch_pdl": true,
+      "source_sha256": {
+        "hopper-overlap.py": "1f876b5052e32846eee49808330d90efe4ab3088538037fbbe471c7d83145f26"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj/build/compiler-env/lib/python3.13/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "4af17c2da03cddfcce134f2b7879ac975b96c6d47a1406d4410e382e34ac5619",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": true,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": null,
+        "name": "_reduce",
+        "num_ctas": 1,
+        "num_stages": 3,
+        "num_warps": 4,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 2048,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {
+          "ld.global.v4.b32": 1
+        },
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "st.shared::cta.v4.b32": 2,
+          "ld.shared.v4.b32": 2,
+          "st.shared::cta.v2.b16": 2,
+          "ld.shared.b32": 1
+        },
+        "mma_instructions": {},
+        "cp_async_instructions": {},
+        "shuffle_instructions": {
+          "shfl.sync.bfly.b32": 4
+        },
+        "grid_dependency_instructions": {
+          "griddepcontrol.wait": 1
+        },
+        "layout_conversions_in_ir": 1,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "dependency_order": {
+        "wait_before_global_load": true,
+        "consumer_launch_pdl": true
+      },
+      "ptxas": {
+        "command": [
+          "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj/build/compiler-env/lib/python3.13/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "build/agent-round7/hopper-overlap-codegen/pdl-qkv_gate-128-reduce/kernel.ptx",
+          "--output-file",
+          "build/agent-round7/hopper-overlap-codegen/pdl-qkv_gate-128-reduce/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 23,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "pdl-qkv_gate-256",
+      "source": "pdl",
+      "language": "gluon",
+      "maxnreg": 96,
+      "kernel": "_hopper_overlap_gemm",
+      "signature": {
+        "Y": "*bf16",
+        "P": "*fp32",
+        "WD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>",
+        "XD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>"
+      },
+      "constants": {
+        "M": 256,
+        "N": 2304,
+        "K": 8192,
+        "BM": 64,
+        "BN": 64,
+        "BK": 128,
+        "S": 1,
+        "BUFFERS": 2
+      },
+      "num_warps": 4,
+      "num_stages": 1,
+      "source_sha256": {
+        "hopper-overlap.py": "1f876b5052e32846eee49808330d90efe4ab3088538037fbbe471c7d83145f26"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj/build/compiler-env/lib/python3.13/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "bc13fe44f99d3b2fbf6cc9e08b39f1c59044f798286d8a599e2db205f3cf42bc",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": 96,
+        "name": "_hopper_overlap_gemm",
+        "num_ctas": 1,
+        "num_stages": 1,
+        "num_warps": 8,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 73764,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [
+          {
+            "swizzle": 3,
+            "elem_size": 2,
+            "elem_type": 10,
+            "block_size": [
+              64,
+              64
+            ],
+            "fp4_padded": false,
+            "is_im2col": false
+          },
+          {
+            "swizzle": 3,
+            "elem_size": 2,
+            "elem_type": 10,
+            "block_size": [
+              64,
+              64
+            ],
+            "fp4_padded": false,
+            "is_im2col": false
+          }
+        ],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {},
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "st.shared.b32": 2,
+          "st.shared::cta.v4.b32": 8,
+          "ld.shared.v4.b32": 8,
+          "ld.shared.b8": 1
+        },
+        "mma_instructions": {
+          "wgmma.fence.sync.aligned": 1,
+          "wgmma.mma_async.sync.aligned.m64n64k16.f32.bf16.bf16": 8,
+          "wgmma.commit_group.sync.aligned": 1,
+          "wgmma.wait_group.sync.aligned": 2
+        },
+        "cp_async_instructions": {
+          "cp.async.bulk.tensor.2d.shared::cta.global.mbarrier::complete_tx::bytes": 4
+        },
+        "shuffle_instructions": {
+          "shfl.sync.idx.b32": 1
+        },
+        "grid_dependency_instructions": {},
+        "layout_conversions_in_ir": 1,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "uses_tma_and_wgmma": true,
+      "ptxas": {
+        "command": [
+          "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj/build/compiler-env/lib/python3.13/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "build/agent-round7/hopper-overlap-codegen/pdl-qkv_gate-256/kernel.ptx",
+          "--output-file",
+          "build/agent-round7/hopper-overlap-codegen/pdl-qkv_gate-256/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 96,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "pdl-qkv_gate-512",
+      "source": "pdl",
+      "language": "gluon",
+      "maxnreg": 96,
+      "kernel": "_hopper_overlap_gemm",
+      "signature": {
+        "Y": "*bf16",
+        "P": "*fp32",
+        "WD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>",
+        "XD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>"
+      },
+      "constants": {
+        "M": 512,
+        "N": 2304,
+        "K": 8192,
+        "BM": 64,
+        "BN": 64,
+        "BK": 128,
+        "S": 1,
+        "BUFFERS": 2
+      },
+      "num_warps": 4,
+      "num_stages": 1,
+      "source_sha256": {
+        "hopper-overlap.py": "1f876b5052e32846eee49808330d90efe4ab3088538037fbbe471c7d83145f26"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj/build/compiler-env/lib/python3.13/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "0065ca707bf7b5145789772c48e891d5de93c46d38b57b35dcaf2cd0da9fa16a",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": 96,
+        "name": "_hopper_overlap_gemm",
+        "num_ctas": 1,
+        "num_stages": 1,
+        "num_warps": 8,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 73764,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [
+          {
+            "swizzle": 3,
+            "elem_size": 2,
+            "elem_type": 10,
+            "block_size": [
+              64,
+              64
+            ],
+            "fp4_padded": false,
+            "is_im2col": false
+          },
+          {
+            "swizzle": 3,
+            "elem_size": 2,
+            "elem_type": 10,
+            "block_size": [
+              64,
+              64
+            ],
+            "fp4_padded": false,
+            "is_im2col": false
+          }
+        ],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {},
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "st.shared.b32": 2,
+          "st.shared::cta.v4.b32": 8,
+          "ld.shared.v4.b32": 8,
+          "ld.shared.b8": 1
+        },
+        "mma_instructions": {
+          "wgmma.fence.sync.aligned": 1,
+          "wgmma.mma_async.sync.aligned.m64n64k16.f32.bf16.bf16": 8,
+          "wgmma.commit_group.sync.aligned": 1,
+          "wgmma.wait_group.sync.aligned": 2
+        },
+        "cp_async_instructions": {
+          "cp.async.bulk.tensor.2d.shared::cta.global.mbarrier::complete_tx::bytes": 4
+        },
+        "shuffle_instructions": {
+          "shfl.sync.idx.b32": 1
+        },
+        "grid_dependency_instructions": {},
+        "layout_conversions_in_ir": 1,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "uses_tma_and_wgmma": true,
+      "ptxas": {
+        "command": [
+          "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj/build/compiler-env/lib/python3.13/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "build/agent-round7/hopper-overlap-codegen/pdl-qkv_gate-512/kernel.ptx",
+          "--output-file",
+          "build/agent-round7/hopper-overlap-codegen/pdl-qkv_gate-512/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 96,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "pdl-pooler-128",
+      "source": "pdl",
+      "language": "gluon",
+      "maxnreg": 96,
+      "kernel": "_hopper_overlap_gemm",
+      "signature": {
+        "Y": "*bf16",
+        "P": "*fp32",
+        "WD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>",
+        "XD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>"
+      },
+      "constants": {
+        "M": 128,
+        "N": 4096,
+        "K": 8192,
+        "BM": 64,
+        "BN": 64,
+        "BK": 128,
+        "S": 1,
+        "BUFFERS": 2
+      },
+      "num_warps": 4,
+      "num_stages": 1,
+      "source_sha256": {
+        "hopper-overlap.py": "1f876b5052e32846eee49808330d90efe4ab3088538037fbbe471c7d83145f26"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj/build/compiler-env/lib/python3.13/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "481606c1c9e360bb9edf8d42017fb677176a12ae5c8c00883dc3125138ac2f79",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": 96,
+        "name": "_hopper_overlap_gemm",
+        "num_ctas": 1,
+        "num_stages": 1,
+        "num_warps": 8,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 73764,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [
+          {
+            "swizzle": 3,
+            "elem_size": 2,
+            "elem_type": 10,
+            "block_size": [
+              64,
+              64
+            ],
+            "fp4_padded": false,
+            "is_im2col": false
+          },
+          {
+            "swizzle": 3,
+            "elem_size": 2,
+            "elem_type": 10,
+            "block_size": [
+              64,
+              64
+            ],
+            "fp4_padded": false,
+            "is_im2col": false
+          }
+        ],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {},
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "st.shared.b32": 2,
+          "st.shared::cta.v4.b32": 8,
+          "ld.shared.v4.b32": 8,
+          "ld.shared.b8": 1
+        },
+        "mma_instructions": {
+          "wgmma.fence.sync.aligned": 1,
+          "wgmma.mma_async.sync.aligned.m64n64k16.f32.bf16.bf16": 8,
+          "wgmma.commit_group.sync.aligned": 1,
+          "wgmma.wait_group.sync.aligned": 2
+        },
+        "cp_async_instructions": {
+          "cp.async.bulk.tensor.2d.shared::cta.global.mbarrier::complete_tx::bytes": 4
+        },
+        "shuffle_instructions": {
+          "shfl.sync.idx.b32": 1
+        },
+        "grid_dependency_instructions": {},
+        "layout_conversions_in_ir": 1,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "uses_tma_and_wgmma": true,
+      "ptxas": {
+        "command": [
+          "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj/build/compiler-env/lib/python3.13/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "build/agent-round7/hopper-overlap-codegen/pdl-pooler-128/kernel.ptx",
+          "--output-file",
+          "build/agent-round7/hopper-overlap-codegen/pdl-pooler-128/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 96,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "pdl-pooler-256",
+      "source": "pdl",
+      "language": "gluon",
+      "maxnreg": 96,
+      "kernel": "_hopper_overlap_gemm",
+      "signature": {
+        "Y": "*bf16",
+        "P": "*fp32",
+        "WD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>",
+        "XD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>"
+      },
+      "constants": {
+        "M": 256,
+        "N": 4096,
+        "K": 8192,
+        "BM": 64,
+        "BN": 64,
+        "BK": 128,
+        "S": 1,
+        "BUFFERS": 2
+      },
+      "num_warps": 4,
+      "num_stages": 1,
+      "source_sha256": {
+        "hopper-overlap.py": "1f876b5052e32846eee49808330d90efe4ab3088538037fbbe471c7d83145f26"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj/build/compiler-env/lib/python3.13/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "2ddc5701ac647263f28505f3bd3ccd8222008303b4b4ed30f859710984376107",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": 96,
+        "name": "_hopper_overlap_gemm",
+        "num_ctas": 1,
+        "num_stages": 1,
+        "num_warps": 8,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 73764,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [
+          {
+            "swizzle": 3,
+            "elem_size": 2,
+            "elem_type": 10,
+            "block_size": [
+              64,
+              64
+            ],
+            "fp4_padded": false,
+            "is_im2col": false
+          },
+          {
+            "swizzle": 3,
+            "elem_size": 2,
+            "elem_type": 10,
+            "block_size": [
+              64,
+              64
+            ],
+            "fp4_padded": false,
+            "is_im2col": false
+          }
+        ],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {},
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "st.shared.b32": 2,
+          "st.shared::cta.v4.b32": 8,
+          "ld.shared.v4.b32": 8,
+          "ld.shared.b8": 1
+        },
+        "mma_instructions": {
+          "wgmma.fence.sync.aligned": 1,
+          "wgmma.mma_async.sync.aligned.m64n64k16.f32.bf16.bf16": 8,
+          "wgmma.commit_group.sync.aligned": 1,
+          "wgmma.wait_group.sync.aligned": 2
+        },
+        "cp_async_instructions": {
+          "cp.async.bulk.tensor.2d.shared::cta.global.mbarrier::complete_tx::bytes": 4
+        },
+        "shuffle_instructions": {
+          "shfl.sync.idx.b32": 1
+        },
+        "grid_dependency_instructions": {},
+        "layout_conversions_in_ir": 1,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "uses_tma_and_wgmma": true,
+      "ptxas": {
+        "command": [
+          "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj/build/compiler-env/lib/python3.13/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "build/agent-round7/hopper-overlap-codegen/pdl-pooler-256/kernel.ptx",
+          "--output-file",
+          "build/agent-round7/hopper-overlap-codegen/pdl-pooler-256/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 96,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    },
+    {
+      "name": "pdl-pooler-512",
+      "source": "pdl",
+      "language": "gluon",
+      "maxnreg": 96,
+      "kernel": "_hopper_overlap_gemm",
+      "signature": {
+        "Y": "*bf16",
+        "P": "*fp32",
+        "WD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>",
+        "XD": "tensordesc<bf16[64,128],NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, rank=2, transposed=False, fp4_padded=False, cga_layout=[])>"
+      },
+      "constants": {
+        "M": 512,
+        "N": 4096,
+        "K": 8192,
+        "BM": 64,
+        "BN": 64,
+        "BK": 128,
+        "S": 1,
+        "BUFFERS": 2
+      },
+      "num_warps": 4,
+      "num_stages": 1,
+      "source_sha256": {
+        "hopper-overlap.py": "1f876b5052e32846eee49808330d90efe4ab3088538037fbbe471c7d83145f26"
+      },
+      "metadata": {
+        "allowed_dot_input_precisions": [
+          "tf32",
+          "tf32x3",
+          "ieee",
+          "bf16x3",
+          "bf16x6"
+        ],
+        "arch": "sm90",
+        "backend_name": "cuda",
+        "debug": false,
+        "default_dot_input_precision": "tf32",
+        "deprecated_fp8_dot_operand_dtypes": [
+          "fp8e4b15"
+        ],
+        "enable_fp_fusion": true,
+        "enable_reflect_ftz": true,
+        "extern_libs": [
+          [
+            "libdevice",
+            "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj/build/compiler-env/lib/python3.13/site-packages/triton/backends/nvidia/lib/libdevice.10.bc"
+          ]
+        ],
+        "global_scratch_align": 1,
+        "global_scratch_size": 0,
+        "hash": "0c32880021d68759b15b55f521b6ec430b3425c2a5e8e70bb763ca1eaefd9a4d",
+        "instrumentation_mode": "",
+        "ir_override": null,
+        "launch_cooperative_grid": false,
+        "launch_pdl": false,
+        "max_num_imprecise_acc_default": 1073741824,
+        "maxnreg": 96,
+        "name": "_hopper_overlap_gemm",
+        "num_ctas": 1,
+        "num_stages": 1,
+        "num_warps": 8,
+        "profile_scratch_align": 1,
+        "profile_scratch_size": 0,
+        "ptx_options": null,
+        "ptx_version": null,
+        "sanitize_overflow": true,
+        "shared": 73764,
+        "supported_fp8_dtypes": [
+          "fp8e4b15",
+          "fp8e4nv",
+          "fp8e5"
+        ],
+        "target": "GPUTarget(backend='cuda', arch=90, warp_size=32)",
+        "tensordesc_meta": [
+          {
+            "swizzle": 3,
+            "elem_size": 2,
+            "elem_type": 10,
+            "block_size": [
+              64,
+              64
+            ],
+            "fp4_padded": false,
+            "is_im2col": false
+          },
+          {
+            "swizzle": 3,
+            "elem_size": 2,
+            "elem_type": 10,
+            "block_size": [
+              64,
+              64
+            ],
+            "fp4_padded": false,
+            "is_im2col": false
+          }
+        ],
+        "tmem_size": 0,
+        "triton_version": "3.8.0",
+        "warp_size": 32
+      },
+      "static_summary": {
+        "global_load_instructions": {},
+        "local_memory_instructions": {},
+        "shared_memory_instructions": {
+          "st.shared.b32": 2,
+          "st.shared::cta.v4.b32": 8,
+          "ld.shared.v4.b32": 8,
+          "ld.shared.b8": 1
+        },
+        "mma_instructions": {
+          "wgmma.fence.sync.aligned": 1,
+          "wgmma.mma_async.sync.aligned.m64n64k16.f32.bf16.bf16": 8,
+          "wgmma.commit_group.sync.aligned": 1,
+          "wgmma.wait_group.sync.aligned": 2
+        },
+        "cp_async_instructions": {
+          "cp.async.bulk.tensor.2d.shared::cta.global.mbarrier::complete_tx::bytes": 4
+        },
+        "shuffle_instructions": {
+          "shfl.sync.idx.b32": 1
+        },
+        "grid_dependency_instructions": {},
+        "layout_conversions_in_ir": 1,
+        "note": "Static assembly/IR counts, including loop bodies once; not executed instruction counts."
+      },
+      "uses_tma_and_wgmma": true,
+      "ptxas": {
+        "command": [
+          "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj/build/compiler-env/lib/python3.13/site-packages/triton/backends/nvidia/bin/ptxas",
+          "--gpu-name=sm_90a",
+          "--verbose",
+          "--warn-on-spills",
+          "build/agent-round7/hopper-overlap-codegen/pdl-pooler-512/kernel.ptx",
+          "--output-file",
+          "build/agent-round7/hopper-overlap-codegen/pdl-pooler-512/reassembled.cubin"
+        ],
+        "returncode": 0,
+        "scope": "Reassembled PTX; other backend flags may differ. Prefer original_cubin_resources when present.",
+        "registers_per_thread": 96,
+        "stack_frame_bytes": 0,
+        "spill_store_bytes": 0,
+        "spill_load_bytes": 0
+      },
+      "status": "ok"
+    }
+  ],
+  "timing_claims": false,
+  "triton_version": "3.8.0",
+  "ptxas_version": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Tue_May_27_02:18:05_PDT_2025\nCuda compilation tools, release 12.9, V12.9.86\nBuild cuda_12.9.r12.9/compiler.36037853_0\n"
+}

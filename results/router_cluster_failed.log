@@ -1,0 +1,75 @@
+OKC_RESOURCE {"layer": "qkv_gate", "m": 1, "family": "gemv", "kernel": "_gemv_full", "registers": 34, "spills": 0, "shared_bytes": 32, "num_warps": 8}
+OKC_RESOURCE {"layer": "pooler", "m": 7, "family": "weight_major", "kernel": "_weight_major_stream_gemm", "registers": 40, "spills": 0, "shared_bytes": 61440, "num_warps": 4}
+OKC_RESOURCE {"layer": "pooler", "m": 7, "family": "reduce", "kernel": "_reduce", "registers": 24, "spills": 0, "shared_bytes": 2048, "num_warps": 4}
+OKC_RESOURCE {"layer": "unpooler", "m": 5, "family": "dot", "kernel": "_gemm", "registers": 40, "spills": 0, "shared_bytes": 20480, "num_warps": 4}
+OKC_RESOURCE {"layer": "unpooler", "m": 5, "family": "reduce", "kernel": "_reduce", "registers": 30, "spills": 0, "shared_bytes": 2048, "num_warps": 4}
+Traceback (most recent call last):
+  File "/tmp/muse_bf16_proj-bthtel41/run/worker.py", line 484, in child_main
+    out = kernel()(state.get("data"))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/muse_bf16_proj-bthtel41/run/worker.py", line 415, in <lambda>
+    return functools.partial(lambda k, p, d: k(d, p), fn, state["prep"])
+                                             ^^^^^^^
+  File "/tmp/muse_bf16_proj-bthtel41/run/submission.py", line 998, in kernel_fn
+    return run_config(data, state, select_config(data["config"]))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/muse_bf16_proj-bthtel41/run/submission.py", line 919, in run_config
+    compiled = _router_cluster[(triton.cdiv(m, bm) * triton.cdiv(n, bn),)](
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py", line 374, in <lambda>
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py", line 757, in run
+    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py", line 902, in _do_compile
+    kernel = self.compile(src, target=target, options=options.__dict__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py", line 307, in compile
+    module = src.make_ir(target, options, codegen_fns, module_map, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/sglang/lib/python3.12/site-packages/triton/experimental/gluon/_runtime.py", line 40, in make_ir
+    module = ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+triton.compiler.errors.CompilationError: at 4:44:
+def _router_cluster(X, WH, WL, Y, M: gl.constexpr, N: gl.constexpr,
+                    K: gl.constexpr, BM: gl.constexpr, BN: gl.constexpr,
+                    BK: gl.constexpr, C: gl.constexpr):
+    gl.static_assert(C == gl.num_ctas() and C in (2, 4, 8))
+                                            ^
+AttributeError("'In' object has no attribute '__name__'")
+Traceback (most recent call last):
+  File "/tmp/muse_bf16_proj-bthtel41/run/worker.py", line 484, in child_main
+    out = kernel()(state.get("data"))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/muse_bf16_proj-bthtel41/run/worker.py", line 415, in <lambda>
+    return functools.partial(lambda k, p, d: k(d, p), fn, state["prep"])
+                                             ^^^^^^^
+  File "/tmp/muse_bf16_proj-bthtel41/run/submission.py", line 998, in kernel_fn
+    return run_config(data, state, select_config(data["config"]))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/muse_bf16_proj-bthtel41/run/submission.py", line 919, in run_config
+    compiled = _router_cluster[(triton.cdiv(m, bm) * triton.cdiv(n, bn),)](
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py", line 374, in <lambda>
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py", line 757, in run
+    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py", line 902, in _do_compile
+    kernel = self.compile(src, target=target, options=options.__dict__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py", line 307, in compile
+    module = src.make_ir(target, options, codegen_fns, module_map, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/sglang/lib/python3.12/site-packages/triton/experimental/gluon/_runtime.py", line 40, in make_ir
+    module = ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+triton.compiler.errors.CompilationError: at 4:44:
+def _router_cluster(X, WH, WL, Y, M: gl.constexpr, N: gl.constexpr,
+                    K: gl.constexpr, BM: gl.constexpr, BN: gl.constexpr,
+                    BK: gl.constexpr, C: gl.constexpr):
+    gl.static_assert(C == gl.num_ctas() and C in (2, 4, 8))
+                                            ^
+AttributeError("'In' object has no attribute '__name__'")

@@ -1,0 +1,79 @@
+{
+  "control": {
+    "job": "f5ab0410cf1e4449",
+    "source": "results/round7_selected_source.py",
+    "source_sha256": "b1115afac8b8a47bf8951ce782818d490dd53ecc19cf34959d21831e32494944"
+  },
+  "runs": {
+    "stages2": {
+      "job": "99492464985742e0",
+      "source": "build/agent-round8/stages2.py",
+      "source_sha256": "7cf60a1aeb8f3edaa737e5cd12f7d1ff363a6db826349539e38f5715ad65dc38",
+      "service_content_hash": "55eca9bb62a890341135a4945635dcd04b035e7065c9eadfaf8da9a6626fead4",
+      "passed": true,
+      "score_us": 3933.7941757166996,
+      "speedup": 1.2280256119703759,
+      "speedup_ci": [
+        1.2096052277908202,
+        1.2464459961499315
+      ],
+      "score_change_pct": 4.486592927593369
+    },
+    "stages4": {
+      "job": "72ee9e56e9c74c82",
+      "source": "build/agent-round8/stages4.py",
+      "source_sha256": "7756d42c07ea974b179abe6bdfd0f4ef364d970c9bc530fc28dcdd4d319dd304",
+      "service_content_hash": "926688fcd86f876ca4fd924f70635b684aa464d86557e06b32f6e7f835fcbd63",
+      "passed": true,
+      "score_us": 3799.7694968644823,
+      "speedup": 1.271340275768388,
+      "speedup_ci": [
+        1.2522701716318623,
+        1.2904103799049138
+      ],
+      "score_change_pct": 0.9267264384088758
+    },
+    "wide": {
+      "job": "76820b2557f04afc",
+      "source": "build/agent-round8/wide.py",
+      "source_sha256": "a92953bcfe838536cb8b806a5ae89eac3e84aece8463cb2e298bbbd431f63bff",
+      "service_content_hash": "98054bacac930340017d57e23141d2b6d58b6ae4dbce5f38b250631bb863d190",
+      "passed": true,
+      "score_us": 3836.197285211189,
+      "speedup": 1.259267874106234,
+      "speedup_ci": [
+        1.2403788559946405,
+        1.2781568922178275
+      ],
+      "score_change_pct": 1.8942949796738384
+    },
+    "early": {
+      "job": "edb8c83cf4f74dfa",
+      "source": "build/agent-round8/early.py",
+      "source_sha256": "d9ebe514c32db6bdd4277c93b84e620e9a6f8fd6a5a3e550622782fb8b12cf1b",
+      "service_content_hash": "1185d04db95c769658c570f088a3541796263a8cfe86163450068f2ad236887f",
+      "passed": true,
+      "score_us": 3825.6069373652317,
+      "speedup": 1.26275387908175,
+      "speedup_ci": [
+        1.2438125708955239,
+        1.2816951872679763
+      ],
+      "score_change_pct": 1.613001827334326
+    },
+    "router": {
+      "job": "a7d02a5dc3194517",
+      "source": "build/agent-round8/router.py",
+      "source_sha256": "b0d7e0166e23d59aeff944943317359e36126f1b965daa4337c9036acb28e6a9",
+      "service_content_hash": "458e8d3fe4e8a67da028a22007abab7d36319fd5716590c131d801305882b76a",
+      "passed": true,
+      "score_us": 3819.72046605203,
+      "speedup": 1.2646998760600399,
+      "speedup_ci": [
+        1.2457293779191392,
+        1.2836703742009403
+      ],
+      "score_change_pct": 1.4566496379698757
+    }
+  }
+}

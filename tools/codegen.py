@@ -27,12 +27,13 @@ import traceback
 
 from projection.configs import CONFIGS, TUNED_CONFIGS, fallback_config
 from projection.shapes import SCORED_TOKENS, SHAPES, shape_config
+from tools.tune import read_source_choices
 
 HERE = Path(__file__).resolve().parents[1]
 KERNEL_SOURCES = sorted((HERE / "projection/kernels").glob("*.py"))
 
 
-def compile_jobs(preset="pdl", layers=tuple(SHAPES), tokens=SCORED_TOKENS):
+def compile_jobs(preset="pdl", layers=tuple(SHAPES), tokens=SCORED_TOKENS, overrides=None):
     """Compile the same configurations selected by the preset, including reducers."""
     jobs = []
     for layer in layers:
@@ -40,31 +41,80 @@ def compile_jobs(preset="pdl", layers=tuple(SHAPES), tokens=SCORED_TOKENS):
             config = shape_config(layer, m)
             n, k = config["n"], config["k"]
             key = (layer, m)
-            option = TUNED_CONFIGS.get(key, CONFIGS[preset].get(key, fallback_config(config, preset)))
+            option = (overrides or {}).get(
+                key, TUNED_CONFIGS.get(key, CONFIGS[preset].get(key, fallback_config(config, preset))))
             family = option[0]
-            if family == "torch":
+            early = family.endswith("_early")
+            family = family.removesuffix("_early")
+            reduce_warps = 1 if family == "dot_reduce32_warp1" else 4
+            if family == "dot_reduce32_warp1":
+                family = "dot_reduce32"
+            if family in ("torch", "torch_transposed", "torch_reversed", "torch_transposed_reversed"):
                 continue
             dtype = "fp32" if layer == "router" else "bf16"
             job = dict(name=f"{preset}-{layer}-{m}", source=preset)
-            if family == "gemv":
-                _, rows, warps = option
-                job.update(kernel="_gemv_full", signature={"X": "*bf16", "W": f"*{dtype}", "Y": f"*{dtype}"},
-                           constants={"N": n, "K": k, "ROWS": rows, "BLOCK_K": 1 << (k-1).bit_length()},
+            if family == "router_direct":
+                if layer != "router":
+                    raise ValueError("router_direct requires router weights")
+                _, tokens, warps = option
+                job.update(kernel="_router_direct",
+                           signature={"X": "*bf16", "W": "*fp32", "Y": "*fp32"},
+                           constants={"M": m, "N": n, "K": k, "BM": tokens,
+                                      "BLOCK_K": 1 << (k-1).bit_length()},
+                           num_warps=warps, num_stages=3)
+                jobs.append(job)
+                continue
+            if family in ("gemv", "gemv_chunked"):
+                _, rows, warps = option[:3]
+                block_k = option[3] if family == "gemv_chunked" else 1 << (k-1).bit_length()
+                job.update(kernel="_gemv_chunked" if family == "gemv_chunked" else "_gemv_full",
+                           signature={"X": "*bf16", "W": f"*{dtype}", "Y": f"*{dtype}"},
+                           constants={"N": n, "K": k, "ROWS": rows, "BLOCK_K": block_k},
                            num_warps=warps, num_stages=3)
                 jobs.append(job)
                 continue
             _, bm, bn, bk, splits, warps, stages = option
+            if family == "router_cluster":
+                if layer != "router":
+                    raise ValueError("router_cluster requires router weights")
+                job.update(kernel="_router_cluster", language="gluon",
+                           signature=dict(X="*bf16", WH="*bf16", WL="*bf16", Y="*fp32"),
+                           constants=dict(M=m, N=n, K=k, BM=bm, BN=bn, BK=bk, C=splits),
+                           num_warps=warps, num_stages=stages, num_ctas=splits)
+                jobs.append(job)
+                continue
+            if family == "dot_reduce32" and layer != "router":
+                raise ValueError("dot_reduce32 requires router weights")
             constants = dict(M=m, N=n, K=k, BM=bm, BN=bn, BK=bk)
             signature = dict(X="*bf16", W="*bf16", Y=f"*{dtype}")
-            kernel = {"dot": "_gemm", "gemm": "_stream_gemm", "orientation": "_weight_major_gemm",
-                      "tma": "_tma_weight_major"}[family]
-            if family != "orientation":
+            kernel = {"dot": "_gemm", "dot_reduce32": "_gemm",
+                      "gemm": "_stream_gemm", "orientation": "_weight_major_gemm",
+                      "hopper_ws": "_hopper_ws_gemm",
+                      "hopper_overlap": "_hopper_overlap_gemm",
+                      "weight_major": "_weight_major_stream_gemm", "tma": "_tma_weight_major",
+                      "orientation_native": "_weight_major_native_gemm",
+                      "weight_major_unroll2": "_weight_major_unroll2_gemm",
+                      "weight_major_tiled": "_weight_major_tiled_gemm",
+                      "router_interleaved": "_router_interleaved_gemm"}[family]
+            if early:
+                kernel += "_early"
+            if family not in ("orientation", "orientation_native"):
                 constants["S"] = splits
                 signature["P"] = "*fp32"
-            if family == "dot":
+            if family in ("dot", "dot_reduce32"):
                 signature.pop("W")
                 signature.update(WH="*bf16", WL="*bf16")
                 constants["ROUTER"] = layer == "router"
+            elif family in ("hopper_ws", "hopper_overlap"):
+                signature.pop("X")
+                signature.pop("W")
+                layout = ("NVMMASharedLayout(swizzle_byte_width=128, element_bitwidth=16, "
+                          "rank=2, transposed=False, fp4_padded=False, cga_layout=[])")
+                signature.update(WD=f"tensordesc<bf16[{bn},{bk}],{layout}>",
+                                 XD=f"tensordesc<bf16[{bm},{bk}],{layout}>")
+                constants["BUFFERS"] = stages
+                job.update(language="gluon", maxnreg=96)
+                stages = 1
             elif family == "tma":
                 signature.pop("X")
                 signature.pop("W")
@@ -75,21 +125,27 @@ def compile_jobs(preset="pdl", layers=tuple(SHAPES), tokens=SCORED_TOKENS):
             if splits > 1:
                 jobs.append(dict(name=f"{preset}-{layer}-{m}-reduce", source=preset, kernel="_reduce",
                                  signature={"P": "*fp32", "Y": f"*{dtype}"},
-                                 constants={"TOTAL": m*n, "S": splits, "B": 256},
-                                 num_warps=4, num_stages=3, launch_pdl=True))
+                                 constants={"TOTAL": m*n, "S": splits,
+                                            "B": 32 if family == "dot_reduce32" else 256},
+                                 num_warps=reduce_warps, num_stages=3, launch_pdl=True))
     return jobs
 
 
 def extract_jit_sources(paths):
     definitions = {}
+    imports = {"import triton": None, "import triton.language as tl": None}
     for path in paths:
         for node in ast.parse(path.read_text()).body:
+            if ((isinstance(node, ast.ImportFrom) and not node.level and
+                 node.module and node.module.startswith("triton")) or
+                (isinstance(node, ast.Import) and all(a.name.startswith("triton") for a in node.names))):
+                imports[ast.unparse(node)] = None
             if isinstance(node, ast.FunctionDef) and any(
                     isinstance(d, ast.Attribute) and d.attr == "jit" for d in node.decorator_list):
                 if node.name in definitions:
                     raise ValueError(f"duplicate JIT definition: {node.name}")
                 definitions[node.name] = node
-    body = "import triton\nimport triton.language as tl\n\n"
+    body = "\n".join(imports) + "\n\n"
     return body + "\n\n".join(ast.unparse(n) for n in definitions.values()) + "\n"
 
 
@@ -139,6 +195,7 @@ def find_ptxas(triton, explicit):
 def audit(args, jobs):
     args.output.mkdir(parents=True, exist_ok=True)
     report = {"created_at": datetime.now(timezone.utc).isoformat(), "target": "cuda:90:32 (sm_90a)",
+              "source": str(args.source) if args.source else None,
               "status": "running", "planned_jobs": jobs, "jobs": [], "timing_claims": False}
     report_path = args.output / "report.json"
     try:
@@ -158,7 +215,7 @@ def audit(args, jobs):
     nvdisasm = shutil.which("nvdisasm")
     if ptxas:
         report["ptxas_version"] = subprocess.run([ptxas, "--version"], capture_output=True, text=True).stdout
-    bundles = {job["source"]: KERNEL_SOURCES for job in jobs}
+    bundles = {job["source"]: [args.source] if args.source else KERNEL_SOURCES for job in jobs}
     modules = {}
     for name, paths in bundles.items():
         if not any(job["source"] == name for job in jobs):
@@ -181,8 +238,16 @@ def audit(args, jobs):
             signature = {**job["signature"], **{k: "constexpr" for k in job["constants"]}}
             attrs = {(i,): [["tt.divisibility", 16]] for i, name in enumerate(kernel.arg_names)
                      if job["signature"].get(name, "").startswith("*")}
-            src = ASTSource(fn=kernel, signature=signature, constexprs=job["constants"], attrs=attrs)
+            source_type = ASTSource
+            if job.get("language") == "gluon":
+                from triton.experimental.gluon._runtime import GluonASTSource
+                source_type = GluonASTSource
+            src = source_type(fn=kernel, signature=signature, constexprs=job["constants"], attrs=attrs)
             options = {"num_warps": job["num_warps"], "num_stages": job["num_stages"]}
+            if "maxnreg" in job:
+                options["maxnreg"] = job["maxnreg"]
+            if "num_ctas" in job:
+                options["num_ctas"] = job["num_ctas"]
             if "launch_pdl" in job:
                 options["launch_pdl"] = job["launch_pdl"]
             compiled = triton.compile(src, target=GPUTarget("cuda", 90, 32), options=options)
@@ -194,7 +259,21 @@ def audit(args, jobs):
             metadata = compiled.metadata._asdict()
             entry["metadata"] = json.loads(json.dumps(metadata, default=str))
             entry["static_summary"] = summarize_ptx(compiled.asm["ptx"], compiled.asm.get("ttgir", ""))
-            if job["kernel"] == "_tma_weight_major":
+            if job["kernel"] == "_router_cluster":
+                ptx = compiled.asm["ptx"]
+                entry["cluster_audit"] = {
+                    "ctas_per_cluster": metadata.get("num_ctas"),
+                    "has_tensor_core_mma": bool(entry["static_summary"]["mma_instructions"]),
+                    "has_cluster_barrier": "barrier.cluster" in ptx,
+                    "has_remote_shared_access": bool(re.search(r"(?:ld|st)\.shared::cluster", ptx)),
+                    "has_no_grid_dependency": "griddepcontrol." not in ptx,
+                }
+                if (metadata.get("num_ctas") != job["num_ctas"] or
+                        not all(entry["cluster_audit"][key] for key in (
+                            "has_tensor_core_mma", "has_cluster_barrier",
+                            "has_remote_shared_access", "has_no_grid_dependency"))):
+                    raise RuntimeError("Cluster reduction/MMA instruction audit failed")
+            if job["kernel"] in ("_tma_weight_major", "_tma_weight_major_early", "_hopper_ws_gemm", "_hopper_overlap_gemm"):
                 summary = entry["static_summary"]
                 entry["uses_tma_and_wgmma"] = (
                     any(k.startswith("cp.async.bulk.tensor") for k in summary["cp_async_instructions"])
@@ -208,12 +287,22 @@ def audit(args, jobs):
                     first_load = re.search(r"\bld\.global[.\s]", ptx).start()
                     entry["dependency_order"] = {"wait_before_global_load": wait < first_load,
                                                  "consumer_launch_pdl": metadata["launch_pdl"]}
+                elif job["kernel"] in ("_hopper_ws_gemm", "_hopper_overlap_gemm"):
+                    # Partitioned control flow does not imply execution order
+                    # from PTX text order. CPU protocol tests check source order.
+                    entry["dependency_order"] = {
+                        "release_present": "griddepcontrol.launch_dependents;" in ptx,
+                        "producer_uses_normal_launch": not metadata["launch_pdl"]}
+                    entry["dependency_order_note"] = "Partition CFG requires protocol review; text order is not a proof."
                 else:
                     release = ptx.index("griddepcontrol.launch_dependents;")
                     first_store = re.search(r"\bst\.global[.\s]", ptx).start()
                     mma_positions = [m.start() for m in re.finditer(r"\b(?:wgmma|mma)\.", ptx)]
+                    math_order = ({"release_before_first_mma": release < min(mma_positions)}
+                                  if job["kernel"].endswith("_early") else
+                                  {"release_after_last_mma": release > max(mma_positions)})
                     entry["dependency_order"] = {"release_before_partial_store": release < first_store,
-                                                 "release_after_last_mma": release > max(mma_positions),
+                                                 **math_order,
                                                  "producer_uses_normal_launch": not metadata["launch_pdl"]}
                 if not all(entry["dependency_order"].values()):
                     raise RuntimeError(f"PDL instruction/launch ordering failed: {entry['dependency_order']}")
@@ -263,7 +352,9 @@ def audit(args, jobs):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=HERE / "build/codegen")
-    parser.add_argument("--preset", choices=("pdl", "combined", "tma"), default="pdl")
+    parser.add_argument("--preset", choices=tuple(CONFIGS), default="pdl")
+    parser.add_argument("--source", type=Path,
+                        help="compile exact configurations and kernels from a standalone experiment")
     parser.add_argument("--layers", nargs="+", choices=SHAPES, default=list(SHAPES))
     parser.add_argument("--tokens", nargs="+", type=int, default=list(SCORED_TOKENS))
     parser.add_argument("--ptxas", help="optional path to the NVIDIA assembler")
@@ -272,7 +363,8 @@ def main():
     args = parser.parse_args()
     if any(m <= 0 for m in args.tokens):
         parser.error("token counts must be positive")
-    jobs = compile_jobs(args.preset, args.layers, args.tokens)
+    overrides = read_source_choices(args.source.read_text(), args.layers, args.tokens) if args.source else None
+    jobs = compile_jobs(args.preset, args.layers, args.tokens, overrides)
     if args.plan:
         print(json.dumps(jobs, indent=2))
         return 0

@@ -1,0 +1,88 @@
+{
+  "reference_score_us": 3830.2665629470603,
+  "reference_is_measured": false,
+  "target_user_reported_us": 2950,
+  "required_reduction_pct": 22.981861666300606,
+  "groups": {
+    "small_qkv_pooler": {
+      "case_count": 6,
+      "sensitivity_pct": 27.471926763264022,
+      "conditional_20pct_floor_capped": {
+        "score_us": 3613.5326581926856,
+        "saving_us": 216.73390475437463
+      },
+      "conditional_30pct_floor_capped": {
+        "score_us": 3528.061828519182,
+        "saving_us": 302.20473442787807
+      },
+      "reported_floor_scenario": {
+        "score_us": 3498.391066254676,
+        "saving_us": 331.87549669238433
+      }
+    },
+    "large_qkv_pooler": {
+      "case_count": 4,
+      "sensitivity_pct": 17.75571156855236,
+      "conditional_20pct_floor_capped": {
+        "score_us": 3689.1102240593227,
+        "saving_us": 141.15633888773755
+      },
+      "conditional_30pct_floor_capped": {
+        "score_us": 3614.2898688326572,
+        "saving_us": 215.97669411440302
+      },
+      "reported_floor_scenario": {
+        "score_us": 3502.074598468827,
+        "saving_us": 328.19196447823333
+      }
+    },
+    "full_unpooler": {
+      "case_count": 4,
+      "sensitivity_pct": 18.146743043828316,
+      "conditional_20pct_floor_capped": {
+        "score_us": 3689.9426182664824,
+        "saving_us": 140.32394468057782
+      },
+      "conditional_30pct_floor_capped": {
+        "score_us": 3660.185941190021,
+        "saving_us": 170.08062175703935
+      },
+      "reported_floor_scenario": {
+        "score_us": 3660.185941190021,
+        "saving_us": 170.08062175703935
+      }
+    },
+    "all_router": {
+      "case_count": 6,
+      "sensitivity_pct": 10.970546348188163,
+      "conditional_20pct_floor_capped": {
+        "score_us": 3746.2236246703774,
+        "saving_us": 84.04293827668289
+      },
+      "conditional_30pct_floor_capped": {
+        "score_us": 3704.200057056533,
+        "saving_us": 126.06650589052742
+      },
+      "reported_floor_scenario": {
+        "score_us": 3533.7817562703476,
+        "saving_us": 296.48480667671265
+      }
+    },
+    "broad_dense_engine": {
+      "case_count": 14,
+      "sensitivity_pct": 63.374381375644695,
+      "conditional_20pct_floor_capped": {
+        "score_us": 3337.9242746386863,
+        "saving_us": 492.342288308374
+      },
+      "conditional_30pct_floor_capped": {
+        "score_us": 3154.736062618081,
+        "saving_us": 675.5305003289791
+      },
+      "reported_floor_scenario": {
+        "score_us": 3020.8297105360325,
+        "saving_us": 809.4368524110278
+      }
+    }
+  }
+}

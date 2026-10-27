@@ -1,0 +1,33 @@
+{
+  "status": "unmeasured; staged after daily check quota was exhausted",
+  "control_job": "f5ab0410cf1e4449",
+  "control_source": "results/round7_selected_source.py",
+  "source_sha256": "529c057f4f3afd77ebcab7b184bca0a335d5172c6e343261e49aa542eacd5e2f",
+  "scored_changes": [
+    {
+      "layer": "qkv_gate",
+      "m": 32,
+      "before": [
+        "tma",
+        32,
+        64,
+        128,
+        8,
+        4,
+        3
+      ],
+      "after": [
+        "tma",
+        32,
+        64,
+        128,
+        4,
+        4,
+        3
+      ]
+    }
+  ],
+  "nearby_policy": "QKV M17..32 uses the same S4 setting; other dispatch is unchanged",
+  "hypothesis": "Longer TMA loop and half the partial-buffer traffic may compensate for 144 rather than 288 producer CTAs; earlier non-TMA split-count results do not settle this TMA setting.",
+  "preset": "qkv_split4"
+}

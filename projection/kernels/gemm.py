@@ -72,6 +72,38 @@ def _stream_gemm(X, W, Y, P, M: tl.constexpr, N: tl.constexpr,
 
 
 @triton.jit
+def _weight_major_stream_gemm(X, W, Y, P, M: tl.constexpr, N: tl.constexpr,
+                              K: tl.constexpr, S: tl.constexpr,
+                              BM: tl.constexpr, BN: tl.constexpr, BK: tl.constexpr):
+    # Same weight storage, tile order and FP32 partials as _stream_gemm;
+    # reverse the dot operands so contiguous weight rows are the left operand.
+    mt = tl.cdiv(M, BM)
+    tile = tl.program_id(0)
+    ms = (tile % mt) * BM + tl.arange(0, BM)
+    ns = (tile // mt) * BN + tl.arange(0, BN)
+    split = tl.program_id(1)
+    chunk: tl.constexpr = tl.cdiv(K, S)
+    ks = split * chunk + tl.arange(0, BK)
+    end = tl.minimum((split + 1) * chunk, K)
+    acc = tl.full((BN, BM), 0, tl.float32)
+    for _ in range(tl.cdiv(chunk, BK)):
+        w = tl.load(W + ns[:, None] * K + ks[None, :],
+                    (ns[:, None] < N) & (ks[None, :] < end), other=0)
+        x = tl.load(X + ms[None, :] * K + ks[:, None],
+                    (ms[None, :] < M) & (ks[:, None] < end), other=0)
+        acc = tl.dot(w, x, acc)
+        ks += BK
+    if S > 1:
+        tl.extra.cuda.gdc_launch_dependents()
+    offsets = ms[None, :] * N + ns[:, None]
+    mask = (ms[None, :] < M) & (ns[:, None] < N)
+    if S == 1:
+        tl.store(Y + offsets, acc, mask)
+    else:
+        tl.store(P + split * M * N + offsets, acc, mask)
+
+
+@triton.jit
 def _weight_major_gemm(W, X, Y, M: tl.constexpr, N: tl.constexpr,
                        K: tl.constexpr, BM: tl.constexpr,
                        BN: tl.constexpr, BK: tl.constexpr):
@@ -90,3 +122,35 @@ def _weight_major_gemm(W, X, Y, M: tl.constexpr, N: tl.constexpr,
         ks += BK
     tl.store(Y + ms[None, :] * N + ns[:, None], acc,
              (ms[None, :] < M) & (ns[:, None] < N))
+
+
+@triton.jit
+def _weight_major_unroll2_gemm(X, W, Y, P, M: tl.constexpr, N: tl.constexpr,
+                               K: tl.constexpr, S: tl.constexpr,
+                               BM: tl.constexpr, BN: tl.constexpr, BK: tl.constexpr):
+    # Identical arithmetic and addressing to _weight_major_stream_gemm.
+    # The sole compiler scheduling change is the two-iteration unroll hint.
+    mt = tl.cdiv(M, BM)
+    tile = tl.program_id(0)
+    ms = (tile % mt) * BM + tl.arange(0, BM)
+    ns = (tile // mt) * BN + tl.arange(0, BN)
+    split = tl.program_id(1)
+    chunk: tl.constexpr = tl.cdiv(K, S)
+    ks = split * chunk + tl.arange(0, BK)
+    end = tl.minimum((split + 1) * chunk, K)
+    acc = tl.full((BN, BM), 0, tl.float32)
+    for _ in tl.range(tl.cdiv(chunk, BK), loop_unroll_factor=2):
+        w = tl.load(W + ns[:, None] * K + ks[None, :],
+                    (ns[:, None] < N) & (ks[None, :] < end), other=0)
+        x = tl.load(X + ms[None, :] * K + ks[:, None],
+                    (ms[None, :] < M) & (ks[:, None] < end), other=0)
+        acc = tl.dot(w, x, acc)
+        ks += BK
+    if S > 1:
+        tl.extra.cuda.gdc_launch_dependents()
+    offsets = ms[None, :] * N + ns[:, None]
+    mask = (ms[None, :] < M) & (ns[:, None] < N)
+    if S == 1:
+        tl.store(Y + offsets, acc, mask)
+    else:
+        tl.store(P + split * M * N + offsets, acc, mask)

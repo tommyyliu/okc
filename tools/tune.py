@@ -11,11 +11,13 @@ into a standalone submission; neither timing nor reference imports go into it.
 
 import argparse
 import ast
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
 import random
 import statistics
+from types import SimpleNamespace
 
 
 from projection.shapes import SHAPES, SCORED_TOKENS, shape_config
@@ -24,7 +26,8 @@ HERE = Path(__file__).resolve().parents[1]
 BUCKETS = SCORED_TOKENS
 
 
-def options(m, n, k, layer):
+def options(m, n, k, layer, *, stages=(2, 3, 4), k_tiles=(64, 128, 256),
+            families=("gemm", "weight_major"), splits=None):
     if layer != "router":
         yield ("torch",)
     if m == 1:
@@ -34,14 +37,85 @@ def options(m, n, k, layer):
                     yield ("gemv", rows, warps)
     elif layer != "router":
         bm = 16 if m <= 16 else (32 if m <= 32 else 128)
-        for bn, bk, warps in ((32, 128, 4), (64, 128, 4), (128, 64, 8)):
+        for bn, warps in ((32, 4), (64, 4), (128, 8)):
             tiles = ((m + bm - 1) // bm) * ((n + bn - 1) // bn)
             occupancy_split = 1
             while tiles * occupancy_split < 264 and occupancy_split < 16:
                 occupancy_split *= 2
-            for split in sorted({1, max(1, occupancy_split // 2), occupancy_split}):
-                if k % (split * bk) == 0:
-                    yield ("gemm", bm, bn, bk, split, warps, 3)
+            partitions = (splits if splits is not None else
+                          sorted({1, max(1, occupancy_split // 4),
+                                  max(1, occupancy_split // 2), occupancy_split,
+                                  min(32, occupancy_split * 2)}))
+            for bk in k_tiles:
+                for split in partitions:
+                    if k % (split * bk) == 0:
+                        for family in families:
+                            for depth in stages:
+                                yield (family, bm, bn, bk, split, warps, depth)
+
+
+def read_source_choices(source, layers=tuple(SHAPES), tokens=SCORED_TOKENS):
+    """Inspect standalone configuration without importing Torch or GPU kernels."""
+    tree = ast.parse(source)
+    host = [n for n in tree.body if isinstance(n, (ast.Assign, ast.FunctionDef))
+            and not (isinstance(n, ast.FunctionDef) and (n.decorator_list or
+                     n.name in ("prepare", "run_config", "kernel_fn")))]
+    ns = {}
+    exec(compile(ast.Module(body=host, type_ignores=[]), "<source configuration>", "exec"), ns)
+    return source_choices(SimpleNamespace(**ns), layers, tokens)
+
+
+def write_ablations(source, directory, layers, tokens):
+    """Export one-factor small-GEMM experiments for remote checks, without a GPU.
+
+    The streaming reference changes cuBLAS cases to the existing streaming tile;
+    all other variants change exactly one field of that reference. The original
+    source remains a separate control, including its cuBLAS choices.
+    """
+    choices = read_source_choices(source)
+    keys = [(layer, m) for layer in layers for m in tokens]
+    if any(layer not in ("qkv_gate", "pooler") or m not in (8, 16, 32)
+           for layer, m in keys):
+        raise ValueError("ablations require QKV/pooler at M=8/16/32")
+    streaming = dict(choices)
+    for layer, m in keys:
+        option = choices[(layer, m)]
+        if option[0] == "torch":
+            option = ("gemm", 16 if m <= 16 else 32, 64, 128,
+                      8 if layer == "qkv_gate" else 4, 4, 3)
+        if option[0] != "gemm":
+            raise ValueError("ablations require a streaming GEMM or cuBLAS source control")
+        streaming[(layer, m)] = option
+    directory.mkdir(parents=True, exist_ok=True)
+    control = directory / "control.py"
+    control.write_text(source)
+    manifest = {"source_sha256": hashlib.sha256(source.encode()).hexdigest(),
+                "measured": False, "control": "control.py", "experiments": []}
+    changes = (("streaming", None, None), ("stages2", 6, 2), ("stages4", 6, 4),
+               ("bk64", 3, 64), ("bk256", 3, 256),
+               ("splits_half", 4, "half"), ("splits_double", 4, "double"),
+               ("weight_major", 0, "weight_major"))
+    for name, field, value in changes:
+        selected = dict(streaming)
+        for key in keys:
+            option = list(selected[key])
+            if field is not None:
+                option[field] = (max(1, option[field] // 2) if value == "half" else
+                                 option[field] * 2 if value == "double" else value)
+            if SHAPES[key[0]][1] % (option[3] * option[4]):
+                raise ValueError(f"{name}: K must be divisible by splits * BK: {key}")
+            selected[key] = tuple(option)
+        path = directory / f"{name}.py"
+        export_submission(source, path, selected)
+        comparison = choices if name == "streaming" else streaming
+        manifest["experiments"].append({
+            "file": path.name,
+            "compare_to": "control.py" if name == "streaming" else "streaming.py",
+            "changed_cases": [{"layer": layer, "m": m, "before": comparison[(layer, m)],
+                               "after": selected[(layer, m)]}
+                              for layer, m in keys if selected[(layer, m)] != comparison[(layer, m)]]})
+    (directory / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    return manifest
 
 
 def export_submission(source, destination, choices):
@@ -58,11 +132,11 @@ def export_submission(source, destination, choices):
     destination.write_text(result)
 
 
-def source_choices(module):
+def source_choices(module, layers=tuple(SHAPES), tokens=SCORED_TOKENS):
     """Preserve exact overrides and every unswept scored configuration."""
     choices = dict(module.TUNED_CONFIGS)
-    for layer in SHAPES:
-        for m in SCORED_TOKENS:
+    for layer in layers:
+        for m in tokens:
             choices[(layer, m)] = module.select_config(shape_config(layer, m))
     return choices
 
@@ -141,7 +215,9 @@ def run(args):
     flush = torch.empty(128 * 1024 * 1024, dtype=torch.uint8, device="cuda")
     choices = source_choices(module)
     report = {"gpu": torch.cuda.get_device_name(), "torch": torch.__version__,
-              "seed": args.seed, "source": str(args.source), "cases": []}
+              "seed": args.seed, "source": str(args.source),
+              "search": {"stages": args.stages, "k_tiles": args.k_tiles,
+                         "families": args.families, "splits": args.splits}, "cases": []}
     print(f"GPU: {report['gpu']}; measuring cold-L2 CUDA graph nodes", flush=True)
     with torch.no_grad():
         for index, (m, layer) in enumerate((m, layer) for m in args.tokens for layer in args.layers):
@@ -153,7 +229,9 @@ def run(args):
             torch.cuda.synchronize()
             correct(reference, data, baseline[3], weights)
             case = {"m": m, "layer": layer, "baseline": baseline_option, "trials": []}
-            candidates = [option for option in options(m, cfg["n"], cfg["k"], layer)
+            candidates = [option for option in dict.fromkeys(options(m, cfg["n"], cfg["k"], layer,
+                          stages=args.stages, k_tiles=args.k_tiles,
+                          families=args.families, splits=args.splits))
                           if option != baseline_option]
             random.Random(args.seed + index).shuffle(candidates)
             best = baseline_option
@@ -195,7 +273,10 @@ def run(args):
                     # Also validate the candidate on nearby shapes before retaining it.
                     position = BUCKETS.index(m)
                     lower = BUCKETS[position - 1] + 1 if position else 1
-                    for nearby in sorted({lower, max(lower, m - 1)} - {m}):
+                    nearby_tokens = {lower, max(lower, m - 1)}
+                    if m > 1:
+                        nearby_tokens.add(m + 1)
+                    for nearby in sorted(nearby_tokens - {m}):
                         nearby_data = reference.generate_input(
                             nearby, layer, args.seed + index + nearby + 20001, dist="outliers")
                         out = module.run_config(nearby_data, state, best)
@@ -224,26 +305,40 @@ def main():
     parser.add_argument("--tokens", nargs="+", type=int, choices=BUCKETS, default=[1, 8, 16, 32, 128, 256])
     parser.add_argument("--pairs", type=int, default=20)
     parser.add_argument("--seed", type=int, default=27641)
-    parser.add_argument("--plan", action="store_true")
+    parser.add_argument("--stages", nargs="+", type=int, choices=(1, 2, 3, 4, 5), default=[2, 3, 4])
+    parser.add_argument("--k-tiles", nargs="+", type=int, choices=(32, 64, 128, 256), default=[64, 128, 256])
+    parser.add_argument("--families", nargs="+", choices=("gemm", "weight_major"),
+                        default=["gemm", "weight_major"])
+    parser.add_argument("--splits", nargs="+", type=int, choices=(1, 2, 4, 8, 16, 32),
+                        help="default: occupancy-derived partitions plus quarter, half and double")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--plan", action="store_true")
+    mode.add_argument("--ablations", type=Path,
+                      help="export small QKV/pooler experiments and a manifest without a GPU")
     args = parser.parse_args()
     if args.pairs < 10:
         parser.error("--pairs must be at least 10")
     if args.source.resolve() == args.output.resolve():
         parser.error("--output must differ from --source")
-    if args.plan:
-        tree = ast.parse(args.source.read_text())
-        host = [n for n in tree.body if isinstance(n, (ast.Assign, ast.FunctionDef))
-                and not (isinstance(n, ast.FunctionDef) and (n.decorator_list or
-                         n.name in ("prepare", "run_config", "kernel_fn")))]
-        ns = {}
-        exec(compile(ast.Module(body=host, type_ignores=[]), str(args.source), "exec"), ns)
+    if args.ablations:
+        if args.source.resolve().parent == args.ablations.resolve():
+            parser.error("--ablations must differ from the source directory")
+        try:
+            manifest = write_ablations(args.source.read_text(), args.ablations, args.layers, args.tokens)
+        except ValueError as error:
+            parser.error(str(error))
+        print(f"Wrote control and {len(manifest['experiments'])} experiments to {args.ablations}")
+    elif args.plan:
+        choices = read_source_choices(args.source.read_text())
         for m in args.tokens:
             for layer in args.layers:
                 n, k = SHAPES[layer]
                 if layer == "unpooler" and m <= 8:
                     n = 1024
-                current = ns["select_config"](shape_config(layer, m))
-                count = len(set(options(m, n, k, layer)) | {current})
+                current = choices[(layer, m)]
+                count = len(set(options(m, n, k, layer, stages=args.stages,
+                                       k_tiles=args.k_tiles, families=args.families,
+                                       splits=args.splits)) | {current})
                 print(f"m={m:3d} {layer:9s}: {current}; {count} choices")
     else:
         run(args)
