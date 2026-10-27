@@ -1,0 +1,16 @@
+{
+  "job": "71b479393ecd4532",
+  "judge_content_hash": "fe4a9e2ee9d198e68b401414167337fd762e05fe08a0ab061b5e76b8c0d8da72",
+  "artifact_sha256": {
+    "candidate.py": "82be848591dd01d3aa0eebf8d9a2e599333b0031f7669860d5c198798fd3828b",
+    "check.json": "cccefd93c04010e8df8d002fa340d3f066a9a2f3799e04c61f1bf4230a10c2ae",
+    "profile.txt": "ab93632519454139263643b8e8362dbd8c4dd28d966b2f3dfa1148ca010b7614"
+  },
+  "source_provenance": "Local FP8-fixed source saved before organization changes while this check was running; exact AST checkpoint in tests/fixtures/fp8_fix.json.",
+  "organization_change": "Generated source preserves every function/class AST and constant value; verified by CPU tests.",
+  "target": {
+    "score_us": 9580,
+    "speedup": 2.36,
+    "source": "Corrected user-reported muse_decode_layer leaderboard result; not independently refreshed."
+  }
+}

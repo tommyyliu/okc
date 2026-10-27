@@ -1,0 +1,19 @@
+{
+  "problem": "muse_decode_layer",
+  "preset": "full_fa3_m8_finalize",
+  "expert_block_size_candidates": [
+    8
+  ],
+  "small_expert_finalize": true,
+  "submission_sha256": "8211d1bc0b5c0d98be021668c1e96c78aa4e392c39913a4830cd2fa2e764cd81",
+  "sources": {
+    "decode/spec.py": "8a778378074530709e643812055d2f12f55b6a8863641b70b89a7d296c15c496",
+    "decode/config.py": "77cb26728154a908f71c733a40787327f6ebf4b8706d5f88f3cfdec8a208f4ff",
+    "decode/projections.py": "a49924ec4df958950e3c113ab8190d552cfc1d473f7167e2cca92c9ffef03b58",
+    "decode/boundaries.py": "f0c9b9a230d55c7e63dd5048b923f94b5d8a1548bcf6ff300c6618b3a966ab19",
+    "decode/experts.py": "73e5cc83c219578b5203b62aa35a4dee3287a85803bf1ad60c74f751417e896e",
+    "decode/attention.py": "cade00487ca80a817c9add448f5c30dea895f5ec9d413cbaf63caccbc45da7d8",
+    "decode/runtime.py": "93d38fb66c7fd6c6ab04c282bf4940f5e91f0c88aecff0b7d919236d58e5ba16"
+  },
+  "validation": "Build/syntax only; no claim of GPU compilation, correctness, or speed."
+}

@@ -1,12 +1,22 @@
+# Python / tooling
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.idea/
+
 # generated bench/check files and raw okc output
 build/
 profiles/
-__pycache__/
-*.pyc
 
 # challenge-provided files written by `okc init` (not ours to redistribute)
-AGENTS.md
 TASK.md
 baseline.py
 reference.py
 checks.py
+nvfp4.py
+AGENTS.md
+!muse_decode_layer/AGENTS.md
+
+# separate repository with its own history
+muse_bf16_proj/

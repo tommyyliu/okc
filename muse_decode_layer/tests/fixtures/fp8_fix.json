@@ -1,0 +1,39 @@
+{
+  "description": "FP8-fixed candidate before organization changes; check 71b479393ecd4532 passed at 22056.34 us / 1.0255689x.",
+  "source_sha256": "82be848591dd01d3aa0eebf8d9a2e599333b0031f7669860d5c198798fd3828b",
+  "definitions": {
+    "Weights": "d8fee40d5d010d2cc0a620701c185d8639338082843fc93689dfba9bcf651e8d",
+    "Config": "55bd89a012e039ae1621004b1f43c5eec29fdbde2bfc56d2d7a3d05789959b97",
+    "Inputs": "f015a8d859f23f4c8310d13dbb7afdd4ddc19ef23a0f495d9347f93f16918a7d",
+    "_marlin_bank": "5796b33c0bb41eff4b373dd2b6787fcc882bda425d88e4926acf886d7d75d628",
+    "_experts": "7a283fb7c71db6aa1eb063047cde2bb1ab9cd3f57e0327ffbe31132d5ae12e68",
+    "_gemv": "fd00931f80958cf8908a9bdd72c84cbeb10e2192c9e2c32ccbb87517c8d37f8b",
+    "_small_gemm": "7a3121e6a00efd919730a25a82409753e227603884f34d07148d1710957a5d7c",
+    "_reduce_projection": "505274c8c243f0ff4f7c88215a1df3337806d2867d0937b3eb34f7bb6257e30b",
+    "_project": "79ae390171569706399086ea82d2cc2f88162fee148acb1f07faa15f605fc06f",
+    "_qkv_norm_store": "c85de826c678190393d871e4d4fdd2d8146369d543fba9c18697526b12475343",
+    "_attention_parts": "de2d863eb04176e63abffd9a0c8f81ac74748d4710335e6b1be2a83df0fe75ed",
+    "_attention_finish": "61924f3d6969ed195c7a5d34aacd2b40d60d8fd1ef21033b2439ae670e3bde3c",
+    "_attention": "370703fb6b0d095ea96f16f812fca0c940b8b94e4589a8d7ddc3a5558272291b",
+    "_norm": "6dd78c59e508fd7b72709d62821b3d4ca971c0de266094650ca271b1841d86cb",
+    "_boundary": "8203a0d48885098bfdb67156b99eb3c85f66e26b94d1302f7f1b06a14d53de7f",
+    "_residual_boundary": "a593983fc36df71787dab4fc043d5c100cae572a0502a67766f5005e4ecc3f45",
+    "prepare": "da9c7f4a8e4b89b8c089f5d60232ff9194950e15756d6e3437507887a75f201c",
+    "kernel_fn": "57a91211d49fd0eb70fffd8616b3206ab754e8f2c090d5b808ebe872b18fc0ae"
+  },
+  "constants": {
+    "HIDDEN": 8192,
+    "N_EXPERTS": 256,
+    "TOP_K": 8,
+    "LOCAL_EXPERTS": 32,
+    "D_EXPERT": 4096,
+    "POST_NORM_EPS": 1e-08,
+    "BLOCK_SIZE_M_CANDIDATES": [
+      8,
+      16,
+      32,
+      48,
+      64
+    ]
+  }
+}

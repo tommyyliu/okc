@@ -1,0 +1,277 @@
+{
+  "board": "muse_decode_layer",
+  "call_id": "nyc3:kc-918336d7e75f4911",
+  "cluster": "nyc3",
+  "content_hash": "8bc4d8d27121a715c641d6d81368cf904144668f2525dfc10be99ff660781816",
+  "created_at": 1792986667.0110352,
+  "dedicated": false,
+  "duplicate_of": null,
+  "finished_at": 1792986733.8243296,
+  "id": "918336d7e75f4911",
+  "limits": {
+    "scored": {
+      "per_day": 10,
+      "used": 0,
+      "left": 10
+    },
+    "checks": {
+      "per_day": 20,
+      "used": 1,
+      "left": 19
+    }
+  },
+  "mode": "check",
+  "output": {
+    "log": "/home/tommy/PycharmProjects/okc-work/muse_decode_layer/profiles/submission.918336d7e75f4911.log"
+  },
+  "payload_ref": "muse_decode_layer/8bc4d8d27121a715c641d6d81368cf904144668f2525dfc10be99ff660781816.py",
+  "result": {
+    "checks": {
+      "flagged": [],
+      "ok": true,
+      "rejected": []
+    },
+    "error": null,
+    "evaluator": {
+      "code_sha256": "2999d8a201bb2b0bad6c7b3998af2143a1ed720d531dbb4d15670721ee9f957b",
+      "files": {
+        "challenge/checks.py": "9a046c3c38db28b325dcd1557baecdf6bc9ef941d2175f9a900ba4c230bb8055",
+        "challenge/nvfp4.py": "cfdf37c7bc14b10f7353aba7d4632f4767401b92b4b073941a8030d9a961aaaf",
+        "configs/muse-spark-open.yaml": "98f07230e4e64fe91b7c76d9a3ce04948053c043d494d5f1fae56cfe2de033af",
+        "harness/eval.py": "0051a1bfac67a9f1fad06086b306653c6643b2bb253e15a794aa672312f070a9",
+        "harness/runner.py": "c905e5c80264c6d27620b6fc7d55b162dccdb8ed7282f8a513a4d2e6f2f226f2",
+        "harness/static_checks.py": "c5588b69e9e86229459a525c61b30096f6f13ff2add6cadf98f272c4ac8ca0c2",
+        "harness/worker.py": "950437610f57ddffbc1176b65d9c2ae909c47bf67b1e3fe0716a81946986f568",
+        "problems/muse_decode_layer/baseline.py": "87d95a0c4b78f0fd6c772436b959330ca45652b10e82dfc8add9acf0549227d4",
+        "problems/muse_decode_layer/reference.py": "23e177b87aee70c0d4990515989b95bff2972270cdac8ab967445b21fa2f5163",
+        "problems/muse_decode_layer/task.yml": "6a73de4094ff00d7453fb94bd3aa40f5fae79ac7fbea149660eae2125dc5a0c7"
+      },
+      "image": "localhost:30500/kc/judge@sha256:9a7f287b80d772c6f636bbcb57422c619fe326e2aabc53803b85007bca93f68e"
+    },
+    "flags": [],
+    "gpu": "H200",
+    "log_tail": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntriton.compiler.errors.CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e\nTraceback (most recent call last):\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/language/core.py\", line 43, in wrapper\n    return fn(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/language/core.py\", line 2540, in load\n    return _semantic.load(pointer, mask, other, boundary_check, padding_option, cache_modifier, eviction_policy,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/language/semantic.py\", line 1045, in load\n    other = self.cast(other, elt_ty)\n            ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/language/semantic.py\", line 916, in cast\n    assert False, f'cannot cast {input} to {dst_ty}'\n           ^^^^^\nAssertionError: cannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/tmp/muse_decode_layer-ddn3oh_k/run/worker.py\", line 484, in child_main\n    out = kernel()(state.get(\"data\"))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/muse_decode_layer-ddn3oh_k/run/worker.py\", line 415, in \u003clambda\u003e\n    return functools.partial(lambda k, p, d: k(d, p), fn, state[\"prep\"])\n                                             ^^^^^^^\n  File \"/tmp/muse_decode_layer-ddn3oh_k/run/submission.py\", line 447, in kernel_fn\n    attn_output = _project(_attention(data, state), state, \"o\")\n                           ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/muse_decode_layer-ddn3oh_k/run/submission.py\", line 355, in _attention\n    _attention_parts[(batch, 2, splits)](\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 374, in \u003clambda\u003e\n    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 757, in run\n    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 902, in _do_compile\n    kernel = self.compile(src, target=target, options=options.__dict__)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 307, in compile\n    module = src.make_ir(target, options, codegen_fns, module_map, context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 80, in make_ir\n    return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntriton.compiler.errors.CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e\nTraceback (most recent call last):\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/language/core.py\", line 43, in wrapper\n    return fn(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/language/core.py\", line 2540, in load\n    return _semantic.load(pointer, mask, other, boundary_check, padding_option, cache_modifier, eviction_policy,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/language/semantic.py\", line 1045, in load\n    other = self.cast(other, elt_ty)\n            ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/language/semantic.py\", line 916, in cast\n    assert False, f'cannot cast {input} to {dst_ty}'\n           ^^^^^\nAssertionError: cannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/tmp/muse_decode_layer-ddn3oh_k/run/worker.py\", line 484, in child_main\n    out = kernel()(state.get(\"data\"))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/muse_decode_layer-ddn3oh_k/run/worker.py\", line 415, in \u003clambda\u003e\n    return functools.partial(lambda k, p, d: k(d, p), fn, state[\"prep\"])\n                                             ^^^^^^^\n  File \"/tmp/muse_decode_layer-ddn3oh_k/run/submission.py\", line 447, in kernel_fn\n    attn_output = _project(_attention(data, state), state, \"o\")\n                           ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/muse_decode_layer-ddn3oh_k/run/submission.py\", line 355, in _attention\n    _attention_parts[(batch, 2, splits)](\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 374, in \u003clambda\u003e\n    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 757, in run\n    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 902, in _do_compile\n    kernel = self.compile(src, target=target, options=options.__dict__)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 307, in compile\n    module = src.make_ir(target, options, codegen_fns, module_map, context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 80, in make_ir\n    return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntriton.compiler.errors.CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e\nTraceback (most recent call last):\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/language/core.py\", line 43, in wrapper\n    return fn(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/language/core.py\", line 2540, in load\n    return _semantic.load(pointer, mask, other, boundary_check, padding_option, cache_modifier, eviction_policy,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/language/semantic.py\", line 1045, in load\n    other = self.cast(other, elt_ty)\n            ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/language/semantic.py\", line 916, in cast\n    assert False, f'cannot cast {input} to {dst_ty}'\n           ^^^^^\nAssertionError: cannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/tmp/muse_decode_layer-ddn3oh_k/run/worker.py\", line 484, in child_main\n    out = kernel()(state.get(\"data\"))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/muse_decode_layer-ddn3oh_k/run/worker.py\", line 415, in \u003clambda\u003e\n    return functools.partial(lambda k, p, d: k(d, p), fn, state[\"prep\"])\n                                             ^^^^^^^\n  File \"/tmp/muse_decode_layer-ddn3oh_k/run/submission.py\", line 447, in kernel_fn\n    attn_output = _project(_attention(data, state), state, \"o\")\n                           ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/muse_decode_layer-ddn3oh_k/run/submission.py\", line 355, in _attention\n    _attention_parts[(batch, 2, splits)](\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 374, in \u003clambda\u003e\n    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 757, in run\n    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 902, in _do_compile\n    kernel = self.compile(src, target=target, options=options.__dict__)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 307, in compile\n    module = src.make_ir(target, options, codegen_fns, module_map, context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 80, in make_ir\n    return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntriton.compiler.errors.CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e\nTraceback (most recent call last):\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/language/core.py\", line 43, in wrapper\n    return fn(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/language/core.py\", line 2540, in load\n    return _semantic.load(pointer, mask, other, boundary_check, padding_option, cache_modifier, eviction_policy,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/language/semantic.py\", line 1045, in load\n    other = self.cast(other, elt_ty)\n            ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/language/semantic.py\", line 916, in cast\n    assert False, f'cannot cast {input} to {dst_ty}'\n           ^^^^^\nAssertionError: cannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/tmp/muse_decode_layer-ddn3oh_k/run/worker.py\", line 484, in child_main\n    out = kernel()(state.get(\"data\"))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/muse_decode_layer-ddn3oh_k/run/worker.py\", line 415, in \u003clambda\u003e\n    return functools.partial(lambda k, p, d: k(d, p), fn, state[\"prep\"])\n                                             ^^^^^^^\n  File \"/tmp/muse_decode_layer-ddn3oh_k/run/submission.py\", line 447, in kernel_fn\n    attn_output = _project(_attention(data, state), state, \"o\")\n                           ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/muse_decode_layer-ddn3oh_k/run/submission.py\", line 355, in _attention\n    _attention_parts[(batch, 2, splits)](\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 374, in \u003clambda\u003e\n    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 757, in run\n    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 902, in _do_compile\n    kernel = self.compile(src, target=target, options=options.__dict__)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 307, in compile\n    module = src.make_ir(target, options, codegen_fns, module_map, context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 80, in make_ir\n    return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntriton.compiler.errors.CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e\n",
+    "machine": {
+      "gpu_after": {
+        "clocks.max.sm": 1980,
+        "clocks.mem": 3201,
+        "clocks.sm": 1980,
+        "driver_version": "580.159.03",
+        "name": "NVIDIA H200",
+        "power.draw": 124.81,
+        "power.limit": 700,
+        "temperature.gpu": 35
+      },
+      "gpu_before": {
+        "clocks.max.sm": 1980,
+        "clocks.mem": 3201,
+        "clocks.sm": 1980,
+        "driver_version": "580.159.03",
+        "name": "NVIDIA H200",
+        "power.draw": 139.76,
+        "power.limit": 700,
+        "temperature.gpu": 34
+      },
+      "node": "n-f4g3z3c7dpp5uvibsnaa266yoh"
+    },
+    "passed": false,
+    "records": [
+      {
+        "baseline_copies": 2,
+        "baseline_prepare_pad": 23659008,
+        "copies": 3,
+        "error": null,
+        "event": "setup",
+        "first": "submission",
+        "prepare_pad": 13062144,
+        "prepare_s": 0.131124131,
+        "status": "pass"
+      },
+      {
+        "case": {
+          "batch": 1,
+          "ctx": 10,
+          "layer": "sliding",
+          "seed": 7172427532261033417
+        },
+        "event": "test",
+        "index": 0,
+        "message": "CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e",
+        "status": "fail"
+      },
+      {
+        "case": {
+          "batch": 1,
+          "ctx": 3000,
+          "layer": "full",
+          "seed": 7172519843617620950
+        },
+        "event": "test",
+        "index": 1,
+        "message": "CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e",
+        "status": "fail"
+      },
+      {
+        "case": {
+          "batch": 8,
+          "ctx": 2047,
+          "layer": "sliding",
+          "seed": 7172612154974208484
+        },
+        "event": "test",
+        "index": 2,
+        "message": "CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e",
+        "status": "fail"
+      },
+      {
+        "case": {
+          "batch": 9,
+          "ctx": 5000,
+          "layer": "sliding",
+          "page": 1,
+          "seed": 7172704466330796019,
+          "spread": "mixed"
+        },
+        "event": "test",
+        "index": 3,
+        "message": "CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e",
+        "status": "fail"
+      },
+      {
+        "case": {
+          "batch": 3,
+          "ctx": 6000,
+          "dist": "outliers",
+          "layer": "full",
+          "q_len": 8,
+          "seed": 7172796777687383555
+        },
+        "event": "test",
+        "index": 4,
+        "message": "CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e",
+        "status": "fail"
+      },
+      {
+        "case": {
+          "batch": 5,
+          "ctx": 5000,
+          "layer": "sliding",
+          "page": 1,
+          "q_len": 8,
+          "seed": 7172889089043971092,
+          "spread": "mixed"
+        },
+        "event": "test",
+        "index": 5,
+        "message": "CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e",
+        "status": "fail"
+      },
+      {
+        "case": {
+          "batch": 33,
+          "ctx": 20000,
+          "layer": "full",
+          "page": 1,
+          "seed": 7172981400400558630,
+          "spread": "mixed"
+        },
+        "event": "test",
+        "index": 6,
+        "message": "CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e",
+        "status": "fail"
+      },
+      {
+        "case": {
+          "batch": 2,
+          "ctx": 300000,
+          "layer": "sliding",
+          "q_len": 8,
+          "seed": 7173073711757146169
+        },
+        "event": "test",
+        "index": 7,
+        "message": "CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e",
+        "status": "fail"
+      },
+      {
+        "case": {
+          "batch": 1,
+          "ctx": 1048576,
+          "layer": "full",
+          "q_len": 8,
+          "seed": 7173166023113733709
+        },
+        "event": "test",
+        "index": 8,
+        "message": "CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e",
+        "status": "fail"
+      },
+      {
+        "case": {
+          "batch": 4,
+          "ctx": 7000,
+          "kv_scale": 0.015625,
+          "layer": "sliding",
+          "page": 1,
+          "q_len": 8,
+          "seed": 7173535268540083879
+        },
+        "event": "test",
+        "index": 9,
+        "message": "CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e",
+        "status": "fail"
+      },
+      {
+        "case": {
+          "batch": 1,
+          "ctx": 80000,
+          "dist": "soft",
+          "layer": "full",
+          "page": 1,
+          "seed": 7173258334470321250
+        },
+        "event": "test",
+        "index": 10,
+        "message": "CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e",
+        "status": "fail"
+      },
+      {
+        "case": {
+          "batch": 4,
+          "ctx": 6000,
+          "dist": "soft",
+          "layer": "sliding",
+          "q_len": 8,
+          "seed": 7173350645826908792
+        },
+        "event": "test",
+        "index": 11,
+        "message": "CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e",
+        "status": "fail"
+      },
+      {
+        "case": {
+          "batch": 16,
+          "ctx": 20000,
+          "dist": "soft",
+          "layer": "full",
+          "page": 1,
+          "seed": 7173442957183496335,
+          "spread": "mixed"
+        },
+        "event": "test",
+        "index": 12,
+        "message": "CompilationError: at 30:12:\n    q = tl.load(Q + (b * LENGTH + r[:, None] // 8) * 1024 + h * 512\n                + (r[:, None] % 8) * 64 + d[None, :], r[:, None] \u003c LENGTH * 8, other=0)\n    key_scale = tl.load(KS)\n    value_scale = tl.load(VS)\n    m = tl.full((QM,), -float(\"inf\"), tl.float32)\n    l = tl.full((QM,), 0, tl.float32)\n    acc = tl.full((QM, 64), 0, tl.float32)\n    for off in range(start, stop, BN):\n        pos = off + nk\n        page = tl.load(TABLE + b * TABLE_STRIDE + pos // PAGE, pos \u003c stop, other=0)\n        slot = page * PAGE + pos % PAGE\n        k = tl.load(KC + slot[None, :] * 128 + h * 64 + d[:, None],\n            ^\ncannot cast int32[constexpr[64], constexpr[128]] to \u003c['64', '128'], fp8e4nv\u003e",
+        "status": "fail"
+      }
+    ],
+    "returncode": 112,
+    "score_us": null,
+    "speedup": null,
+    "speedup_ci": null,
+    "status": "ok"
+  },
+  "started_at": 1792986680.8067846,
+  "status": "done",
+  "team": "tommyyliu"
+}

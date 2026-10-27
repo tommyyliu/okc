@@ -1,0 +1,15 @@
+{
+  "problem": "muse_decode_layer",
+  "preset": "full_fa3",
+  "submission_sha256": "d6f5544fb7a63f326cc56584cb8b21144f45b6e8cdcce1d2ebcc23e9aab525ef",
+  "sources": {
+    "decode/spec.py": "8a778378074530709e643812055d2f12f55b6a8863641b70b89a7d296c15c496",
+    "decode/config.py": "52a681a71e91831c10df1649d06f4f60b49ba27ca1d8885a1b09de9ba8c41df4",
+    "decode/projections.py": "a49924ec4df958950e3c113ab8190d552cfc1d473f7167e2cca92c9ffef03b58",
+    "decode/boundaries.py": "f0c9b9a230d55c7e63dd5048b923f94b5d8a1548bcf6ff300c6618b3a966ab19",
+    "decode/experts.py": "0ff3ef317ebbc6efeb66f190c7bef2a8ec4df280e137cad7c4f573d96d5985f9",
+    "decode/attention.py": "cade00487ca80a817c9add448f5c30dea895f5ec9d413cbaf63caccbc45da7d8",
+    "decode/runtime.py": "93d38fb66c7fd6c6ab04c282bf4940f5e91f0c88aecff0b7d919236d58e5ba16"
+  },
+  "validation": "Build/syntax only; no claim of GPU compilation, correctness, or speed."
+}

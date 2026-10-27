@@ -1,0 +1,287 @@
+{
+  "job": "71b479393ecd4532",
+  "content_hash": "fe4a9e2ee9d198e68b401414167337fd762e05fe08a0ab061b5e76b8c0d8da72",
+  "passed": true,
+  "tests_passed": 13,
+  "tests_total": 13,
+  "failures": [],
+  "error": null,
+  "score_us": 22056.343702683083,
+  "speedup": 1.0255688932362943,
+  "speedup_ci": [
+    1.01018535983775,
+    1.0409524266348387
+  ],
+  "has_timings": true,
+  "reconstructed_speedup": 1.0255688932362943,
+  "loads": {
+    "decode 1": {
+      "baseline_us": 10920.768268406391,
+      "candidate_us": 9547.48566706844,
+      "speedup": 1.1438370948358405
+    },
+    "decode 16": {
+      "baseline_us": 18790.495906956494,
+      "candidate_us": 18720.82743430946,
+      "speedup": 1.0037214419550362
+    },
+    "decode 32": {
+      "baseline_us": 22020.735752768815,
+      "candidate_us": 22332.15809049113,
+      "speedup": 0.9860549823953235
+    },
+    "verify 1": {
+      "baseline_us": 16286.560105159879,
+      "candidate_us": 13963.790269784784,
+      "speedup": 1.1663423605266519
+    },
+    "verify 16": {
+      "baseline_us": 34684.544026851654,
+      "candidate_us": 36342.226923538,
+      "speedup": 0.9543868651699848
+    },
+    "verify 32": {
+      "baseline_us": 49866.78484920412,
+      "candidate_us": 54007.16035879853,
+      "speedup": 0.9233365449675992
+    }
+  },
+  "shapes_by_sensitivity": [
+    {
+      "case": {
+        "batch": 1,
+        "ctx": 80000,
+        "dist": "soft",
+        "layer": "sliding",
+        "load": "decode 1",
+        "page": 1,
+        "repeats": 60,
+        "seed": 4048682109506155883,
+        "weight": 46
+      },
+      "candidate_us": 151.08214149420854,
+      "baseline_us": 173.92000555992126,
+      "normalized_latency": 0.868687538318619,
+      "within_load_share": 0.7279171450034264,
+      "score_sensitivity": 0.12131952416723774,
+      "hypothetical_score_us_if_shape_20pct_faster": 21485.48349409847
+    },
+    {
+      "case": {
+        "batch": 1,
+        "ctx": 80000,
+        "dist": "soft",
+        "layer": "sliding",
+        "load": "verify 1",
+        "page": 1,
+        "q_len": 8,
+        "seed": 4050064483455795710,
+        "weight": 46
+      },
+      "candidate_us": 220.42143071200232,
+      "baseline_us": 259.4079999253154,
+      "normalized_latency": 0.8497094568226985,
+      "within_load_share": 0.726119886997442,
+      "score_sensitivity": 0.12101998116624034,
+      "hypothetical_score_us_if_shape_20pct_faster": 21486.989714499592
+    },
+    {
+      "case": {
+        "batch": 16,
+        "ctx": 80000,
+        "dist": "soft",
+        "layer": "sliding",
+        "load": "verify 16",
+        "page": 1,
+        "q_len": 8,
+        "seed": 4050525274772342327,
+        "spread": "agentic",
+        "weight": 46
+      },
+      "candidate_us": 496.2229607213769,
+      "baseline_us": 512.9600055515766,
+      "normalized_latency": 0.9673716378488365,
+      "within_load_share": 0.6280918404149668,
+      "score_sensitivity": 0.10468197340249447,
+      "hypothetical_score_us_if_shape_20pct_faster": 21568.355096602398
+    },
+    {
+      "case": {
+        "batch": 32,
+        "ctx": 80000,
+        "dist": "soft",
+        "layer": "sliding",
+        "load": "verify 32",
+        "page": 1,
+        "q_len": 8,
+        "seed": 4050986066088888948,
+        "spread": "agentic",
+        "weight": 46
+      },
+      "candidate_us": 708.2841991037568,
+      "baseline_us": 717.8080040030181,
+      "normalized_latency": 0.9867320998844403,
+      "within_load_share": 0.6032732130761785,
+      "score_sensitivity": 0.10054553551269642,
+      "hypothetical_score_us_if_shape_20pct_faster": 21588.71368138318
+    },
+    {
+      "case": {
+        "batch": 16,
+        "ctx": 80000,
+        "dist": "soft",
+        "layer": "sliding",
+        "load": "decode 16",
+        "page": 1,
+        "seed": 4049142900822702488,
+        "spread": "agentic",
+        "weight": 46
+      },
+      "candidate_us": 244.48472015040818,
+      "baseline_us": 257.74399330839515,
+      "normalized_latency": 0.9485564222553112,
+      "within_load_share": 0.600737182498024,
+      "score_sensitivity": 0.10012286374967067,
+      "hypothetical_score_us_if_shape_20pct_faster": 21590.788576609117
+    },
+    {
+      "case": {
+        "batch": 32,
+        "ctx": 80000,
+        "dist": "soft",
+        "layer": "sliding",
+        "load": "decode 32",
+        "page": 1,
+        "seed": 4049603692139249097,
+        "spread": "agentic",
+        "weight": 46
+      },
+      "candidate_us": 246.0098460297763,
+      "baseline_us": 262.8479986451566,
+      "normalized_latency": 0.9359395821837253,
+      "within_load_share": 0.5067335127897099,
+      "score_sensitivity": 0.08445558546495165,
+      "hypothetical_score_us_if_shape_20pct_faster": 21667.00496134061
+    },
+    {
+      "case": {
+        "batch": 32,
+        "ctx": 80000,
+        "dist": "soft",
+        "layer": "full",
+        "load": "decode 32",
+        "page": 1,
+        "seed": 4049834087797522403,
+        "spread": "agentic",
+        "weight": 16
+      },
+      "candidate_us": 688.4815733200887,
+      "baseline_us": 620.6079884432256,
+      "normalized_latency": 1.109366276523642,
+      "within_load_share": 0.49326648721029004,
+      "score_sensitivity": 0.08221108120171501,
+      "hypothetical_score_us_if_shape_20pct_faster": 21677.81470613236
+    },
+    {
+      "case": {
+        "batch": 16,
+        "ctx": 80000,
+        "dist": "soft",
+        "layer": "full",
+        "load": "decode 16",
+        "page": 1,
+        "seed": 4049373296480975792,
+        "spread": "agentic",
+        "weight": 16
+      },
+      "candidate_us": 467.1581442119178,
+      "baseline_us": 433.3920134231448,
+      "normalized_latency": 1.0779112898783514,
+      "within_load_share": 0.399262817501976,
+      "score_sensitivity": 0.066543802916996,
+      "hypothetical_score_us_if_shape_20pct_faster": 21752.52905858904
+    },
+    {
+      "case": {
+        "batch": 32,
+        "ctx": 80000,
+        "dist": "soft",
+        "layer": "full",
+        "load": "verify 32",
+        "page": 1,
+        "q_len": 8,
+        "seed": 4051216461747162260,
+        "spread": "agentic",
+        "weight": 16
+      },
+      "candidate_us": 1339.1304500016076,
+      "baseline_us": 1052.9760415665805,
+      "normalized_latency": 1.2717577581435724,
+      "within_load_share": 0.39672678692382146,
+      "score_sensitivity": 0.06612113115397024,
+      "hypothetical_score_us_if_shape_20pct_faster": 21754.52701423625
+    },
+    {
+      "case": {
+        "batch": 16,
+        "ctx": 80000,
+        "dist": "soft",
+        "layer": "full",
+        "load": "verify 16",
+        "page": 1,
+        "q_len": 8,
+        "seed": 4050755670430615637,
+        "spread": "agentic",
+        "weight": 16
+      },
+      "candidate_us": 844.748170647166,
+      "baseline_us": 693.0239857174456,
+      "normalized_latency": 1.218930640290393,
+      "within_load_share": 0.3719081595850331,
+      "score_sensitivity": 0.061984693264172185,
+      "hypothetical_score_us_if_shape_20pct_faster": 21774.03156201492
+    },
+    {
+      "case": {
+        "batch": 1,
+        "ctx": 80000,
+        "dist": "soft",
+        "layer": "full",
+        "load": "verify 1",
+        "page": 1,
+        "q_len": 8,
+        "seed": 4050294879114069018,
+        "weight": 16
+      },
+      "candidate_us": 239.02527856454228,
+      "baseline_us": 272.1120067872107,
+      "normalized_latency": 0.878407687285398,
+      "within_load_share": 0.273880113002558,
+      "score_sensitivity": 0.04564668550042633,
+      "hypothetical_score_us_if_shape_20pct_faster": 21850.228133392535
+    },
+    {
+      "case": {
+        "batch": 1,
+        "ctx": 80000,
+        "dist": "soft",
+        "layer": "full",
+        "load": "decode 1",
+        "page": 1,
+        "repeats": 60,
+        "seed": 4048912505164429185,
+        "weight": 16
+      },
+      "candidate_us": 162.356697395928,
+      "baseline_us": 182.5280007906258,
+      "normalized_latency": 0.8894892657163549,
+      "within_load_share": 0.2720828549965737,
+      "score_sensitivity": 0.04534714249942895,
+      "hypothetical_score_us_if_shape_20pct_faster": 21851.61278850737
+    }
+  ],
+  "target_score_us": 9580.0,
+  "required_uniform_latency_reduction": 0.5656578384369925,
+  "target_source": "User-reported 9580 us leaderboard time, or CLI override; no live verification.",
+  "caveat": "Sensitivity ranks whole shapes, not kernel stages. Conditional savings are not measured predictions. Profile timings are a separate pass; router and pooler overlap."
+}
