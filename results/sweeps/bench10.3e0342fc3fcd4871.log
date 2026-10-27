@@ -1,0 +1,24 @@
+torch 2.14.1+cu130 triton 3.8.0 NVIDIA H200
+corr {'batch': 1, 'ctx': 10, 'layer': 'sliding'} rel 0.0022
+corr {'batch': 3, 'ctx': 2047, 'layer': 'sliding'} rel 0.00248
+corr {'batch': 5, 'ctx': 5000, 'layer': 'sliding', 'q_len': 8, 'spread': 'mixed'} rel 0.07976
+corr {'batch': 4, 'ctx': 3000, 'layer': 'full', 'page': 64} rel 0.08938
+corr {'batch': 2, 'ctx': 9000, 'layer': 'full', 'kv_scale': 0.015625, 'page': 64} rel 0.15217
+corr {'batch': 3, 'ctx': 4000, 'layer': 'sliding', 'q_len': 8, 'kv_scale': 0.015625} rel 0.12105
+corr {'batch': 2, 'ctx': 20000, 'layer': 'full', 'q_len': 8, 'heads': 'dp', 'page': 64} rel 0.08446
+corr {'batch': 4, 'ctx': 80000, 'layer': 'full', 'spread': 'agentic'} rel 0.09275
+corr time 9.522186279296875
+  per-phase durations (median): 1.54 8.96 0.00
+PROF d32s 8 n=576: p0: min 0.00 med 0.00 max 5.12 | p1: min 1.02 med 1.54 max 6.40 | p2: min 1.54 med 10.75 max 15.36 | p3: min 2.82 med 10.75 max 15.36 | p4: min 3.84 med 11.52 max 16.13 | p5: min 12.29 med 13.06 max 16.64 | p6: min 12.54 med 13.31 max 16.90
+   regs 123 spills 0
+  per-phase durations (median): 1.79 7.68 0.00
+PROF d32s 8 n=288: p0: min 0.00 med 0.00 max 7.94 | p1: min 1.54 med 1.79 max 9.73 | p2: min 2.05 med 9.73 max 15.36 | p3: min 3.84 med 9.98 max 15.36 | p4: min 5.12 med 10.75 max 16.38 | p5: min 6.66 med 12.80 max 17.66 | p6: min 12.80 med 14.59 max 18.69
+   regs 255 spills 6
+  per-phase durations (median): 1.79 289.28 0.00
+PROF v32f 8 n=576: p0: min 0.00 med 0.00 max 8.96 | p1: min 1.28 med 2.05 max 11.26 | p2: min 2.05 med 291.33 max 318.46 | p3: min 2.30 med 291.58 max 318.46 | p4: min 4.35 med 292.86 max 319.74 | p5: min 7.42 med 297.98 max 321.02 | p6: min 299.78 med 309.50 max 324.86
+   regs 120 spills 18
+d16s: sglang 31.4  default 15.7  best 15.6{'pack': 1, 'nsplit': 8, 'bn': 128, 'warps': 4, 'stages': 4, 'gearly': True, 'qk8': False}  16.2{'pack': 1, 'nsplit': 8, 'bn': 64, 'warps': 4, 'stages': 5, 'gearly': True, 'qk8': False}  17.9{'pack': 2, 'nsplit': 8, 'bn': 128, 'warps': 4, 'stages': 4, 'gearly': True, 'qk8': True}  18.1{'pack': 2, 'nsplit': 8, 'bn': 128, 'warps': 4, 'stages': 3, 'gearly': True, 'qk8': True}  18.2{'pack': 1, 'nsplit': 16, 'bn': 128, 'warps': 4, 'stages': 4, 'gearly': True, 'qk8': False}  18.5{'pack': 1, 'nsplit': 16, 'bn': 64, 'warps': 4, 'stages': 5, 'gearly': True, 'qk8': False}
+d32s: sglang 39.7  default 21.1  best 20.7{'pack': 1, 'nsplit': 8, 'bn': 64, 'warps': 4, 'stages': 5, 'gearly': True, 'qk8': False}  22.2{'pack': 1, 'nsplit': 8, 'bn': 128, 'warps': 4, 'stages': 4, 'gearly': True, 'qk8': False}  24.5{'pack': 2, 'nsplit': 8, 'bn': 128, 'warps': 4, 'stages': 4, 'gearly': True, 'qk8': True}  24.6{'pack': 2, 'nsplit': 8, 'bn': 128, 'warps': 4, 'stages': 3, 'gearly': True, 'qk8': True}  25.2{'pack': 1, 'nsplit': 16, 'bn': 64, 'warps': 4, 'stages': 5, 'gearly': True, 'qk8': False}  25.3{'pack': 2, 'nsplit': 8, 'bn': 64, 'warps': 4, 'stages': 4, 'gearly': True, 'qk8': True}
+v16f: sglang 219.3  default 172.0  best 171.5{'pack': 1, 'bn': 64, 'warps': 4, 'stages': 2, 'pref': True, 'qk8': True, 'sb': 2, 'nsplit': 16, 'maxnreg': 120}  177.2{'pack': 1, 'bn': 64, 'warps': 4, 'stages': 3, 'pref': False, 'qk8': True, 'sb': 2, 'nsplit': 16, 'ws': True, 'maxnreg': 120}  180.7{'pack': 1, 'bn': 64, 'warps': 4, 'stages': 2, 'pref': True, 'qk8': True, 'sb': 2, 'nsplit': 16, 'maxnreg': 104}  184.7{'pack': 1, 'bn': 64, 'warps': 4, 'stages': 2, 'pref': True, 'qk8': True, 'sb': 2, 'nsplit': 16, 'maxnreg': 112}  185.1{'pack': 1, 'bn': 64, 'warps': 4, 'stages': 2, 'pref': False, 'qk8': True, 'sb': 2, 'nsplit': 16, 'ws': True, 'maxnreg': 120}  236.1{'pack': 1, 'bn': 128, 'warps': 8, 'stages': 2, 'pref': True, 'qk8': True, 'sb': 2, 'nsplit': 16, 'maxnreg': 120}
+v32f: sglang 405.6  default 327.0  best 327.2{'pack': 1, 'bn': 64, 'warps': 4, 'stages': 2, 'pref': True, 'qk8': True, 'sb': 2, 'nsplit': 8, 'maxnreg': 120}  336.3{'pack': 1, 'bn': 64, 'warps': 4, 'stages': 3, 'pref': False, 'qk8': True, 'sb': 2, 'nsplit': 8, 'ws': True, 'maxnreg': 120}  338.4{'pack': 1, 'bn': 64, 'warps': 4, 'stages': 2, 'pref': True, 'qk8': True, 'sb': 2, 'nsplit': 8, 'maxnreg': 104}  346.8{'pack': 1, 'bn': 64, 'warps': 4, 'stages': 2, 'pref': True, 'qk8': True, 'sb': 2, 'nsplit': 8, 'maxnreg': 112}  348.8{'pack': 1, 'bn': 64, 'warps': 4, 'stages': 2, 'pref': False, 'qk8': True, 'sb': 2, 'nsplit': 8, 'ws': True, 'maxnreg': 120}  447.0{'pack': 1, 'bn': 128, 'warps': 8, 'stages': 2, 'pref': True, 'qk8': True, 'sb': 2, 'nsplit': 8, 'maxnreg': 120}
+total time 50.17461919784546

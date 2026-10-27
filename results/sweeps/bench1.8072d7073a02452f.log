@@ -1,0 +1,12 @@
+torch 2.14.1+cu130 triton 3.8.0 NVIDIA H200
+BENCH FAIL Traceback (most recent call last):
+  File "/tmp/muse_attention_decode-6m9ekcyv/run/submission.py", line 521, in <module>
+    _main()
+  File "/tmp/muse_attention_decode-6m9ekcyv/run/submission.py", line 460, in _main
+    t0 = _time_mod()
+         ^^^^^^^^^^^
+  File "/tmp/muse_attention_decode-6m9ekcyv/run/submission.py", line 506, in _time_mod
+    return _time.time()
+           ^^^^^^^^^^
+AttributeError: 'function' object has no attribute 'time'
+

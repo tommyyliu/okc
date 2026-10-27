@@ -1,0 +1,12 @@
+# generated bench/check files and raw okc output
+build/
+profiles/
+__pycache__/
+*.pyc
+
+# challenge-provided files written by `okc init` (not ours to redistribute)
+AGENTS.md
+TASK.md
+baseline.py
+reference.py
+checks.py
