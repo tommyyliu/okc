@@ -1,0 +1,202 @@
+{
+  "status": "reported JIT membership syntax corrected; rebuilt candidate awaits GPU check",
+  "preset": "router_cluster",
+  "candidate": {
+    "path": "build/router-cluster/candidate.py",
+    "sha256": "9e12857092bbe62a204b1dcaa376d89c3f0d9fe907c6577812515b7e88b1a1ac"
+  },
+  "control": {
+    "path": "build/router-cluster/control.py",
+    "sha256": "c12d4d6cf2438bc8451be0829b2dd843616802ec2d9e792b83075664e06ff31c",
+    "exact_checked_source": true,
+    "job": "3f90adf02bb14808",
+    "score_us": 3848.1217283380397,
+    "result": "results/router_reduction.json"
+  },
+  "changed_scored_cases": [
+    {
+      "layer": "router",
+      "m": 8,
+      "config": [
+        "router_cluster",
+        16,
+        16,
+        256,
+        8,
+        4,
+        1
+      ],
+      "clusters": 16,
+      "physical_ctas": 128,
+      "previous_paired_ratio": 4.713320232036182,
+      "previous_us": 5.512886501255633
+    },
+    {
+      "layer": "router",
+      "m": 16,
+      "config": [
+        "router_cluster",
+        16,
+        16,
+        256,
+        8,
+        4,
+        1
+      ],
+      "clusters": 16,
+      "physical_ctas": 128,
+      "previous_paired_ratio": 2.4798810800240165,
+      "previous_us": 5.968027926026893
+    },
+    {
+      "layer": "router",
+      "m": 32,
+      "config": [
+        "router_cluster",
+        32,
+        16,
+        256,
+        8,
+        4,
+        1
+      ],
+      "clusters": 16,
+      "physical_ctas": 128,
+      "previous_paired_ratio": 2.4437489128735406,
+      "previous_us": 6.285425013339408
+    }
+  ],
+  "unchanged_scored_cases": 27,
+  "precision": "original BF16 hi/lo, independent FP32 accumulators, FP32 cluster sum/output",
+  "global_scratch_bytes": 0,
+  "launches_per_changed_call": 1,
+  "compile_jobs": [
+    {
+      "name": "router_cluster-router-8",
+      "source": "router_cluster",
+      "kernel": "_router_cluster",
+      "language": "gluon",
+      "signature": {
+        "X": "*bf16",
+        "WH": "*bf16",
+        "WL": "*bf16",
+        "Y": "*fp32"
+      },
+      "constants": {
+        "M": 8,
+        "N": 256,
+        "K": 8192,
+        "BM": 16,
+        "BN": 16,
+        "BK": 256,
+        "C": 8
+      },
+      "num_warps": 4,
+      "num_stages": 1,
+      "num_ctas": 8
+    },
+    {
+      "name": "router_cluster-router-9",
+      "source": "router_cluster",
+      "kernel": "_router_cluster",
+      "language": "gluon",
+      "signature": {
+        "X": "*bf16",
+        "WH": "*bf16",
+        "WL": "*bf16",
+        "Y": "*fp32"
+      },
+      "constants": {
+        "M": 9,
+        "N": 256,
+        "K": 8192,
+        "BM": 16,
+        "BN": 16,
+        "BK": 256,
+        "C": 8
+      },
+      "num_warps": 4,
+      "num_stages": 1,
+      "num_ctas": 8
+    },
+    {
+      "name": "router_cluster-router-16",
+      "source": "router_cluster",
+      "kernel": "_router_cluster",
+      "language": "gluon",
+      "signature": {
+        "X": "*bf16",
+        "WH": "*bf16",
+        "WL": "*bf16",
+        "Y": "*fp32"
+      },
+      "constants": {
+        "M": 16,
+        "N": 256,
+        "K": 8192,
+        "BM": 16,
+        "BN": 16,
+        "BK": 256,
+        "C": 8
+      },
+      "num_warps": 4,
+      "num_stages": 1,
+      "num_ctas": 8
+    },
+    {
+      "name": "router_cluster-router-32",
+      "source": "router_cluster",
+      "kernel": "_router_cluster",
+      "language": "gluon",
+      "signature": {
+        "X": "*bf16",
+        "WH": "*bf16",
+        "WL": "*bf16",
+        "Y": "*fp32"
+      },
+      "constants": {
+        "M": 32,
+        "N": 256,
+        "K": 8192,
+        "BM": 32,
+        "BN": 16,
+        "BK": 256,
+        "C": 8
+      },
+      "num_warps": 4,
+      "num_stages": 1,
+      "num_ctas": 8
+    }
+  ],
+  "conditional_score_scenarios": {
+    "three_cases_at_5us": {
+      "score_us": 3818.2473088795246,
+      "saving_us": 29.87441945851515,
+      "measured": false
+    },
+    "three_cases_at_4.5us": {
+      "score_us": 3801.270196591941,
+      "saving_us": 46.85153174609877,
+      "measured": false
+    },
+    "three_cases_at_4us": {
+      "score_us": 3784.2146717854885,
+      "saving_us": 63.90705655255124,
+      "measured": false
+    }
+  },
+  "run_command": "okc check build/router-cluster/candidate.py --json | tee build/router-cluster/check.json",
+  "validation": {
+    "cpu_status": "51 tests passed",
+    "compiler_status": "unavailable: no local Triton; exact 3D MMA/cluster lowering remains unverified",
+    "gpu_status": "initial source failed compilation; current syntax fix not checked",
+    "default_build_check": "passed"
+  },
+  "previous_failure": {
+    "job": "2d1ffa9571c8437d",
+    "candidate_sha256": "ad194557a510fc08c0540b92ca419001f22eb3b92cc9e05575d92e3c6efaefb0",
+    "status": "Triton frontend rejected tuple membership in static assertion",
+    "result": "results/router_cluster_failed.json",
+    "source": "build/router-cluster/failed-candidate.py"
+  }
+}

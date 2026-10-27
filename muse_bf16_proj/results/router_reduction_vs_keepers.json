@@ -1,0 +1,359 @@
+{
+  "previous_job": "13ae262ccdfb40bf",
+  "candidate_job": "3f90adf02bb14808",
+  "previous_score_us": 3838.821138025054,
+  "candidate_score_us": 3848.1217283380397,
+  "aggregate_latency_change_pct": 0.242277250712708,
+  "used_gpu_bodies_and_original_preparation_identical": [
+    "_gemv_full",
+    "_gemm",
+    "_weight_major_stream_gemm",
+    "_weight_major_gemm",
+    "_reduce",
+    "_prepare_weights"
+  ],
+  "changed_launch_cases": [
+    [
+      "qkv_gate",
+      1
+    ],
+    [
+      "pooler",
+      1
+    ],
+    [
+      "unpooler",
+      1
+    ],
+    [
+      "router",
+      1
+    ],
+    [
+      "router",
+      8
+    ],
+    [
+      "router",
+      16
+    ],
+    [
+      "router",
+      32
+    ]
+  ],
+  "per_case": [
+    {
+      "layer": "qkv_gate",
+      "m": 1,
+      "configuration_changed": true,
+      "previous_us": 10.907869213957945,
+      "new_us": 10.513843388813894,
+      "previous_paired_ratio": 1.2908111476649284,
+      "new_paired_ratio": 1.3087506658714037,
+      "normalized_latency_change_pct": -1.370736128300698
+    },
+    {
+      "layer": "o",
+      "m": 1,
+      "configuration_changed": false,
+      "previous_us": 6.010675212511395,
+      "new_us": 5.743207722828905,
+      "previous_paired_ratio": 1.1393061980908272,
+      "new_paired_ratio": 1.1087880445291023,
+      "normalized_latency_change_pct": 2.7523884039249324
+    },
+    {
+      "layer": "pooler",
+      "m": 1,
+      "configuration_changed": true,
+      "previous_us": 17.71714490634744,
+      "new_us": 16.99239110325298,
+      "previous_paired_ratio": 1.1902594671490032,
+      "new_paired_ratio": 1.2447924102481247,
+      "normalized_latency_change_pct": -4.38088653579205
+    },
+    {
+      "layer": "unpooler",
+      "m": 1,
+      "configuration_changed": true,
+      "previous_us": 3.913592532587719,
+      "new_us": 4.311540188579216,
+      "previous_paired_ratio": 1.80703541305384,
+      "new_paired_ratio": 1.751578298706339,
+      "normalized_latency_change_pct": 3.166122484416478
+    },
+    {
+      "layer": "router",
+      "m": 1,
+      "configuration_changed": true,
+      "previous_us": 5.223532762355135,
+      "new_us": 4.802261983313403,
+      "previous_paired_ratio": 1.994052714582104,
+      "new_paired_ratio": 2.158982542117546,
+      "normalized_latency_change_pct": -7.639238591233699
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 16,
+      "configuration_changed": false,
+      "previous_us": 12.68452025518899,
+      "new_us": 12.336184458262112,
+      "previous_paired_ratio": 1.126412315459475,
+      "new_paired_ratio": 1.1270907749624448,
+      "normalized_latency_change_pct": -0.0601956397870862
+    },
+    {
+      "layer": "o",
+      "m": 16,
+      "configuration_changed": false,
+      "previous_us": 6.209649588638087,
+      "new_us": 6.1559336357981085,
+      "previous_paired_ratio": 1.1105297097761915,
+      "new_paired_ratio": 1.1020261701441483,
+      "normalized_latency_change_pct": 0.7716277401044858
+    },
+    {
+      "layer": "pooler",
+      "m": 16,
+      "configuration_changed": false,
+      "previous_us": 19.221227430592933,
+      "new_us": 19.13717269204245,
+      "previous_paired_ratio": 1.1204279305638365,
+      "new_paired_ratio": 1.1236769979902301,
+      "normalized_latency_change_pct": -0.28914602970468994
+    },
+    {
+      "layer": "unpooler",
+      "m": 16,
+      "configuration_changed": false,
+      "previous_us": 17.94109057578319,
+      "new_us": 17.75953333345018,
+      "previous_paired_ratio": 1.04163117970442,
+      "new_paired_ratio": 1.0225494162762767,
+      "normalized_latency_change_pct": 1.8660969459678212
+    },
+    {
+      "layer": "router",
+      "m": 16,
+      "configuration_changed": true,
+      "previous_us": 6.2848830069843675,
+      "new_us": 5.968027926026893,
+      "previous_paired_ratio": 2.377768881569479,
+      "new_paired_ratio": 2.4798810800240165,
+      "normalized_latency_change_pct": -4.1176248037485985
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 32,
+      "configuration_changed": false,
+      "previous_us": 13.206864751685355,
+      "new_us": 13.602749502740496,
+      "previous_paired_ratio": 1.0891304965708817,
+      "new_paired_ratio": 1.0468471096313428,
+      "normalized_latency_change_pct": 4.039117704057982
+    },
+    {
+      "layer": "o",
+      "m": 32,
+      "configuration_changed": false,
+      "previous_us": 6.119292978249597,
+      "new_us": 6.1069745021958735,
+      "previous_paired_ratio": 1.1190835304547335,
+      "new_paired_ratio": 1.0899013016892378,
+      "normalized_latency_change_pct": 2.677511139794597
+    },
+    {
+      "layer": "pooler",
+      "m": 32,
+      "configuration_changed": false,
+      "previous_us": 19.419263494618768,
+      "new_us": 19.807723258877974,
+      "previous_paired_ratio": 1.1337195946211929,
+      "new_paired_ratio": 1.1187555653836228,
+      "normalized_latency_change_pct": 1.337560205337529
+    },
+    {
+      "layer": "unpooler",
+      "m": 32,
+      "configuration_changed": false,
+      "previous_us": 17.82252232086426,
+      "new_us": 18.22602993250892,
+      "previous_paired_ratio": 1.0395834917414,
+      "new_paired_ratio": 1.0262246064585856,
+      "normalized_latency_change_pct": 1.3017506302947401
+    },
+    {
+      "layer": "router",
+      "m": 32,
+      "configuration_changed": true,
+      "previous_us": 6.65903777588866,
+      "new_us": 6.285425013339408,
+      "previous_paired_ratio": 2.2970286453418973,
+      "new_paired_ratio": 2.4437489128735406,
+      "normalized_latency_change_pct": -6.003901086512142
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 8,
+      "configuration_changed": false,
+      "previous_us": 12.033539535547082,
+      "new_us": 12.231964624735253,
+      "previous_paired_ratio": 1.1993145896941704,
+      "new_paired_ratio": 1.1393099887620415,
+      "normalized_latency_change_pct": 5.266749306510432
+    },
+    {
+      "layer": "o",
+      "m": 8,
+      "configuration_changed": false,
+      "previous_us": 6.004528758918621,
+      "new_us": 6.167975854386481,
+      "previous_paired_ratio": 1.1138259865468294,
+      "new_paired_ratio": 1.099874523314527,
+      "normalized_latency_change_pct": 1.2684595321163394
+    },
+    {
+      "layer": "pooler",
+      "m": 8,
+      "configuration_changed": false,
+      "previous_us": 18.59360965885232,
+      "new_us": 18.835638578216056,
+      "previous_paired_ratio": 1.1444791756632937,
+      "new_paired_ratio": 1.1306226273331488,
+      "normalized_latency_change_pct": 1.2255679300200217
+    },
+    {
+      "layer": "unpooler",
+      "m": 8,
+      "configuration_changed": false,
+      "previous_us": 5.613401935861151,
+      "new_us": 5.988796466808823,
+      "previous_paired_ratio": 1.2142368137078186,
+      "new_paired_ratio": 1.1915582528481798,
+      "normalized_latency_change_pct": 1.9032691692101755
+    },
+    {
+      "layer": "router",
+      "m": 8,
+      "configuration_changed": true,
+      "previous_us": 5.843580891134244,
+      "new_us": 5.512886501255633,
+      "previous_paired_ratio": 4.44658864122721,
+      "new_paired_ratio": 4.713320232036182,
+      "normalized_latency_change_pct": -5.659101815234435
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 128,
+      "configuration_changed": false,
+      "previous_us": 16.895561850998668,
+      "new_us": 17.014603558134276,
+      "previous_paired_ratio": 1.0038139464589504,
+      "new_paired_ratio": 1.0043137710637677,
+      "normalized_latency_change_pct": -0.04976777369963825
+    },
+    {
+      "layer": "o",
+      "m": 128,
+      "configuration_changed": false,
+      "previous_us": 7.189398106241227,
+      "new_us": 7.447541162563804,
+      "previous_paired_ratio": 0.9947980909022022,
+      "new_paired_ratio": 0.9839489605172687,
+      "normalized_latency_change_pct": 1.102611092675998
+    },
+    {
+      "layer": "pooler",
+      "m": 128,
+      "configuration_changed": false,
+      "previous_us": 22.756019483198898,
+      "new_us": 22.79340450943532,
+      "previous_paired_ratio": 1.0870090576204816,
+      "new_paired_ratio": 1.0894379971039472,
+      "normalized_latency_change_pct": -0.2229534392890975
+    },
+    {
+      "layer": "unpooler",
+      "m": 128,
+      "configuration_changed": false,
+      "previous_us": 19.089112557149633,
+      "new_us": 19.06110684100806,
+      "previous_paired_ratio": 1.0376595991902868,
+      "new_paired_ratio": 1.0316295314750854,
+      "normalized_latency_change_pct": 0.5845187183212142
+    },
+    {
+      "layer": "router",
+      "m": 128,
+      "configuration_changed": false,
+      "previous_us": 8.267462387242478,
+      "new_us": 8.793380818067789,
+      "previous_paired_ratio": 1.9662622807604357,
+      "new_paired_ratio": 1.8650392704965562,
+      "normalized_latency_change_pct": 5.427392970493838
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 256,
+      "configuration_changed": false,
+      "previous_us": 19.8827910810862,
+      "new_us": 19.981982318012683,
+      "previous_paired_ratio": 1.0155515425352268,
+      "new_paired_ratio": 1.0105103335899774,
+      "normalized_latency_change_pct": 0.49887752531334595
+    },
+    {
+      "layer": "o",
+      "m": 256,
+      "configuration_changed": false,
+      "previous_us": 9.51771202535559,
+      "new_us": 9.681394988526062,
+      "previous_paired_ratio": 0.9783864616307273,
+      "new_paired_ratio": 0.9750661118740651,
+      "normalized_latency_change_pct": 0.34052560295430023
+    },
+    {
+      "layer": "pooler",
+      "m": 256,
+      "configuration_changed": false,
+      "previous_us": 29.880653477019127,
+      "new_us": 30.189664781807753,
+      "previous_paired_ratio": 1.0243417285806578,
+      "new_paired_ratio": 1.0180967416471907,
+      "normalized_latency_change_pct": 0.6133981848682968
+    },
+    {
+      "layer": "unpooler",
+      "m": 256,
+      "configuration_changed": false,
+      "previous_us": 23.726916104559066,
+      "new_us": 24.24700990947623,
+      "previous_paired_ratio": 1.0155555137364163,
+      "new_paired_ratio": 1.0010306442761019,
+      "normalized_latency_change_pct": 1.4509914899576426
+    },
+    {
+      "layer": "router",
+      "m": 256,
+      "configuration_changed": false,
+      "previous_us": 9.95410771385614,
+      "new_us": 10.285803861854438,
+      "previous_paired_ratio": 1.7520405228306877,
+      "new_paired_ratio": 1.72042943283491,
+      "normalized_latency_change_pct": 1.8373953265661935
+    }
+  ],
+  "sequential_counterfactual_attribution_us": {
+    "old_measured_score": 3838.821138025054,
+    "old_ratios_on_current_baselines": 3835.1349395049488,
+    "then_new_three_router_ratios": 3823.987652083285,
+    "then_new_four_gemv_ratios": 3806.316096573527,
+    "then_new_23_unchanged_case_ratios": 3848.1217283380397,
+    "baseline_distribution_change": -3.6861985201053358,
+    "router_contribution": -11.147287421663805,
+    "gemv_contribution": -17.671555509758036,
+    "unchanged_case_contribution": 41.80563176451278
+  },
+  "caveat": "Sequential counterfactual decomposition, order-dependent; cross-run observations do not prove causal regressions. The aggregate 0.24% difference lies inside reported score uncertainty. Keepers uses four-warp GEMV while candidate uses selected eight-warp GEMV."
+}

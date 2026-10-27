@@ -1,0 +1,174 @@
+Job c02532ce190544f5
+{"passed": true, "score_us": 4582.376962100434, "speedup": 1.0542127022622112, "speedup_ci": [1.038399511728278, 1.0700258927961444]}
+TEST {'layer': 'qkv_gate', 'm': 1, 'seed': 7769515057684354533}: pass relative L2 error 0.000e+00 (worst row 0.000e+00)
+TEST {'layer': 'pooler', 'm': 7, 'seed': 7769647585131262897}: pass relative L2 error 1.044e-04 (worst row 1.389e-04)
+TEST {'layer': 'o', 'm': 33, 'seed': 7769780112578171262}: pass relative L2 error 6.726e-05 (worst row 1.956e-04); 4 probe rows exact to 0.0e+00
+TEST {'layer': 'unpooler', 'm': 130, 'seed': 7769912640025079628}: pass relative L2 error 1.367e-04 (worst row 2.548e-04); 16 probe rows exact to 0.0e+00
+TEST {'layer': 'unpooler', 'm': 5, 'seed': 7770575277259621473}: pass relative L2 error 2.262e-04 (worst row 5.036e-04)
+TEST {'layer': 'router', 'm': 8, 'seed': 7770045167471987995}: pass relative L2 error 2.374e-06 (worst row 2.546e-06); 1 probe rows exact to 2.4e-06
+TEST {'dist': 'outliers', 'layer': 'router', 'm': 9, 'seed': 7770177694918896363}: pass relative L2 error 2.393e-06 (worst row 2.735e-06); 2 probe rows exact to 2.7e-06
+TEST {'dist': 'outliers', 'layer': 'qkv_gate', 'm': 512, 'seed': 7770310222365804732}: pass relative L2 error 2.209e-04 (worst row 5.894e-04); 53 probe rows exact to 0.0e+00
+TEST {'dist': 'outliers', 'layer': 'unpooler', 'm': 1000, 'seed': 7770442749812713102}: pass relative L2 error 1.610e-04 (worst row 3.657e-04); 113 probe rows exact to 0.0e+00
+qkv_gate M1: 10.750706 us, ratio 1.34242349
+o M1: 6.200791 us, ratio 1.14308003
+pooler M1: 17.416422 us, ratio 1.23653412
+unpooler M1: 3.777475 us, ratio 1.81285088
+router M1: 5.002526 us, ratio 2.11733034
+qkv_gate M16: 12.544658 us, ratio 1.11473748
+o M16: 6.327456 us, ratio 1.10755422
+pooler M16: 19.234687 us, ratio 1.12297124
+unpooler M16: 18.102897 us, ratio 1.02171494
+router M16: 6.068183 us, ratio 2.45740778
+qkv_gate M32: 13.281301 us, ratio 1.06977475
+o M32: 6.418997 us, ratio 1.07680373
+pooler M32: 19.669321 us, ratio 1.12256033
+unpooler M32: 18.455887 us, ratio 1.01951210
+router M32: 6.347041 us, ratio 2.42002539
+qkv_gate M8: 12.324076 us, ratio 1.14897051
+o M8: 6.123809 us, ratio 1.09213073
+pooler M8: 18.618902 us, ratio 1.14464317
+unpooler M8: 5.962079 us, ratio 1.18616344
+router M8: 5.922512 us, ratio 4.45216482
+qkv_gate M128: 32.730036 us, ratio 0.52208924
+o M128: 7.543343 us, ratio 0.99690552
+pooler M128: 60.181229 us, ratio 0.42059627
+unpooler M128: 19.165896 us, ratio 1.03934615
+router M128: 8.443720 us, ratio 1.93848212
+qkv_gate M256: 56.170344 us, ratio 0.35007798
+o M256: 9.628458 us, ratio 0.99372082
+pooler M256: 58.572564 us, ratio 0.52065329
+unpooler M256: 24.326180 us, ratio 0.99843045
+router M256: 10.174045 us, ratio 1.73618268
+{'layer': 'qkv_gate', 'load': 'decode 1', 'm': 1, 'seed': 7782767802375195883, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_gemv_full                                                         8.2 µs 100.0%      1
+total                                                              8.2 µs
+{'layer': 'o', 'load': 'decode 1', 'm': 1, 'seed': 7782900329822104347, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_gemv_full                                                         4.4 µs 100.0%      1
+total                                                              4.4 µs
+{'layer': 'pooler', 'load': 'decode 1', 'm': 1, 'seed': 7783032857269012812, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_gemv_full                                                        16.7 µs 100.0%      1
+total                                                             16.7 µs
+{'layer': 'unpooler', 'load': 'decode 1', 'm': 1, 'seed': 7783165384715921278, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_gemv_full                                                         3.2 µs 100.0%      1
+total                                                              3.2 µs
+{'layer': 'router', 'load': 'decode 1', 'm': 1, 'seed': 7783297912162829745, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_gemv_full                                                         2.8 µs 100.0%      1
+total                                                              2.8 µs
+{'layer': 'qkv_gate', 'load': 'decode 16', 'm': 16, 'seed': 7783430439609738213, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_weight_major_stream_gemm                                          9.2 µs  87.8%      1
+_reduce                                                            1.3 µs  12.2%      1
+total                                                             10.5 µs
+{'layer': 'o', 'load': 'decode 16', 'm': 16, 'seed': 7783562967056646682, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_weight_major_gemm                                                 4.0 µs 100.0%      1
+total                                                              4.0 µs
+{'layer': 'pooler', 'load': 'decode 16', 'm': 16, 'seed': 7783695494503555152, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_weight_major_stream_gemm                                         17.5 µs  93.0%      1
+_reduce                                                            1.3 µs   7.0%      1
+total                                                             18.8 µs
+{'layer': 'unpooler', 'load': 'decode 16', 'm': 16, 'seed': 7783828021950463623, 'weight': 62}
+kernel                                                           GPU time  share  calls
+nvjet_sm90_tst_64x16_64x16_2x1_v_bz_NNT                           18.0 µs 100.0%      1
+total                                                             18.0 µs
+{'layer': 'router', 'load': 'decode 16', 'm': 16, 'seed': 7783960549397372095, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_gemm                                                              2.8 µs  68.8%      1
+_reduce                                                            1.2 µs  31.2%      1
+total                                                              4.0 µs
+{'layer': 'qkv_gate', 'load': 'decode 32', 'm': 32, 'seed': 7784093076844280568, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_weight_major_stream_gemm                                          9.0 µs  84.2%      1
+_reduce                                                            1.7 µs  15.8%      1
+total                                                             10.7 µs
+{'layer': 'o', 'load': 'decode 32', 'm': 32, 'seed': 7784225604291189042, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_weight_major_gemm                                                 4.0 µs 100.0%      1
+total                                                              4.0 µs
+{'layer': 'pooler', 'load': 'decode 32', 'm': 32, 'seed': 7784358131738097517, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_weight_major_stream_gemm                                         18.5 µs  92.5%      1
+_reduce                                                            1.5 µs   7.5%      1
+total                                                             20.0 µs
+{'layer': 'unpooler', 'load': 'decode 32', 'm': 32, 'seed': 7784490659185005993, 'weight': 62}
+kernel                                                           GPU time  share  calls
+nvjet_sm90_tst_64x32_64x16_2x1_v_bz_NNT                           19.4 µs 100.0%      1
+total                                                             19.4 µs
+{'layer': 'router', 'load': 'decode 32', 'm': 32, 'seed': 7784623186631914470, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_gemm                                                              3.0 µs  68.8%      1
+_reduce                                                            1.4 µs  31.2%      1
+total                                                              4.4 µs
+{'layer': 'qkv_gate', 'load': 'verify 1', 'm': 8, 'seed': 7784755714078822948, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_weight_major_stream_gemm                                          7.4 µs  86.2%      1
+_reduce                                                            1.2 µs  13.8%      1
+total                                                              8.6 µs
+{'layer': 'o', 'load': 'verify 1', 'm': 8, 'seed': 7784888241525731427, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_weight_major_gemm                                                 3.9 µs 100.0%      1
+total                                                              3.9 µs
+{'layer': 'pooler', 'load': 'verify 1', 'm': 8, 'seed': 7785020768972639907, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_weight_major_stream_gemm                                         17.3 µs  93.4%      1
+_reduce                                                            1.2 µs   6.6%      1
+total                                                             18.6 µs
+{'layer': 'unpooler', 'load': 'verify 1', 'm': 8, 'seed': 7785153296419548388, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_gemm                                                              2.5 µs  64.2%      1
+_reduce                                                            1.4 µs  35.8%      1
+total                                                              3.9 µs
+{'layer': 'router', 'load': 'verify 1', 'm': 8, 'seed': 7785285823866456870, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_gemm                                                              2.8 µs  71.1%      1
+_reduce                                                            1.1 µs  28.9%      1
+total                                                              3.9 µs
+{'layer': 'qkv_gate', 'load': 'verify 16', 'm': 128, 'seed': 7785418351313365353, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_hopper_overlap_gemm                                              29.9 µs  93.6%      1
+_reduce                                                            2.0 µs   6.4%      1
+total                                                             31.9 µs
+{'layer': 'o', 'load': 'verify 16', 'm': 128, 'seed': 7785550878760273837, 'weight': 62}
+kernel                                                           GPU time  share  calls
+nvjet_sm90_tst_128x64_64x8_1x2_h_bz_TNT                            5.3 µs 100.0%      1
+total                                                              5.3 µs
+{'layer': 'pooler', 'load': 'verify 16', 'm': 128, 'seed': 7785683406207182322, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_hopper_overlap_gemm                                              59.5 µs 100.0%      1
+total                                                             59.5 µs
+{'layer': 'unpooler', 'load': 'verify 16', 'm': 128, 'seed': 7785815933654090808, 'weight': 62}
+kernel                                                           GPU time  share  calls
+nvjet_sm90_tst_128x64_64x8_1x2_h_bz_NNT                           19.0 µs 100.0%      1
+total                                                             19.0 µs
+{'layer': 'router', 'load': 'verify 16', 'm': 128, 'seed': 7785948461100999295, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_gemm                                                              4.3 µs  72.8%      1
+_reduce                                                            1.6 µs  27.2%      1
+total                                                              5.9 µs
+{'layer': 'qkv_gate', 'load': 'verify 32', 'm': 256, 'seed': 7786080988547907783, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_hopper_overlap_gemm                                              57.6 µs 100.0%      1
+total                                                             57.6 µs
+{'layer': 'o', 'load': 'verify 32', 'm': 256, 'seed': 7786213515994816272, 'weight': 62}
+kernel                                                           GPU time  share  calls
+nvjet_sm90_tst_128x128_64x6_2x1_v_bz_TNT                           8.0 µs 100.0%      1
+total                                                              8.0 µs
+{'layer': 'pooler', 'load': 'verify 32', 'm': 256, 'seed': 7786346043441724762, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_hopper_overlap_gemm                                              59.0 µs 100.0%      1
+total                                                             59.0 µs
+{'layer': 'unpooler', 'load': 'verify 32', 'm': 256, 'seed': 7786478570888633253, 'weight': 62}
+kernel                                                           GPU time  share  calls
+nvjet_sm90_tst_128x128_64x6_2x1_v_bz_NNT                          24.0 µs 100.0%      1
+total                                                             24.0 µs
+{'layer': 'router', 'load': 'verify 32', 'm': 256, 'seed': 7786611098335541745, 'weight': 62}
+kernel                                                           GPU time  share  calls
+_gemm                                                              6.3 µs  77.6%      1
+_reduce                                                            1.8 µs  22.4%      1
+total                                                              8.2 µs

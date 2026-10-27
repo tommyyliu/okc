@@ -1,0 +1,100 @@
+{
+  "banked_control_20261026": {
+    "job": "6ddee3c328e34835",
+    "source": "build/router-reduction/control.py",
+    "sha256": "8858a1864b2b8a073cd8a618fc6e774d51d92dc12fb2bd649d912f06daa44276",
+    "service_content_hash": "4c6e703732784fe369beaa009fa4e97467515a379519fe5c029a030a2a27ea60",
+    "passed": true,
+    "score_us": 3830.401355752187,
+    "speedup": 1.2611733213663094,
+    "speedup_ci": [
+      1.2422557215458148,
+      1.280090921186804
+    ]
+  },
+  "router_cluster_fixed": {
+    "job": "5e18ccab93f940f7",
+    "source": "build/router-cluster/layout-fixed.py",
+    "sha256": "f243358e1466fe77939e340f28dbda79389402ce3f7f7850814ee13ba008678d",
+    "service_content_hash": "5c6a4363da708439293832536ef1eab8949a1fc9f5d1a9a23723144d579e6aa7",
+    "passed": true,
+    "score_us": 3980.0960239303745,
+    "speedup": 1.2137395607931964,
+    "speedup_ci": [
+      1.1955334673812985,
+      1.2319456542050944
+    ]
+  },
+  "router_cluster_bk64": {
+    "job": "e40c0396e29b49a0",
+    "source": "build/router-cluster/bk64.py",
+    "sha256": "2728743b446bef060d692a90f56cb93a81c24792e98a7a0df715d5cad1ed7c2b",
+    "service_content_hash": "048141ae27de5974e301397127804ad5019f4999f43e7cc912ed2902d3f0dad4",
+    "passed": true,
+    "score_us": 4187.908349383078,
+    "speedup": 1.1535113944677484,
+    "speedup_ci": [
+      1.136208723550732,
+      1.1708140653847645
+    ]
+  },
+  "small_tma": {
+    "job": "0f311fd4ab4342af",
+    "source": "build/agent-round7/small-tma.py",
+    "sha256": "f724f29975d1c30cdcb8dd12c7a568b4f943dff6ec1a4c2e69437704273133d5",
+    "service_content_hash": "5cac979d015f6cbe83542fb3d168f8a5cece99405d06022ad67b519ad6e101a2",
+    "passed": true,
+    "score_us": 3824.0237788550226,
+    "speedup": 1.2632766633701278,
+    "speedup_ci": [
+      1.244327513419576,
+      1.2822258133206796
+    ]
+  },
+  "hopper_overlap": {
+    "job": "c02532ce190544f5",
+    "source": "build/agent-round7/hopper-overlap.py",
+    "sha256": "1f876b5052e32846eee49808330d90efe4ab3088538037fbbe471c7d83145f26",
+    "service_content_hash": "54c033e9105ad3d9b3e86f5d409f79e5adb38924eb72e58af9e308a0afc1af74",
+    "passed": true,
+    "score_us": 4582.376962100434,
+    "speedup": 1.0542127022622112,
+    "speedup_ci": [
+      1.038399511728278,
+      1.0700258927961444
+    ]
+  },
+  "occupancy": {
+    "job": "ed6f332cdf94424b",
+    "source": "build/agent-round7/occupancy.py",
+    "sha256": "6f3b6cfb084106c22960ca7eba02ba1f2f2d6498903fefc2e2e75b1262b653d4",
+    "service_content_hash": "ae1e9d6bf85510f2801a1e81efa3829a0e36bfff078068b1001dfcdb368530f3",
+    "passed": true,
+    "score_us": 3865.9603887103985,
+    "speedup": 1.249573072219566,
+    "speedup_ci": [
+      1.2308294761362724,
+      1.2683166683028593
+    ]
+  },
+  "router_cluster_frontend_failed": {
+    "job": "c0c78fb3324a4b2e",
+    "source": "build/router-cluster/frontend-failed-candidate.py",
+    "passed": false,
+    "reason": "Gluon layout equality failure at final store"
+  },
+  "round7_selected": {
+    "job": "f5ab0410cf1e4449",
+    "source": "results/round7_selected_source.py",
+    "build_source": "build/agent-round7/selected.py",
+    "sha256": "b1115afac8b8a47bf8951ce782818d490dd53ecc19cf34959d21831e32494944",
+    "service_content_hash": "18202b10a2a8d0e22bc5b7c72d574e803a7cb6c69dddfd64ffe767508736ee4d",
+    "passed": true,
+    "score_us": 3764.8793644202005,
+    "speedup": 1.283122122226074,
+    "speedup_ci": [
+      1.2638752903926829,
+      1.302368954059465
+    ]
+  }
+}

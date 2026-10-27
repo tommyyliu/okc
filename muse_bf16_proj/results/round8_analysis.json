@@ -1,0 +1,3074 @@
+{
+  "control_job": "f5ab0410cf1e4449",
+  "control_score_us": 3764.8793644202005,
+  "comparison": "Cross-run official paired ratios against each run's SGLang; not paired A/B timing of our kernels.",
+  "runs": {
+    "stages2": {
+      "job": "99492464985742e0",
+      "source": "build/agent-round8/stages2.py",
+      "source_sha256": "7cf60a1aeb8f3edaa737e5cd12f7d1ff363a6db826349539e38f5715ad65dc38",
+      "service_content_hash": "55eca9bb62a890341135a4945635dcd04b035e7065c9eadfaf8da9a6626fead4",
+      "passed": true,
+      "score_us": 3933.7941757166996,
+      "speedup": 1.2280256119703759,
+      "speedup_ci": [
+        1.2096052277908202,
+        1.2464459961499315
+      ],
+      "rows": [
+        {
+          "layer": "qkv_gate",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "latency_us": 10.396437204737001,
+          "normalized_latency_change_pct": 2.3968031921275834
+        },
+        {
+          "layer": "o",
+          "m": 1,
+          "before": [
+            "gemv",
+            4,
+            4
+          ],
+          "after": [
+            "gemv",
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 5.772097508922099,
+          "normalized_latency_change_pct": -0.6004556882122758
+        },
+        {
+          "layer": "pooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "latency_us": 17.11469873985984,
+          "normalized_latency_change_pct": 0.01868764335102302
+        },
+        {
+          "layer": "unpooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "latency_us": 3.8910449373663787,
+          "normalized_latency_change_pct": 8.647858303302813
+        },
+        {
+          "layer": "router",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            16
+          ],
+          "after": [
+            "gemv",
+            1,
+            16
+          ],
+          "changed": false,
+          "latency_us": 4.024571332454272,
+          "normalized_latency_change_pct": 5.10950148972249
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            16,
+            64,
+            128,
+            8,
+            4,
+            2
+          ],
+          "changed": true,
+          "latency_us": 13.287276423992743,
+          "normalized_latency_change_pct": 11.780365025022842
+        },
+        {
+          "layer": "o",
+          "m": 16,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 6.081265979613961,
+          "normalized_latency_change_pct": 1.0678784870387314
+        },
+        {
+          "layer": "pooler",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            16,
+            64,
+            128,
+            4,
+            4,
+            2
+          ],
+          "changed": true,
+          "latency_us": 21.968443595406104,
+          "normalized_latency_change_pct": 17.426820539260124
+        },
+        {
+          "layer": "unpooler",
+          "m": 16,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 17.965588247927126,
+          "normalized_latency_change_pct": 1.09433581294629
+        },
+        {
+          "layer": "router",
+          "m": 16,
+          "before": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 6.196054482364672,
+          "normalized_latency_change_pct": 9.080672298418557
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 32,
+          "before": [
+            "tma",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            32,
+            64,
+            128,
+            8,
+            4,
+            2
+          ],
+          "changed": true,
+          "latency_us": 14.551814684628475,
+          "normalized_latency_change_pct": 20.70352473910555
+        },
+        {
+          "layer": "o",
+          "m": 32,
+          "before": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 6.276159412365395,
+          "normalized_latency_change_pct": 4.1496637519660595
+        },
+        {
+          "layer": "pooler",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            32,
+            64,
+            128,
+            4,
+            4,
+            2
+          ],
+          "changed": true,
+          "latency_us": 22.52878745716862,
+          "normalized_latency_change_pct": 17.32414094033652
+        },
+        {
+          "layer": "unpooler",
+          "m": 32,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 18.412209281947174,
+          "normalized_latency_change_pct": 0.16886954401071907
+        },
+        {
+          "layer": "router",
+          "m": 32,
+          "before": [
+            "dot_reduce32",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 6.4356422943303375,
+          "normalized_latency_change_pct": 1.6123833929644338
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            16,
+            64,
+            128,
+            8,
+            4,
+            2
+          ],
+          "changed": true,
+          "latency_us": 13.718262658331028,
+          "normalized_latency_change_pct": 11.100019306322494
+        },
+        {
+          "layer": "o",
+          "m": 8,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 6.317938124659123,
+          "normalized_latency_change_pct": 3.468800615607437
+        },
+        {
+          "layer": "pooler",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            16,
+            64,
+            128,
+            4,
+            4,
+            2
+          ],
+          "changed": true,
+          "latency_us": 21.729425631486237,
+          "normalized_latency_change_pct": 16.75964125100766
+        },
+        {
+          "layer": "unpooler",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 5.879598906712469,
+          "normalized_latency_change_pct": 1.4859480901935118
+        },
+        {
+          "layer": "router",
+          "m": 8,
+          "before": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 5.5456574308435735,
+          "normalized_latency_change_pct": -0.290165613812543
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 16.910570614151418,
+          "normalized_latency_change_pct": -1.5424918364659201
+        },
+        {
+          "layer": "o",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 7.45672817087211,
+          "normalized_latency_change_pct": -3.154468920304776
+        },
+        {
+          "layer": "pooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 22.42016274809812,
+          "normalized_latency_change_pct": -2.021261994075252
+        },
+        {
+          "layer": "unpooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 19.170047277622903,
+          "normalized_latency_change_pct": -1.4329736991054887
+        },
+        {
+          "layer": "router",
+          "m": 128,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 8.271552779983928,
+          "normalized_latency_change_pct": -0.3668859494342258
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 19.36573756732834,
+          "normalized_latency_change_pct": 0.6028239666423962
+        },
+        {
+          "layer": "o",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 9.256154199522719,
+          "normalized_latency_change_pct": 0.014239029008500381
+        },
+        {
+          "layer": "pooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 29.583309038438994,
+          "normalized_latency_change_pct": -1.184396657906317
+        },
+        {
+          "layer": "unpooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 23.59651514518873,
+          "normalized_latency_change_pct": -1.3178874038197619
+        },
+        {
+          "layer": "router",
+          "m": 256,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 9.836047486463169,
+          "normalized_latency_change_pct": -1.5317505978343027
+        }
+      ],
+      "unchanged_median_pct": 0.09377859368087105,
+      "unchanged_range_pct": [
+        -3.154468920304776,
+        9.080672298418557
+      ],
+      "score_change_pct": 4.486592927593369
+    },
+    "stages4": {
+      "job": "72ee9e56e9c74c82",
+      "source": "build/agent-round8/stages4.py",
+      "source_sha256": "7756d42c07ea974b179abe6bdfd0f4ef364d970c9bc530fc28dcdd4d319dd304",
+      "service_content_hash": "926688fcd86f876ca4fd924f70635b684aa464d86557e06b32f6e7f835fcbd63",
+      "passed": true,
+      "score_us": 3799.7694968644823,
+      "speedup": 1.271340275768388,
+      "speedup_ci": [
+        1.2522701716318623,
+        1.2904103799049138
+      ],
+      "rows": [
+        {
+          "layer": "qkv_gate",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "latency_us": 10.343877104224863,
+          "normalized_latency_change_pct": -1.8481471476517686
+        },
+        {
+          "layer": "o",
+          "m": 1,
+          "before": [
+            "gemv",
+            4,
+            4
+          ],
+          "after": [
+            "gemv",
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 5.818608502366998,
+          "normalized_latency_change_pct": 0.6845530521766507
+        },
+        {
+          "layer": "pooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "latency_us": 16.96433233100532,
+          "normalized_latency_change_pct": -0.6382700929313145
+        },
+        {
+          "layer": "unpooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "latency_us": 3.7269132624528094,
+          "normalized_latency_change_pct": 5.244761095198003
+        },
+        {
+          "layer": "router",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            16
+          ],
+          "after": [
+            "gemv",
+            1,
+            16
+          ],
+          "changed": false,
+          "latency_us": 3.8294975148313486,
+          "normalized_latency_change_pct": 0.01477418016178067
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            16,
+            64,
+            128,
+            8,
+            4,
+            4
+          ],
+          "changed": true,
+          "latency_us": 13.584664545554785,
+          "normalized_latency_change_pct": 6.498621264734261
+        },
+        {
+          "layer": "o",
+          "m": 16,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 5.709759646809269,
+          "normalized_latency_change_pct": -4.6523415215849795
+        },
+        {
+          "layer": "pooler",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            16,
+            64,
+            128,
+            4,
+            4,
+            4
+          ],
+          "changed": true,
+          "latency_us": 18.760686244662203,
+          "normalized_latency_change_pct": 0.7295702223955258
+        },
+        {
+          "layer": "unpooler",
+          "m": 16,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 17.87209281572546,
+          "normalized_latency_change_pct": -0.6372184636116329
+        },
+        {
+          "layer": "router",
+          "m": 16,
+          "before": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 5.508123438657857,
+          "normalized_latency_change_pct": -2.188871149434579
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 32,
+          "before": [
+            "tma",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            32,
+            64,
+            128,
+            8,
+            4,
+            4
+          ],
+          "changed": true,
+          "latency_us": 14.438559298816637,
+          "normalized_latency_change_pct": 15.142972575345116
+        },
+        {
+          "layer": "o",
+          "m": 32,
+          "before": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 6.20811167644556,
+          "normalized_latency_change_pct": 1.1037932111678694
+        },
+        {
+          "layer": "pooler",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            32,
+            64,
+            128,
+            4,
+            4,
+            4
+          ],
+          "changed": true,
+          "latency_us": 19.005568824851043,
+          "normalized_latency_change_pct": 1.1854152588082867
+        },
+        {
+          "layer": "unpooler",
+          "m": 32,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 17.972450568530462,
+          "normalized_latency_change_pct": -0.5377758069760263
+        },
+        {
+          "layer": "router",
+          "m": 32,
+          "before": [
+            "dot_reduce32",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 6.213740320097093,
+          "normalized_latency_change_pct": -0.03817745173516629
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            16,
+            64,
+            128,
+            8,
+            4,
+            4
+          ],
+          "changed": true,
+          "latency_us": 13.682514908617318,
+          "normalized_latency_change_pct": 14.225909524442892
+        },
+        {
+          "layer": "o",
+          "m": 8,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 5.989871383795225,
+          "normalized_latency_change_pct": -0.5092169632776478
+        },
+        {
+          "layer": "pooler",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            16,
+            64,
+            128,
+            4,
+            4,
+            4
+          ],
+          "changed": true,
+          "latency_us": 18.952320230769,
+          "normalized_latency_change_pct": 1.761585166866264
+        },
+        {
+          "layer": "unpooler",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 5.586719685447825,
+          "normalized_latency_change_pct": -2.4321941188051976
+        },
+        {
+          "layer": "router",
+          "m": 8,
+          "before": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 5.587308976623029,
+          "normalized_latency_change_pct": 0.5825921541243284
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 17.529227051125144,
+          "normalized_latency_change_pct": 0.5530729995157246
+        },
+        {
+          "layer": "o",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 7.448727511158545,
+          "normalized_latency_change_pct": -0.7346897129819396
+        },
+        {
+          "layer": "pooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 22.72115383306933,
+          "normalized_latency_change_pct": -2.524927793984677
+        },
+        {
+          "layer": "unpooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 18.79265641750252,
+          "normalized_latency_change_pct": -2.28246291144919
+        },
+        {
+          "layer": "router",
+          "m": 128,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 8.103462235082178,
+          "normalized_latency_change_pct": -2.775115539349171
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 19.583398479817124,
+          "normalized_latency_change_pct": 1.4013517553772559
+        },
+        {
+          "layer": "o",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 9.38003028528479,
+          "normalized_latency_change_pct": -1.0522385485409624
+        },
+        {
+          "layer": "pooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 28.52307874965862,
+          "normalized_latency_change_pct": 1.2975469707560583
+        },
+        {
+          "layer": "unpooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 23.855466005395588,
+          "normalized_latency_change_pct": -1.214952653521728
+        },
+        {
+          "layer": "router",
+          "m": 256,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 9.726565941495634,
+          "normalized_latency_change_pct": -3.162781988038743
+        }
+      ],
+      "unchanged_median_pct": -0.6377442782714737,
+      "unchanged_range_pct": [
+        -4.6523415215849795,
+        5.244761095198003
+      ],
+      "score_change_pct": 0.9267264384088758
+    },
+    "wide": {
+      "job": "76820b2557f04afc",
+      "source": "build/agent-round8/wide.py",
+      "source_sha256": "a92953bcfe838536cb8b806a5ae89eac3e84aece8463cb2e298bbbd431f63bff",
+      "service_content_hash": "98054bacac930340017d57e23141d2b6d58b6ae4dbce5f38b250631bb863d190",
+      "passed": true,
+      "score_us": 3836.197285211189,
+      "speedup": 1.259267874106234,
+      "speedup_ci": [
+        1.2403788559946405,
+        1.2781568922178275
+      ],
+      "rows": [
+        {
+          "layer": "qkv_gate",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "latency_us": 10.539280164701044,
+          "normalized_latency_change_pct": 0.11699226032122478
+        },
+        {
+          "layer": "o",
+          "m": 1,
+          "before": [
+            "gemv",
+            4,
+            4
+          ],
+          "after": [
+            "gemv",
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 6.281540247127243,
+          "normalized_latency_change_pct": 2.5051512260627407
+        },
+        {
+          "layer": "pooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "latency_us": 17.423041339294024,
+          "normalized_latency_change_pct": 1.2930722839698872
+        },
+        {
+          "layer": "unpooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "latency_us": 3.8608815378636736,
+          "normalized_latency_change_pct": 10.278229947903949
+        },
+        {
+          "layer": "router",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            16
+          ],
+          "after": [
+            "gemv",
+            1,
+            16
+          ],
+          "changed": false,
+          "latency_us": 4.365501733420816,
+          "normalized_latency_change_pct": 11.750694883372347
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            16,
+            128,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 12.519352895007883,
+          "normalized_latency_change_pct": 2.0067080685252536
+        },
+        {
+          "layer": "o",
+          "m": 16,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 6.175304439358965,
+          "normalized_latency_change_pct": 2.144356681726056
+        },
+        {
+          "layer": "pooler",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            16,
+            128,
+            64,
+            8,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 19.775389938806,
+          "normalized_latency_change_pct": 6.177703032960191
+        },
+        {
+          "layer": "unpooler",
+          "m": 16,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 18.15855490094803,
+          "normalized_latency_change_pct": 1.2153892173731196
+        },
+        {
+          "layer": "router",
+          "m": 16,
+          "before": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 6.085850178393229,
+          "normalized_latency_change_pct": 5.663532433219953
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 32,
+          "before": [
+            "tma",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            32,
+            128,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 13.494695859624853,
+          "normalized_latency_change_pct": 11.685979125927194
+        },
+        {
+          "layer": "o",
+          "m": 32,
+          "before": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 6.194763352519416,
+          "normalized_latency_change_pct": 1.1215738956647625
+        },
+        {
+          "layer": "pooler",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            32,
+            128,
+            64,
+            8,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 20.213299736240565,
+          "normalized_latency_change_pct": 6.037426007172031
+        },
+        {
+          "layer": "unpooler",
+          "m": 32,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 18.11927525877626,
+          "normalized_latency_change_pct": 0.44795887774640164
+        },
+        {
+          "layer": "router",
+          "m": 32,
+          "before": [
+            "dot_reduce32",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 6.382006140442463,
+          "normalized_latency_change_pct": 1.2870896321583114
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            16,
+            128,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 12.38864953677025,
+          "normalized_latency_change_pct": 1.0030003799279763
+        },
+        {
+          "layer": "o",
+          "m": 8,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 6.0725588988068475,
+          "normalized_latency_change_pct": 0.38843785074271775
+        },
+        {
+          "layer": "pooler",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            16,
+            128,
+            64,
+            8,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 19.4128117122507,
+          "normalized_latency_change_pct": 4.623053200928862
+        },
+        {
+          "layer": "unpooler",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 5.962701819009937,
+          "normalized_latency_change_pct": 0.3473470619397734
+        },
+        {
+          "layer": "router",
+          "m": 8,
+          "before": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 5.7550897384837505,
+          "normalized_latency_change_pct": 2.4658681161741303
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 16.938100167678982,
+          "normalized_latency_change_pct": -1.6584450570649278
+        },
+        {
+          "layer": "o",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 7.592352490022973,
+          "normalized_latency_change_pct": -1.183678877195815
+        },
+        {
+          "layer": "pooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 22.903278947221978,
+          "normalized_latency_change_pct": -1.4946906408538574
+        },
+        {
+          "layer": "unpooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 18.94413546896367,
+          "normalized_latency_change_pct": -1.0960014679388785
+        },
+        {
+          "layer": "router",
+          "m": 128,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 8.46319890244537,
+          "normalized_latency_change_pct": -0.22323153668413198
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 19.82280533567001,
+          "normalized_latency_change_pct": 1.563168125767822
+        },
+        {
+          "layer": "o",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 9.38409497936165,
+          "normalized_latency_change_pct": -0.672655597755345
+        },
+        {
+          "layer": "pooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 30.09961814506803,
+          "normalized_latency_change_pct": 1.9636812162781458
+        },
+        {
+          "layer": "unpooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 23.74626890513239,
+          "normalized_latency_change_pct": -0.4941798054824087
+        },
+        {
+          "layer": "router",
+          "m": 256,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 10.039649065997073,
+          "normalized_latency_change_pct": -2.0197080830174796
+        }
+      ],
+      "unchanged_median_pct": 0.7847663867055821,
+      "unchanged_range_pct": [
+        -2.0197080830174796,
+        11.750694883372347
+      ],
+      "score_change_pct": 1.8942949796738384
+    },
+    "early": {
+      "job": "edb8c83cf4f74dfa",
+      "source": "build/agent-round8/early.py",
+      "source_sha256": "d9ebe514c32db6bdd4277c93b84e620e9a6f8fd6a5a3e550622782fb8b12cf1b",
+      "service_content_hash": "1185d04db95c769658c570f088a3541796263a8cfe86163450068f2ad236887f",
+      "passed": true,
+      "score_us": 3825.6069373652317,
+      "speedup": 1.26275387908175,
+      "speedup_ci": [
+        1.2438125708955239,
+        1.2816951872679763
+      ],
+      "rows": [
+        {
+          "layer": "qkv_gate",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "latency_us": 10.709261004928665,
+          "normalized_latency_change_pct": 1.8447567117303443
+        },
+        {
+          "layer": "o",
+          "m": 1,
+          "before": [
+            "gemv",
+            4,
+            4
+          ],
+          "after": [
+            "gemv",
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 6.092953371605027,
+          "normalized_latency_change_pct": 4.42286189421961
+        },
+        {
+          "layer": "pooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "latency_us": 17.332247679390008,
+          "normalized_latency_change_pct": 0.9894823474683845
+        },
+        {
+          "layer": "unpooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "latency_us": 3.7828934713488542,
+          "normalized_latency_change_pct": 10.32808396128171
+        },
+        {
+          "layer": "router",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            16
+          ],
+          "after": [
+            "gemv",
+            1,
+            16
+          ],
+          "changed": false,
+          "latency_us": 4.094551510032228,
+          "normalized_latency_change_pct": 7.946008924150116
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major_early",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 12.893307944658956,
+          "normalized_latency_change_pct": 5.647182253220406
+        },
+        {
+          "layer": "o",
+          "m": 16,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 6.1455341710470135,
+          "normalized_latency_change_pct": 4.627120111298844
+        },
+        {
+          "layer": "pooler",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major_early",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 18.956147339390604,
+          "normalized_latency_change_pct": 2.083768935821717
+        },
+        {
+          "layer": "unpooler",
+          "m": 16,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 17.994907853589176,
+          "normalized_latency_change_pct": 1.08412743316042
+        },
+        {
+          "layer": "router",
+          "m": 16,
+          "before": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32_early",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 5.659704804337765,
+          "normalized_latency_change_pct": 2.845317642199796
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 32,
+          "before": [
+            "tma",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "tma_early",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 12.700173478206679,
+          "normalized_latency_change_pct": 5.935136175611011
+        },
+        {
+          "layer": "o",
+          "m": 32,
+          "before": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 6.123463200349563,
+          "normalized_latency_change_pct": 2.5881548917226826
+        },
+        {
+          "layer": "pooler",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major_early",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 19.74926677621279,
+          "normalized_latency_change_pct": 1.9586442561156492
+        },
+        {
+          "layer": "unpooler",
+          "m": 32,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 17.96523502499278,
+          "normalized_latency_change_pct": 0.6368769543654285
+        },
+        {
+          "layer": "router",
+          "m": 32,
+          "before": [
+            "dot_reduce32",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32_early",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 5.979413634286527,
+          "normalized_latency_change_pct": -1.2164485618942789
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major_early",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 12.536234950610632,
+          "normalized_latency_change_pct": 2.092431520471072
+        },
+        {
+          "layer": "o",
+          "m": 8,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 6.0123709123145295,
+          "normalized_latency_change_pct": 3.800044452342499
+        },
+        {
+          "layer": "pooler",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major_early",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 18.71505602142526,
+          "normalized_latency_change_pct": 1.7739972324484876
+        },
+        {
+          "layer": "unpooler",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot_early",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 5.8871296166323255,
+          "normalized_latency_change_pct": -0.4720543587271475
+        },
+        {
+          "layer": "router",
+          "m": 8,
+          "before": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32_early",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 5.8789124478078065,
+          "normalized_latency_change_pct": 4.415787020198114
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 16.87061312669729,
+          "normalized_latency_change_pct": -1.2201898914518505
+        },
+        {
+          "layer": "o",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 7.6637620192951985,
+          "normalized_latency_change_pct": -0.4655814427742655
+        },
+        {
+          "layer": "pooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 23.184309272725223,
+          "normalized_latency_change_pct": -0.9135296792950443
+        },
+        {
+          "layer": "unpooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 19.18504364524016,
+          "normalized_latency_change_pct": -0.5629035553788686
+        },
+        {
+          "layer": "router",
+          "m": 128,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot_early",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 8.393399302477146,
+          "normalized_latency_change_pct": 0.7035388581027258
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 19.9886788042646,
+          "normalized_latency_change_pct": -0.4809009575321377
+        },
+        {
+          "layer": "o",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 9.359991617829582,
+          "normalized_latency_change_pct": -0.927786104670203
+        },
+        {
+          "layer": "pooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 30.14706777763262,
+          "normalized_latency_change_pct": 2.2316461984566605
+        },
+        {
+          "layer": "unpooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 24.399406146757563,
+          "normalized_latency_change_pct": -0.07496299478643165
+        },
+        {
+          "layer": "router",
+          "m": 256,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot_early",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 9.798808968190347,
+          "normalized_latency_change_pct": -1.6328144467660732
+        }
+      ],
+      "unchanged_median_pct": 1.0368048903144023,
+      "unchanged_range_pct": [
+        -1.2201898914518505,
+        10.32808396128171
+      ],
+      "score_change_pct": 1.613001827334326
+    },
+    "router": {
+      "job": "a7d02a5dc3194517",
+      "source": "build/agent-round8/router.py",
+      "source_sha256": "b0d7e0166e23d59aeff944943317359e36126f1b965daa4337c9036acb28e6a9",
+      "service_content_hash": "458e8d3fe4e8a67da028a22007abab7d36319fd5716590c131d801305882b76a",
+      "passed": true,
+      "score_us": 3819.72046605203,
+      "speedup": 1.2646998760600399,
+      "speedup_ci": [
+        1.2457293779191392,
+        1.2836703742009403
+      ],
+      "rows": [
+        {
+          "layer": "qkv_gate",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "latency_us": 10.482411715616745,
+          "normalized_latency_change_pct": 1.9530441407757504
+        },
+        {
+          "layer": "o",
+          "m": 1,
+          "before": [
+            "gemv",
+            4,
+            4
+          ],
+          "after": [
+            "gemv",
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 6.10277429748689,
+          "normalized_latency_change_pct": 1.2016564470099356
+        },
+        {
+          "layer": "pooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "latency_us": 17.301855631268584,
+          "normalized_latency_change_pct": 1.338636415602834
+        },
+        {
+          "layer": "unpooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "latency_us": 3.6564640259055294,
+          "normalized_latency_change_pct": 6.891094397279085
+        },
+        {
+          "layer": "router",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            16
+          ],
+          "after": [
+            "gemv",
+            1,
+            32
+          ],
+          "changed": true,
+          "latency_us": 4.057540871694777,
+          "normalized_latency_change_pct": 5.641466220036473
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 12.745213208863074,
+          "normalized_latency_change_pct": 4.670245417262842
+        },
+        {
+          "layer": "o",
+          "m": 16,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 5.980813667933397,
+          "normalized_latency_change_pct": 1.3284805446724945
+        },
+        {
+          "layer": "pooler",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 19.076476700591652,
+          "normalized_latency_change_pct": 2.3487336194128794
+        },
+        {
+          "layer": "unpooler",
+          "m": 16,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 17.853890896505714,
+          "normalized_latency_change_pct": 0.2919824454761466
+        },
+        {
+          "layer": "router",
+          "m": 16,
+          "before": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32_warp1",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 5.840689971201735,
+          "normalized_latency_change_pct": 3.7167201760775592
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 32,
+          "before": [
+            "tma",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 12.56226407243487,
+          "normalized_latency_change_pct": 5.9728293485791895
+        },
+        {
+          "layer": "o",
+          "m": 32,
+          "before": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 6.267730213049416,
+          "normalized_latency_change_pct": 1.6021612656866857
+        },
+        {
+          "layer": "pooler",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 19.41219448257121,
+          "normalized_latency_change_pct": 1.5371196336325665
+        },
+        {
+          "layer": "unpooler",
+          "m": 32,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 18.08293960742673,
+          "normalized_latency_change_pct": -0.3558095589434096
+        },
+        {
+          "layer": "router",
+          "m": 32,
+          "before": [
+            "dot_reduce32",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32_warp1",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 6.247088745292881,
+          "normalized_latency_change_pct": -0.13046500106455028
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 12.40018275052327,
+          "normalized_latency_change_pct": 1.3229492897180117
+        },
+        {
+          "layer": "o",
+          "m": 8,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "latency_us": 6.002378940874766,
+          "normalized_latency_change_pct": 1.87113404120689
+        },
+        {
+          "layer": "pooler",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 19.00207207113615,
+          "normalized_latency_change_pct": 1.8772330143873583
+        },
+        {
+          "layer": "unpooler",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 6.324477230298884,
+          "normalized_latency_change_pct": 1.8080933491948503
+        },
+        {
+          "layer": "router",
+          "m": 8,
+          "before": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32_warp1",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "latency_us": 5.611734291197849,
+          "normalized_latency_change_pct": 0.15779551007100157
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 17.19669840677809,
+          "normalized_latency_change_pct": 0.3112676395415459
+        },
+        {
+          "layer": "o",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 7.760905352277018,
+          "normalized_latency_change_pct": -0.050948148456897435
+        },
+        {
+          "layer": "pooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 22.923625247898286,
+          "normalized_latency_change_pct": -0.27030256698904465
+        },
+        {
+          "layer": "unpooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 19.43021740436263,
+          "normalized_latency_change_pct": -1.8946301133402565
+        },
+        {
+          "layer": "router",
+          "m": 128,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 8.43989431180913,
+          "normalized_latency_change_pct": 1.2613776088542972
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 19.80199423485269,
+          "normalized_latency_change_pct": 2.0334668611597717
+        },
+        {
+          "layer": "o",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "latency_us": 9.278465574289921,
+          "normalized_latency_change_pct": 2.3884096541704425
+        },
+        {
+          "layer": "pooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 29.97379355121188,
+          "normalized_latency_change_pct": 1.6974366317981326
+        },
+        {
+          "layer": "unpooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "latency_us": 24.316601383695584,
+          "normalized_latency_change_pct": 2.0309651583902744
+        },
+        {
+          "layer": "router",
+          "m": 256,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "latency_us": 10.148742103092394,
+          "normalized_latency_change_pct": 0.03273066661078072
+        }
+      ],
+      "unchanged_median_pct": 1.5696404496596261,
+      "unchanged_range_pct": [
+        -1.8946301133402565,
+        6.891094397279085
+      ],
+      "score_change_pct": 1.4566496379698757
+    }
+  },
+  "remaining_quota": {
+    "scored": {
+      "per_day": 10,
+      "used": 0,
+      "left": 10
+    },
+    "checks": {
+      "per_day": 20,
+      "used": 20,
+      "left": 0
+    }
+  }
+}

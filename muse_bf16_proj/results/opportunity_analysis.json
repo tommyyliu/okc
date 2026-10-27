@@ -1,0 +1,370 @@
+{
+  "source": "results/small_gemm_weight_major_nearby.json",
+  "job": "67a1b145d83b4f89",
+  "passed": true,
+  "score_us": 3934.4242570855376,
+  "speedup": 1.227828948873567,
+  "speedup_ci": [
+    1.2094115146404634,
+    1.2462463831066704
+  ],
+  "target_score_us": 3000,
+  "target_source": "user supplied approximate competitor score; not a live leaderboard lookup",
+  "required_latency_reduction": 0.2374996177401878,
+  "required_speedup_factor": 1.311474752361846,
+  "method": "Rebuild weighted load sums, then take the geometric mean. Shares are within-load weighted fractions averaged over six loads. Single-area savings are not additive. Reported floors are optimistic bounds, not predictions.",
+  "layers": {
+    "pooler": {
+      "scored_cases": 6,
+      "score_weighted_latency_share": 0.33968965701254145,
+      "scenarios": {
+        "20pct_less_time": {
+          "score_us": 3666.9635855639194,
+          "saving_score_us": 267.4606715216182
+        },
+        "reported_floor": {
+          "score_us": 3518.746202393228,
+          "saving_score_us": 415.6780546923096
+        }
+      }
+    },
+    "qkv_gate": {
+      "scored_cases": 6,
+      "score_weighted_latency_share": 0.2191086951091168,
+      "scenarios": {
+        "20pct_less_time": {
+          "score_us": 3761.9836446454574,
+          "saving_score_us": 172.44061244008026
+        },
+        "reported_floor": {
+          "score_us": 3592.99910405211,
+          "saving_score_us": 341.4251530334277
+        }
+      }
+    },
+    "unpooler": {
+      "scored_cases": 6,
+      "score_weighted_latency_share": 0.2173109482383108,
+      "scenarios": {
+        "20pct_less_time": {
+          "score_us": 3762.8715220380727,
+          "saving_score_us": 171.55273504746492
+        },
+        "reported_floor": {
+          "score_us": 3656.3345658642766,
+          "saving_score_us": 278.0896912212611
+        }
+      }
+    },
+    "router": {
+      "scored_cases": 6,
+      "score_weighted_latency_share": 0.10971306336537667,
+      "scenarios": {
+        "20pct_less_time": {
+          "score_us": 3848.0886930225697,
+          "saving_score_us": 86.33556406296793
+        },
+        "reported_floor": {
+          "score_us": 3626.43939565184,
+          "saving_score_us": 307.98486143369746
+        }
+      }
+    },
+    "o": {
+      "scored_cases": 6,
+      "score_weighted_latency_share": 0.11417763627465428,
+      "scenarios": {
+        "20pct_less_time": {
+          "score_us": 3844.5581381827865,
+          "saving_score_us": 89.86611890275117
+        },
+        "reported_floor": {
+          "score_us": 3720.8557466175216,
+          "saving_score_us": 213.56851046801603
+        }
+      }
+    }
+  },
+  "groups": {
+    "small_qkv_pooler": {
+      "scored_cases": 6,
+      "score_weighted_latency_share": 0.2704721877512291,
+      "scenarios": {
+        "20pct_less_time": {
+          "score_us": 3715.3348051875564,
+          "saving_score_us": 219.08945189798123
+        },
+        "reported_floor": {
+          "score_us": 3599.051459083829,
+          "saving_score_us": 335.3727980017088
+        }
+      }
+    },
+    "full_unpooler": {
+      "scored_cases": 4,
+      "score_weighted_latency_share": 0.18287129887210973,
+      "scenarios": {
+        "20pct_less_time": {
+          "score_us": 3789.1566017049013,
+          "saving_score_us": 145.26765538063637
+        },
+        "reported_floor": {
+          "score_us": 3740.0508210084286,
+          "saving_score_us": 194.3734360771091
+        }
+      }
+    },
+    "single_token": {
+      "scored_cases": 5,
+      "score_weighted_latency_share": 0.16666666666666666,
+      "scenarios": {
+        "20pct_less_time": {
+          "score_us": 3790.7882005652496,
+          "saving_score_us": 143.6360565202881
+        },
+        "reported_floor": {
+          "score_us": 3664.4111455721463,
+          "saving_score_us": 270.0131115133913
+        }
+      }
+    },
+    "large_pooler": {
+      "scored_cases": 2,
+      "score_weighted_latency_share": 0.10740801695538266,
+      "scenarios": {
+        "20pct_less_time": {
+          "score_us": 3848.022362933797,
+          "saving_score_us": 86.40189415174063
+        },
+        "reported_floor": {
+          "score_us": 3742.2636440376473,
+          "saving_score_us": 192.16061304789037
+        }
+      }
+    },
+    "large_qkv": {
+      "scored_cases": 2,
+      "score_weighted_latency_share": 0.07117799862898998,
+      "scenarios": {
+        "20pct_less_time": {
+          "score_us": 3877.5977352586247,
+          "saving_score_us": 56.826521826912995
+        },
+        "reported_floor": {
+          "score_us": 3785.198008319258,
+          "saving_score_us": 149.2262487662797
+        }
+      }
+    },
+    "multi_token_router": {
+      "scored_cases": 5,
+      "score_weighted_latency_share": 0.09012346479735962,
+      "scenarios": {
+        "20pct_less_time": {
+          "score_us": 3863.3755119994967,
+          "saving_score_us": 71.04874508604098
+        },
+        "reported_floor": {
+          "score_us": 3675.805091198687,
+          "saving_score_us": 258.6191658868506
+        }
+      }
+    },
+    "all_cases": {
+      "scored_cases": 30,
+      "score_weighted_latency_share": 1.0,
+      "scenarios": {
+        "20pct_less_time": {
+          "score_us": 3147.5394056684304,
+          "saving_score_us": 786.8848514171073
+        },
+        "reported_floor": {
+          "score_us": 2372.7756433506975,
+          "saving_score_us": 1561.6486137348402
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "layer": "qkv_gate",
+      "m": 1,
+      "candidate_us": 10.75709565490123,
+      "floor_us": 7.868693333333334
+    },
+    {
+      "layer": "o",
+      "m": 1,
+      "candidate_us": 5.86657976309027,
+      "floor_us": 3.499093333333333
+    },
+    {
+      "layer": "pooler",
+      "m": 1,
+      "candidate_us": 18.34999722600551,
+      "floor_us": 13.986133333333333
+    },
+    {
+      "layer": "unpooler",
+      "m": 1,
+      "candidate_us": 4.036534004663727,
+      "floor_us": 1.74976
+    },
+    {
+      "layer": "router",
+      "m": 1,
+      "candidate_us": 5.195876544058396,
+      "floor_us": 1.7512533333333333
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 16,
+      "candidate_us": 12.565535852313934,
+      "floor_us": 7.934293333333334
+    },
+    {
+      "layer": "o",
+      "m": 16,
+      "candidate_us": 6.8473421480982735,
+      "floor_us": 3.556693333333333
+    },
+    {
+      "layer": "pooler",
+      "m": 16,
+      "candidate_us": 18.771735350324878,
+      "floor_us": 14.062933333333334
+    },
+    {
+      "layer": "unpooler",
+      "m": 16,
+      "candidate_us": 18.84377957276069,
+      "floor_us": 14.062933333333334
+    },
+    {
+      "layer": "router",
+      "m": 16,
+      "candidate_us": 6.2524209690466765,
+      "floor_us": 1.805653333333333
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 32,
+      "candidate_us": 13.213325497722101,
+      "floor_us": 8.004266666666668
+    },
+    {
+      "layer": "o",
+      "m": 32,
+      "candidate_us": 6.748151930822588,
+      "floor_us": 3.6181333333333336
+    },
+    {
+      "layer": "pooler",
+      "m": 32,
+      "candidate_us": 19.55783676959538,
+      "floor_us": 14.144853333333334
+    },
+    {
+      "layer": "unpooler",
+      "m": 32,
+      "candidate_us": 18.787569990791674,
+      "floor_us": 14.144853333333334
+    },
+    {
+      "layer": "router",
+      "m": 32,
+      "candidate_us": 6.95436881073032,
+      "floor_us": 1.8636799999999998
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 8,
+      "candidate_us": 11.94111799349571,
+      "floor_us": 7.899306666666666
+    },
+    {
+      "layer": "o",
+      "m": 8,
+      "candidate_us": 6.887233533900672,
+      "floor_us": 3.5259733333333334
+    },
+    {
+      "layer": "pooler",
+      "m": 8,
+      "candidate_us": 18.768387978718195,
+      "floor_us": 14.021973333333333
+    },
+    {
+      "layer": "unpooler",
+      "m": 8,
+      "candidate_us": 5.662317026551285,
+      "floor_us": 1.7646933333333334
+    },
+    {
+      "layer": "router",
+      "m": 8,
+      "candidate_us": 5.839229598070261,
+      "floor_us": 1.7766399999999998
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 128,
+      "candidate_us": 17.32935950884977,
+      "floor_us": 8.424106666666667
+    },
+    {
+      "layer": "o",
+      "m": 128,
+      "candidate_us": 7.613960312187893,
+      "floor_us": 3.9867733333333333
+    },
+    {
+      "layer": "pooler",
+      "m": 128,
+      "candidate_us": 25.128311883538,
+      "floor_us": 14.636373333333333
+    },
+    {
+      "layer": "unpooler",
+      "m": 128,
+      "candidate_us": 20.247257174424337,
+      "floor_us": 14.636373333333333
+    },
+    {
+      "layer": "router",
+      "m": 128,
+      "candidate_us": 8.814391729213963,
+      "floor_us": 2.21184
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 256,
+      "candidate_us": 20.016293805934097,
+      "floor_us": 9.771159166835186
+    },
+    {
+      "layer": "o",
+      "m": 256,
+      "candidate_us": 10.029087328666007,
+      "floor_us": 4.478293333333333
+    },
+    {
+      "layer": "pooler",
+      "m": 256,
+      "candidate_us": 31.446815438457207,
+      "floor_us": 17.37094962992922
+    },
+    {
+      "layer": "unpooler",
+      "m": 256,
+      "candidate_us": 24.5975116222267,
+      "floor_us": 17.37094962992922
+    },
+    {
+      "layer": "router",
+      "m": 256,
+      "candidate_us": 10.106184094885535,
+      "floor_us": 2.6760533333333334
+    }
+  ]
+}

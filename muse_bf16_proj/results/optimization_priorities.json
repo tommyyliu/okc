@@ -1,0 +1,585 @@
+{
+  "source": "results/pdl_recheck.json",
+  "job": "706c118665f14447",
+  "measured_speedup": 1.2197187862551842,
+  "measured_ci": [
+    1.2014230044613563,
+    1.2380145680490118
+  ],
+  "target_speedup": 1.61,
+  "target_source": "historical target, not refreshed leaderboard",
+  "required_latency_reduction": 0.2424106917669664,
+  "methodology": "Share is mean over loads of selected weighted latency / total weighted latency. Scenarios rebuild load sums before taking their geometric mean. Reported floors are optimistic uncompressed bounds, not attainable timings or measured predictions.",
+  "groups": {
+    "small_qkv_pooler": {
+      "cases": [
+        {
+          "layer": "qkv_gate",
+          "m": 16
+        },
+        {
+          "layer": "pooler",
+          "m": 16
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 32
+        },
+        {
+          "layer": "pooler",
+          "m": 32
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 8
+        },
+        {
+          "layer": "pooler",
+          "m": 8
+        }
+      ],
+      "score_weighted_latency_share": 0.27565467273390776,
+      "speedup_if_20pct_less_latency": 1.2931352397472706,
+      "speedup_at_reported_floor": 1.3496760461359019
+    },
+    "full_unpooler": {
+      "cases": [
+        {
+          "layer": "unpooler",
+          "m": 16
+        },
+        {
+          "layer": "unpooler",
+          "m": 32
+        },
+        {
+          "layer": "unpooler",
+          "m": 128
+        },
+        {
+          "layer": "unpooler",
+          "m": 256
+        }
+      ],
+      "score_weighted_latency_share": 0.1802854738537446,
+      "speedup_if_20pct_less_latency": 1.265785499711532,
+      "speedup_at_reported_floor": 1.280451101486422
+    },
+    "single_token": {
+      "cases": [
+        {
+          "layer": "qkv_gate",
+          "m": 1
+        },
+        {
+          "layer": "o",
+          "m": 1
+        },
+        {
+          "layer": "pooler",
+          "m": 1
+        },
+        {
+          "layer": "unpooler",
+          "m": 1
+        },
+        {
+          "layer": "router",
+          "m": 1
+        }
+      ],
+      "score_weighted_latency_share": 0.16666666666666666,
+      "speedup_if_20pct_less_latency": 1.2659349258156278,
+      "speedup_at_reported_floor": 1.3066819779088867
+    },
+    "large_pooler": {
+      "cases": [
+        {
+          "layer": "pooler",
+          "m": 128
+        },
+        {
+          "layer": "pooler",
+          "m": 256
+        }
+      ],
+      "score_weighted_latency_share": 0.10894997223282686,
+      "speedup_if_20pct_less_latency": 1.247517011818607,
+      "speedup_at_reported_floor": 1.2833534951591754
+    },
+    "large_qkv": {
+      "cases": [
+        {
+          "layer": "qkv_gate",
+          "m": 128
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 256
+        }
+      ],
+      "score_weighted_latency_share": 0.07072597194826408,
+      "speedup_if_20pct_less_latency": 1.2374768783773447,
+      "speedup_at_reported_floor": 1.2664618071403486
+    }
+  },
+  "layers": {
+    "pooler": {
+      "cases": [
+        {
+          "layer": "pooler",
+          "m": 1
+        },
+        {
+          "layer": "pooler",
+          "m": 16
+        },
+        {
+          "layer": "pooler",
+          "m": 32
+        },
+        {
+          "layer": "pooler",
+          "m": 8
+        },
+        {
+          "layer": "pooler",
+          "m": 128
+        },
+        {
+          "layer": "pooler",
+          "m": 256
+        }
+      ],
+      "score_weighted_latency_share": 0.3418162471789127,
+      "speedup_if_20pct_less_latency": 1.309272147454586,
+      "speedup_at_reported_floor": 1.3693389421862243
+    },
+    "qkv_gate": {
+      "cases": [
+        {
+          "layer": "qkv_gate",
+          "m": 1
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 16
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 32
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 8
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 128
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 256
+        }
+      ],
+      "score_weighted_latency_share": 0.22454840033899415,
+      "speedup_if_20pct_less_latency": 1.277080944519359,
+      "speedup_at_reported_floor": 1.3447868508206997
+    },
+    "unpooler": {
+      "cases": [
+        {
+          "layer": "unpooler",
+          "m": 1
+        },
+        {
+          "layer": "unpooler",
+          "m": 16
+        },
+        {
+          "layer": "unpooler",
+          "m": 32
+        },
+        {
+          "layer": "unpooler",
+          "m": 8
+        },
+        {
+          "layer": "unpooler",
+          "m": 128
+        },
+        {
+          "layer": "unpooler",
+          "m": 256
+        }
+      ],
+      "score_weighted_latency_share": 0.21461896165539973,
+      "speedup_if_20pct_less_latency": 1.2746002940412933,
+      "speedup_at_reported_floor": 1.3097968586859172
+    },
+    "o": {
+      "cases": [
+        {
+          "layer": "o",
+          "m": 1
+        },
+        {
+          "layer": "o",
+          "m": 16
+        },
+        {
+          "layer": "o",
+          "m": 32
+        },
+        {
+          "layer": "o",
+          "m": 8
+        },
+        {
+          "layer": "o",
+          "m": 128
+        },
+        {
+          "layer": "o",
+          "m": 256
+        }
+      ],
+      "score_weighted_latency_share": 0.1118950817103187,
+      "speedup_if_20pct_less_latency": 1.2476461830304824,
+      "speedup_at_reported_floor": 1.2871395188095534
+    },
+    "router": {
+      "cases": [
+        {
+          "layer": "router",
+          "m": 1
+        },
+        {
+          "layer": "router",
+          "m": 16
+        },
+        {
+          "layer": "router",
+          "m": 32
+        },
+        {
+          "layer": "router",
+          "m": 8
+        },
+        {
+          "layer": "router",
+          "m": 128
+        },
+        {
+          "layer": "router",
+          "m": 256
+        }
+      ],
+      "score_weighted_latency_share": 0.10712130911637473,
+      "speedup_if_20pct_less_latency": 1.246424551727876,
+      "speedup_at_reported_floor": 1.319871248719843
+    }
+  },
+  "individual_cases": [
+    {
+      "layer": "pooler",
+      "m": 256,
+      "latency_us": 31.00697098143565,
+      "baseline_us": 30.84800112992525,
+      "floor_us": 17.37094962992922,
+      "score_weighted_latency_share": 0.054264815826344855,
+      "speedup_if_20pct_less_latency": 1.2334841202646976,
+      "speedup_at_reported_floor": 1.2515413807462972
+    },
+    {
+      "layer": "pooler",
+      "m": 128,
+      "latency_us": 25.5038524640033,
+      "baseline_us": 25.3440011292696,
+      "floor_us": 14.636373333333333,
+      "score_weighted_latency_share": 0.054685156406482006,
+      "speedup_if_20pct_less_latency": 1.233595074707209,
+      "speedup_at_reported_floor": 1.2507220228854818
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 128,
+      "latency_us": 16.791103693186592,
+      "baseline_us": 17.151999287307262,
+      "floor_us": 8.424106666666667,
+      "score_weighted_latency_share": 0.03600335019955782,
+      "speedup_if_20pct_less_latency": 1.2287300774770478,
+      "speedup_at_reported_floor": 1.2430919341550182
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 256,
+      "latency_us": 19.84054139991765,
+      "baseline_us": 19.983998965471983,
+      "floor_us": 9.771159166835186,
+      "score_weighted_latency_share": 0.034722621748706266,
+      "speedup_if_20pct_less_latency": 1.228401439649355,
+      "speedup_at_reported_floor": 1.2426492488617016
+    },
+    {
+      "layer": "pooler",
+      "m": 8,
+      "latency_us": 19.233344472986037,
+      "baseline_us": 21.27999998629093,
+      "floor_us": 14.021973333333333,
+      "score_weighted_latency_share": 0.06310895219158075,
+      "speedup_if_20pct_less_latency": 1.235833494439359,
+      "speedup_at_reported_floor": 1.2419245646333885
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 32,
+      "latency_us": 14.42342370979769,
+      "baseline_us": 14.528000261634588,
+      "floor_us": 8.004266666666668,
+      "score_weighted_latency_share": 0.03586760513401946,
+      "speedup_if_20pct_less_latency": 1.2286952158167208,
+      "speedup_at_reported_floor": 1.2403583005694483
+    },
+    {
+      "layer": "pooler",
+      "m": 32,
+      "latency_us": 20.438909697196358,
+      "baseline_us": 21.95199951529503,
+      "floor_us": 14.144853333333334,
+      "score_weighted_latency_share": 0.05082668006840402,
+      "speedup_if_20pct_less_latency": 1.2325791927769205,
+      "speedup_at_reported_floor": 1.2399320715536022
+    },
+    {
+      "layer": "pooler",
+      "m": 1,
+      "latency_us": 18.036803891022984,
+      "baseline_us": 21.48800017312169,
+      "floor_us": 13.986133333333333,
+      "score_weighted_latency_share": 0.06891712119508174,
+      "speedup_if_20pct_less_latency": 1.237393576058857,
+      "speedup_at_reported_floor": 1.2396933856935604
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 8,
+      "latency_us": 12.541188665715657,
+      "baseline_us": 14.143999200314283,
+      "floor_us": 7.899306666666666,
+      "score_weighted_latency_share": 0.04115047578136404,
+      "speedup_if_20pct_less_latency": 1.2300570804181565,
+      "speedup_at_reported_floor": 1.2393572349047655
+    },
+    {
+      "layer": "router",
+      "m": 8,
+      "latency_us": 6.208997128950232,
+      "baseline_us": 26.272001210600138,
+      "floor_us": 1.7766399999999998,
+      "score_weighted_latency_share": 0.020373123536519665,
+      "speedup_if_20pct_less_latency": 1.2247608353484163,
+      "speedup_at_reported_floor": 1.2384219560320506
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 16,
+      "latency_us": 13.376933431079346,
+      "baseline_us": 14.303999487310648,
+      "floor_us": 7.934293333333334,
+      "score_weighted_latency_share": 0.03468743806752023,
+      "speedup_if_20pct_less_latency": 1.228392420116369,
+      "speedup_at_reported_floor": 1.2378389789184119
+    },
+    {
+      "layer": "unpooler",
+      "m": 8,
+      "latency_us": 5.938490122217871,
+      "baseline_us": 7.104000076651573,
+      "floor_us": 1.7646933333333334,
+      "score_weighted_latency_share": 0.019485528881344766,
+      "speedup_if_20pct_less_latency": 1.2245381103511808,
+      "speedup_at_reported_floor": 1.2372745667235197
+    },
+    {
+      "layer": "pooler",
+      "m": 16,
+      "latency_us": 19.287315089022634,
+      "baseline_us": 21.31200022995472,
+      "floor_us": 14.062933333333334,
+      "score_weighted_latency_share": 0.050013521491019286,
+      "speedup_if_20pct_less_latency": 1.2323658452338084,
+      "speedup_at_reported_floor": 1.2370752505083358
+    },
+    {
+      "layer": "router",
+      "m": 128,
+      "latency_us": 8.34821330169528,
+      "baseline_us": 16.1920003592968,
+      "floor_us": 2.21184,
+      "score_weighted_latency_share": 0.017900172170546666,
+      "speedup_if_20pct_less_latency": 1.2241409994852583,
+      "speedup_at_reported_floor": 1.2365513283789364
+    },
+    {
+      "layer": "router",
+      "m": 256,
+      "latency_us": 10.123059308563576,
+      "baseline_us": 17.503999639302492,
+      "floor_us": 2.6760533333333334,
+      "score_weighted_latency_share": 0.017716208052287925,
+      "speedup_if_20pct_less_latency": 1.2240949772403336,
+      "speedup_at_reported_floor": 1.2363840284557233
+    },
+    {
+      "layer": "unpooler",
+      "m": 16,
+      "latency_us": 18.77672421305819,
+      "baseline_us": 18.768000416457653,
+      "floor_us": 14.062933333333334,
+      "score_weighted_latency_share": 0.04868951928385359,
+      "speedup_if_20pct_less_latency": 1.2320190204625396,
+      "speedup_at_reported_floor": 1.2353013845877503
+    },
+    {
+      "layer": "router",
+      "m": 1,
+      "latency_us": 4.938170216017721,
+      "baseline_us": 10.400000493973494,
+      "floor_us": 1.7512533333333333,
+      "score_weighted_latency_share": 0.01886833594884389,
+      "speedup_if_20pct_less_latency": 1.2243834044986073,
+      "speedup_at_reported_floor": 1.2352396924535758
+    },
+    {
+      "layer": "unpooler",
+      "m": 256,
+      "latency_us": 24.319864110553425,
+      "baseline_us": 24.01600033044815,
+      "floor_us": 17.37094962992922,
+      "score_weighted_latency_share": 0.04256181449232974,
+      "speedup_if_20pct_less_latency": 1.2304227017431175,
+      "speedup_at_reported_floor": 1.2352186965809897
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 1,
+      "latency_us": 11.022724430618798,
+      "baseline_us": 14.416000340133905,
+      "floor_us": 7.868693333333334,
+      "score_weighted_latency_share": 0.042116909407826315,
+      "speedup_if_20pct_less_latency": 1.2303073625428138,
+      "speedup_at_reported_floor": 1.235072325321137
+    },
+    {
+      "layer": "router",
+      "m": 32,
+      "latency_us": 6.5152062757247835,
+      "baseline_us": 15.05600055679679,
+      "floor_us": 1.8636799999999998,
+      "score_weighted_latency_share": 0.016201759773973926,
+      "speedup_if_20pct_less_latency": 1.2237165678116748,
+      "speedup_at_reported_floor": 1.2344290571846026
+    },
+    {
+      "layer": "router",
+      "m": 16,
+      "latency_us": 6.194070030419359,
+      "baseline_us": 14.671999495476484,
+      "floor_us": 1.805653333333333,
+      "score_weighted_latency_share": 0.016061709634202656,
+      "speedup_if_20pct_less_latency": 1.2236816153532872,
+      "speedup_at_reported_floor": 1.2341802177804762
+    },
+    {
+      "layer": "unpooler",
+      "m": 32,
+      "latency_us": 18.691160782515563,
+      "baseline_us": 18.72000051662326,
+      "floor_us": 14.144853333333334,
+      "score_weighted_latency_share": 0.04648044652451951,
+      "speedup_if_20pct_less_latency": 1.2314418670793659,
+      "speedup_at_reported_floor": 1.234082316284043
+    },
+    {
+      "layer": "unpooler",
+      "m": 128,
+      "latency_us": 19.84602757845533,
+      "baseline_us": 19.632000010460615,
+      "floor_us": 14.636373333333333,
+      "score_weighted_latency_share": 0.04255369355304175,
+      "speedup_if_20pct_less_latency": 1.2304205957559133,
+      "speedup_at_reported_floor": 1.2339035759419335
+    },
+    {
+      "layer": "o",
+      "m": 8,
+      "latency_us": 6.872000122991564,
+      "baseline_us": 6.815999746322632,
+      "floor_us": 3.5259733333333334,
+      "score_weighted_latency_share": 0.022548586275857447,
+      "speedup_if_20pct_less_latency": 1.2253079282875077,
+      "speedup_at_reported_floor": 1.2336505849369135
+    },
+    {
+      "layer": "o",
+      "m": 256,
+      "latency_us": 9.943067127904682,
+      "baseline_us": 9.791999589651823,
+      "floor_us": 4.478293333333333,
+      "score_weighted_latency_share": 0.017401206546997876,
+      "speedup_if_20pct_less_latency": 1.2240162015291736,
+      "speedup_at_reported_floor": 1.23179137818146
+    },
+    {
+      "layer": "o",
+      "m": 1,
+      "latency_us": 5.735885963908156,
+      "baseline_us": 6.800000090152025,
+      "floor_us": 3.499093333333333,
+      "score_weighted_latency_share": 0.021916341194604328,
+      "speedup_if_20pct_less_latency": 1.2251487527235991,
+      "speedup_at_reported_floor": 1.2304670979889638
+    },
+    {
+      "layer": "o",
+      "m": 32,
+      "latency_us": 6.95289026129309,
+      "baseline_us": 6.9599999114871025,
+      "floor_us": 3.6181333333333336,
+      "score_weighted_latency_share": 0.017290175165749735,
+      "speedup_if_20pct_less_latency": 1.2239884432107806,
+      "speedup_at_reported_floor": 1.2301381623848207
+    },
+    {
+      "layer": "unpooler",
+      "m": 1,
+      "latency_us": 3.885967936320529,
+      "baseline_us": 7.1040005423128605,
+      "floor_us": 1.74976,
+      "score_weighted_latency_share": 0.014847958920310376,
+      "speedup_if_20pct_less_latency": 1.2233789907284243,
+      "speedup_at_reported_floor": 1.2299693424685225
+    },
+    {
+      "layer": "o",
+      "m": 16,
+      "latency_us": 6.638626016458873,
+      "baseline_us": 6.671999581158161,
+      "floor_us": 3.556693333333333,
+      "score_weighted_latency_share": 0.017214478190070902,
+      "speedup_if_20pct_less_latency": 1.2239695211702488,
+      "speedup_at_reported_floor": 1.229748870022073
+    },
+    {
+      "layer": "o",
+      "m": 128,
+      "latency_us": 7.2401605553908395,
+      "baseline_us": 7.23200011998415,
+      "floor_us": 3.9867733333333333,
+      "score_weighted_latency_share": 0.015524294337038414,
+      "speedup_if_20pct_less_latency": 1.2235475568866443,
+      "speedup_at_reported_floor": 1.2284416450505071
+    }
+  ]
+}

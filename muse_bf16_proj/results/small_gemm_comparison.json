@@ -1,0 +1,731 @@
+{
+  "status": "promising; confirmation and nearby kernel validation pending",
+  "normalization": "latency reduction = 1 - (candidate_ns / same-run SGLang_ns) / (comparison_ns / comparison-run SGLang_ns); cross-run comparison, not a paired candidate-to-candidate measurement",
+  "runs": {
+    "pdl": {
+      "job_id": "706c118665f14447",
+      "cluster": "sfo3b",
+      "node": "n-wsbc7j2d6xnjjdziaz2kmgurhe",
+      "gpu": "H200",
+      "driver": "580.178.04",
+      "passed": true,
+      "correctness_passed": 9,
+      "correctness_total": 9,
+      "scored_passed": 30,
+      "speedup": 1.2197187862551842,
+      "speedup_ci": [
+        1.2014230044613563,
+        1.2380145680490118
+      ],
+      "content_hash": "f8bb8374c813328669e862184c364988e4871799bc86dee799d0e89398b97073"
+    },
+    "streaming": {
+      "job_id": "829a3acc7d344f38",
+      "cluster": "sfo3",
+      "node": "n-djsogg5ih26gwdcnhyhbnqzfkb",
+      "gpu": "H200",
+      "driver": "580.159.03",
+      "passed": true,
+      "correctness_passed": 9,
+      "correctness_total": 9,
+      "scored_passed": 30,
+      "speedup": 1.2132922566614281,
+      "speedup_ci": [
+        1.1950928728115067,
+        1.2314916405113494
+      ],
+      "content_hash": "9c89f0882e716ed36e7c051ebc3bd68936a4d91c6334d113d2c2ad05ccd0e734",
+      "source_sha256": "2ba4335b697a922ec73bffa3846199ce08b95a6424b08fc25777e63bf3f9a3a6"
+    },
+    "weight_major": {
+      "job_id": "5aa7a0e662a84bfd",
+      "cluster": "nyc3",
+      "node": "n-3tovvmp4azgxjrdbhkqxjjl254",
+      "gpu": "H200",
+      "driver": "580.159.03",
+      "passed": true,
+      "correctness_passed": 9,
+      "correctness_total": 9,
+      "scored_passed": 30,
+      "speedup": 1.2324506253357164,
+      "speedup_ci": [
+        1.2139638659556806,
+        1.2509373847157519
+      ],
+      "content_hash": "c17565f268a094f46f69b1d03b33a5d7693b641985e1bb67727ec6b33483591c",
+      "source_sha256": "4f147cd6f3f3c765c71fc4bce38475e89fec5100d2ee37bc7cfcc7f3b5a0f92d"
+    }
+  },
+  "cases": [
+    {
+      "layer": "qkv_gate",
+      "m": 1,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 14.416000340133905,
+        "candidate_us": 11.022724430618798,
+        "speedup": 1.3078436670419977
+      },
+      "streaming": {
+        "baseline_us": 13.759999070316553,
+        "candidate_us": 10.833209245342308,
+        "speedup": 1.2701683091954128
+      },
+      "weight_major": {
+        "baseline_us": 13.776000123471022,
+        "candidate_us": 10.821994341710456,
+        "speedup": 1.2729631608080914
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": -0.02740103351597689,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.0021955479142886647
+    },
+    {
+      "layer": "o",
+      "m": 1,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 6.800000090152025,
+        "candidate_us": 5.735885963908156,
+        "speedup": 1.1855187032900552
+      },
+      "streaming": {
+        "baseline_us": 7.072000298649073,
+        "candidate_us": 6.314592010805932,
+        "speedup": 1.1199457204118675
+      },
+      "weight_major": {
+        "baseline_us": 6.784000433981419,
+        "candidate_us": 6.009503864845346,
+        "speedup": 1.1288786206905956
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": -0.05017375788799128,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.007913074191504665
+    },
+    {
+      "layer": "pooler",
+      "m": 1,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 21.48800017312169,
+        "candidate_us": 18.036803891022984,
+        "speedup": 1.1913418975418582
+      },
+      "streaming": {
+        "baseline_us": 21.536000538617373,
+        "candidate_us": 18.08929941430626,
+        "speedup": 1.1905381212046955
+      },
+      "weight_major": {
+        "baseline_us": 21.2640012614429,
+        "candidate_us": 17.92084077211032,
+        "speedup": 1.186551542522237
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": -0.004037207696379053,
+      "weight_major_normalized_latency_reduction_vs_streaming": -0.0033598023681165046
+    },
+    {
+      "layer": "unpooler",
+      "m": 1,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 7.1040005423128605,
+        "candidate_us": 3.885967936320529,
+        "speedup": 1.828116098415202
+      },
+      "streaming": {
+        "baseline_us": 7.200000807642937,
+        "candidate_us": 4.013395219426927,
+        "speedup": 1.7939924712102049
+      },
+      "weight_major": {
+        "baseline_us": 7.055999711155891,
+        "candidate_us": 3.9614719945775305,
+        "speedup": 1.7811560250366922
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": -0.026364940925117653,
+      "weight_major_normalized_latency_reduction_vs_streaming": -0.007206806137743271
+    },
+    {
+      "layer": "router",
+      "m": 1,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 10.400000493973494,
+        "candidate_us": 4.938170216017721,
+        "speedup": 2.1060433397454545
+      },
+      "streaming": {
+        "baseline_us": 10.367999784648418,
+        "candidate_us": 5.142658370546573,
+        "speedup": 2.0160778798818955
+      },
+      "weight_major": {
+        "baseline_us": 10.336000472307205,
+        "candidate_us": 5.119996632976224,
+        "speedup": 2.0187514198225065
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": -0.04324054911655395,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.0013243532187069418
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 16,
+      "targeted": true,
+      "pdl": {
+        "baseline_us": 14.303999487310648,
+        "candidate_us": 13.376933431079346,
+        "speedup": 1.0693033318142557
+      },
+      "streaming": {
+        "baseline_us": 14.175998978316784,
+        "candidate_us": 13.202399813708526,
+        "speedup": 1.0737441054918921
+      },
+      "weight_major": {
+        "baseline_us": 14.079999644309282,
+        "candidate_us": 12.513189380988583,
+        "speedup": 1.1252127028222851
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.049687824237849565,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.04574121603968584
+    },
+    {
+      "layer": "o",
+      "m": 16,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 6.671999581158161,
+        "candidate_us": 6.638626016458873,
+        "speedup": 1.0050271795122283
+      },
+      "streaming": {
+        "baseline_us": 6.864000111818314,
+        "candidate_us": 6.96859178997565,
+        "speedup": 0.9849909879485562
+      },
+      "weight_major": {
+        "baseline_us": 6.656000390648842,
+        "candidate_us": 6.568194016330812,
+        "speedup": 1.013368419705586
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.008231202029940099,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.028003074898736657
+    },
+    {
+      "layer": "pooler",
+      "m": 16,
+      "targeted": true,
+      "pdl": {
+        "baseline_us": 21.31200022995472,
+        "candidate_us": 19.287315089022634,
+        "speedup": 1.104974960567966
+      },
+      "streaming": {
+        "baseline_us": 21.552000660449266,
+        "candidate_us": 19.536449306353553,
+        "speedup": 1.1031687653416236
+      },
+      "weight_major": {
+        "baseline_us": 21.280000917613506,
+        "candidate_us": 18.67894287233441,
+        "speedup": 1.1392508164437696
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.030086312321282782,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.03167173600522666
+    },
+    {
+      "layer": "unpooler",
+      "m": 16,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 18.768000416457653,
+        "candidate_us": 18.77672421305819,
+        "speedup": 0.9995353930482469
+      },
+      "streaming": {
+        "baseline_us": 18.655999563634396,
+        "candidate_us": 18.71265386921999,
+        "speedup": 0.9969724066943394
+      },
+      "weight_major": {
+        "baseline_us": 18.864001147449017,
+        "candidate_us": 18.779842228811365,
+        "speedup": 1.0044813432196218
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.0049238845547114884,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.007475436528481816
+    },
+    {
+      "layer": "router",
+      "m": 16,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 14.671999495476484,
+        "candidate_us": 6.194070030419359,
+        "speedup": 2.3687170831814344
+      },
+      "streaming": {
+        "baseline_us": 15.328000765293837,
+        "candidate_us": 6.489803044199436,
+        "speedup": 2.36185915980824
+      },
+      "weight_major": {
+        "baseline_us": 14.560000970959663,
+        "candidate_us": 5.879902669106067,
+        "speedup": 2.4762316300676535
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.04341861463229979,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.046188114581303785
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 32,
+      "targeted": true,
+      "pdl": {
+        "baseline_us": 14.528000261634588,
+        "candidate_us": 14.42342370979769,
+        "speedup": 1.0072504665980144
+      },
+      "streaming": {
+        "baseline_us": 14.463999774307013,
+        "candidate_us": 14.219604093570275,
+        "speedup": 1.0171872352513138
+      },
+      "weight_major": {
+        "baseline_us": 14.287999365478754,
+        "candidate_us": 13.272371644727627,
+        "speedup": 1.0765219470895828
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.06434748560291448,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.05511704800694739
+    },
+    {
+      "layer": "o",
+      "m": 32,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 6.9599999114871025,
+        "candidate_us": 6.95289026129309,
+        "speedup": 1.0010225460099078
+      },
+      "streaming": {
+        "baseline_us": 6.800000090152025,
+        "candidate_us": 6.721300219387217,
+        "speedup": 1.011709024771398
+      },
+      "weight_major": {
+        "baseline_us": 6.752000190317631,
+        "candidate_us": 6.584803102421257,
+        "speedup": 1.0253913572351
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.023765376071533506,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.013343522321658363
+    },
+    {
+      "layer": "pooler",
+      "m": 32,
+      "targeted": true,
+      "pdl": {
+        "baseline_us": 21.95199951529503,
+        "candidate_us": 20.438909697196358,
+        "speedup": 1.0740298695241177
+      },
+      "streaming": {
+        "baseline_us": 22.30400126427412,
+        "candidate_us": 20.602063341979736,
+        "speedup": 1.082610071333313
+      },
+      "weight_major": {
+        "baseline_us": 22.14400004595518,
+        "candidate_us": 19.513857047977375,
+        "speedup": 1.1347833486486683
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.05353751374383264,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.04597642129441237
+    },
+    {
+      "layer": "unpooler",
+      "m": 32,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 18.72000051662326,
+        "candidate_us": 18.691160782515563,
+        "speedup": 1.001542961105694
+      },
+      "streaming": {
+        "baseline_us": 18.976000137627125,
+        "candidate_us": 18.851874287835024,
+        "speedup": 1.0065842710330504
+      },
+      "weight_major": {
+        "baseline_us": 18.863999284803867,
+        "candidate_us": 18.615120612489942,
+        "speedup": 1.0133697050636856
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.011670710007310015,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.0066959116665213925
+    },
+    {
+      "layer": "router",
+      "m": 32,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 15.05600055679679,
+        "candidate_us": 6.5152062757247835,
+        "speedup": 2.3109015923094294
+      },
+      "streaming": {
+        "baseline_us": 15.263999812304974,
+        "candidate_us": 6.610001223962956,
+        "speedup": 2.3092279857633073
+      },
+      "weight_major": {
+        "baseline_us": 15.343999955803156,
+        "candidate_us": 6.658429855976969,
+        "speedup": 2.304447187654841
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": -0.002800847287438346,
+      "weight_major_normalized_latency_reduction_vs_streaming": -0.002074596516716598
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 8,
+      "targeted": true,
+      "pdl": {
+        "baseline_us": 14.143999200314283,
+        "candidate_us": 12.541188665715657,
+        "speedup": 1.1278037175997753
+      },
+      "streaming": {
+        "baseline_us": 14.256000518798828,
+        "candidate_us": 13.132259345155932,
+        "speedup": 1.0855710463909936
+      },
+      "weight_major": {
+        "baseline_us": 14.175999909639359,
+        "candidate_us": 12.373912136970464,
+        "speedup": 1.1456360569495772
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.015565448766760248,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.052429399541173205
+    },
+    {
+      "layer": "o",
+      "m": 8,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 6.815999746322632,
+        "candidate_us": 6.872000122991564,
+        "speedup": 0.9918509348564223
+      },
+      "streaming": {
+        "baseline_us": 6.7359996028244495,
+        "candidate_us": 6.743542461093024,
+        "speedup": 0.9988814694484252
+      },
+      "weight_major": {
+        "baseline_us": 6.944000720977783,
+        "candidate_us": 6.9522076523186,
+        "speedup": 0.998819521546069
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.006976822678495642,
+      "weight_major_normalized_latency_reduction_vs_streaming": -6.202111694841861e-05
+    },
+    {
+      "layer": "pooler",
+      "m": 8,
+      "targeted": true,
+      "pdl": {
+        "baseline_us": 21.27999998629093,
+        "candidate_us": 19.233344472986037,
+        "speedup": 1.1064118368066198
+      },
+      "streaming": {
+        "baseline_us": 21.631999872624874,
+        "candidate_us": 19.402030485789606,
+        "speedup": 1.1149348460445179
+      },
+      "weight_major": {
+        "baseline_us": 21.120000164955854,
+        "candidate_us": 18.556228486637433,
+        "speedup": 1.1381623253973525
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.027896274443672264,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.020407879293250608
+    },
+    {
+      "layer": "unpooler",
+      "m": 8,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 7.104000076651573,
+        "candidate_us": 5.938490122217871,
+        "speedup": 1.196263684951355
+      },
+      "streaming": {
+        "baseline_us": 7.168000098317862,
+        "candidate_us": 5.91787154439067,
+        "speedup": 1.2112463145828405
+      },
+      "weight_major": {
+        "baseline_us": 6.943999789655209,
+        "candidate_us": 5.85355488679323,
+        "speedup": 1.1862876361375267
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": -0.00840946875777071,
+      "weight_major_normalized_latency_reduction_vs_streaming": -0.021039314315520974
+    },
+    {
+      "layer": "router",
+      "m": 8,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 26.272001210600138,
+        "candidate_us": 6.208997128950232,
+        "speedup": 4.231279329813766
+      },
+      "streaming": {
+        "baseline_us": 26.368001010268927,
+        "candidate_us": 6.2423094244971296,
+        "speedup": 4.2240778559920695
+      },
+      "weight_major": {
+        "baseline_us": 26.207998860627413,
+        "candidate_us": 6.161611992712133,
+        "speedup": 4.253432201122996
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.005208234259236666,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.006901331382025089
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 128,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 17.151999287307262,
+        "candidate_us": 16.791103693186592,
+        "speedup": 1.0214932621890194
+      },
+      "streaming": {
+        "baseline_us": 16.815999522805214,
+        "candidate_us": 17.002547985025554,
+        "speedup": 0.9890282055145713
+      },
+      "weight_major": {
+        "baseline_us": 16.879999078810215,
+        "candidate_us": 16.992945627024824,
+        "speedup": 0.9933533272751145
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": -0.028328223343345504,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.004354061784247021
+    },
+    {
+      "layer": "o",
+      "m": 128,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 7.23200011998415,
+        "candidate_us": 7.2401605553908395,
+        "speedup": 0.9988728930326534
+      },
+      "streaming": {
+        "baseline_us": 7.61600024998188,
+        "candidate_us": 7.703856409266459,
+        "speedup": 0.9885958207659604
+      },
+      "weight_major": {
+        "baseline_us": 7.280000485479832,
+        "candidate_us": 7.1991888938979365,
+        "speedup": 1.011225096711991
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.01221508813369132,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.022378079835646658
+    },
+    {
+      "layer": "pooler",
+      "m": 128,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 25.3440011292696,
+        "candidate_us": 25.5038524640033,
+        "speedup": 0.993732267116926
+      },
+      "streaming": {
+        "baseline_us": 25.424000807106495,
+        "candidate_us": 25.575259858196947,
+        "speedup": 0.9940857276942986
+      },
+      "weight_major": {
+        "baseline_us": 24.527999572455883,
+        "candidate_us": 24.56722107111507,
+        "speedup": 0.9984035028404045
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.004678705263141736,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.004324679484619232
+    },
+    {
+      "layer": "unpooler",
+      "m": 128,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 19.632000010460615,
+        "candidate_us": 19.84602757845533,
+        "speedup": 0.9892155965646716
+      },
+      "streaming": {
+        "baseline_us": 20.048000384122133,
+        "candidate_us": 20.143720845697988,
+        "speedup": 0.9952481241023403
+      },
+      "weight_major": {
+        "baseline_us": 19.935999531298876,
+        "candidate_us": 20.18377750523538,
+        "speedup": 0.987723904810572
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": -0.0015102314997486044,
+      "weight_major_normalized_latency_reduction_vs_streaming": -0.007617735335879505
+    },
+    {
+      "layer": "router",
+      "m": 128,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 16.1920003592968,
+        "candidate_us": 8.34821330169528,
+        "speedup": 1.9395767422483892
+      },
+      "streaming": {
+        "baseline_us": 16.576000954955816,
+        "candidate_us": 8.662264607389853,
+        "speedup": 1.91358746312306
+      },
+      "weight_major": {
+        "baseline_us": 16.44800091162324,
+        "candidate_us": 8.662804504654927,
+        "speedup": 1.8986923810626184
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": -0.021532904220582294,
+      "weight_major_normalized_latency_reduction_vs_streaming": -0.007844915905811822
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 256,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 19.983998965471983,
+        "candidate_us": 19.84054139991765,
+        "speedup": 1.0072305267614787
+      },
+      "streaming": {
+        "baseline_us": 20.111999940127134,
+        "candidate_us": 20.499045022802367,
+        "speedup": 0.9811188725013923
+      },
+      "weight_major": {
+        "baseline_us": 20.016000140458345,
+        "candidate_us": 19.918480716990572,
+        "speedup": 1.0048959267954904
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": -0.0023232256234066995,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.023661210738430083
+    },
+    {
+      "layer": "o",
+      "m": 256,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 9.791999589651823,
+        "candidate_us": 9.943067127904682,
+        "speedup": 0.9848067466195721
+      },
+      "streaming": {
+        "baseline_us": 9.359999559819698,
+        "candidate_us": 9.544440480147518,
+        "speedup": 0.9806755649310761
+      },
+      "weight_major": {
+        "baseline_us": 9.008000139147043,
+        "candidate_us": 9.132282903002576,
+        "speedup": 0.9863908329192617
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.0016059418303810968,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.005794121151015741
+    },
+    {
+      "layer": "pooler",
+      "m": 256,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 30.84800112992525,
+        "candidate_us": 31.00697098143565,
+        "speedup": 0.9948730931632898
+      },
+      "streaming": {
+        "baseline_us": 30.67199932411313,
+        "candidate_us": 30.91480255867162,
+        "speedup": 0.9921460525553192
+      },
+      "weight_major": {
+        "baseline_us": 31.15200065076351,
+        "candidate_us": 30.904869822327225,
+        "speedup": 1.0079965011940528
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.013019299189250488,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.015724706008361622
+    },
+    {
+      "layer": "unpooler",
+      "m": 256,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 24.01600033044815,
+        "candidate_us": 24.319864110553425,
+        "speedup": 0.9875055313334001
+      },
+      "streaming": {
+        "baseline_us": 24.384000338613987,
+        "candidate_us": 24.847932200273437,
+        "speedup": 0.9813291561679992
+      },
+      "weight_major": {
+        "baseline_us": 24.624000769108534,
+        "candidate_us": 24.67860431688801,
+        "speedup": 0.9977874134583005
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.010304682125888531,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.016494753359593384
+    },
+    {
+      "layer": "router",
+      "m": 256,
+      "targeted": false,
+      "pdl": {
+        "baseline_us": 17.503999639302492,
+        "candidate_us": 10.123059308563576,
+        "speedup": 1.7291215141350629
+      },
+      "streaming": {
+        "baseline_us": 17.583999782800674,
+        "candidate_us": 10.046748785980258,
+        "speedup": 1.7502179219747465
+      },
+      "weight_major": {
+        "baseline_us": 17.504000570625067,
+        "candidate_us": 9.87727915422653,
+        "speedup": 1.7721480072915659
+      },
+      "weight_major_normalized_latency_reduction_vs_pdl": 0.02427928873856411,
+      "weight_major_normalized_latency_reduction_vs_streaming": 0.012374861031125617
+    }
+  ],
+  "unchanged_cases_normalized_latency_reduction_vs_streaming": {
+    "median": 0.006245016408768567,
+    "min": -0.021039314315520974,
+    "max": 0.046188114581303785
+  },
+  "hypothetical_targeted_only_scores_on_pdl_control": {
+    "streaming": 1.2193550796924104,
+    "weight_major": 1.2329446405488085
+  },
+  "hypothetical_score_caveat": "Transplants normalized ratios into a different run. An analysis scenario, not an observed score or confidence interval."
+}

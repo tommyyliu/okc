@@ -1,0 +1,77 @@
+OKC_RESOURCE {"layer": "qkv_gate", "m": 1, "family": "gemv", "kernel": "_gemv_full", "registers": 34, "spills": 0, "shared_bytes": 32, "num_warps": 8}
+OKC_RESOURCE {"layer": "pooler", "m": 7, "family": "weight_major", "kernel": "_weight_major_stream_gemm", "registers": 40, "spills": 0, "shared_bytes": 61440, "num_warps": 4}
+OKC_RESOURCE {"layer": "pooler", "m": 7, "family": "reduce", "kernel": "_reduce", "registers": 24, "spills": 0, "shared_bytes": 2048, "num_warps": 4}
+OKC_RESOURCE {"layer": "unpooler", "m": 5, "family": "dot", "kernel": "_gemm", "registers": 40, "spills": 0, "shared_bytes": 20480, "num_warps": 4}
+OKC_RESOURCE {"layer": "unpooler", "m": 5, "family": "reduce", "kernel": "_reduce", "registers": 30, "spills": 0, "shared_bytes": 2048, "num_warps": 4}
+OKC_RESOURCE {"layer": "router", "m": 8, "family": "router_cluster", "kernel": "_router_cluster", "registers": 150, "spills": 0, "shared_bytes": 4096, "num_warps": 4}
+OKC_RESOURCE {"layer": "o", "m": 1, "family": "gemv", "kernel": "_gemv_full", "registers": 32, "spills": 0, "shared_bytes": 64, "num_warps": 4}
+OKC_RESOURCE {"layer": "unpooler", "m": 1, "family": "gemv", "kernel": "_gemv_full", "registers": 32, "spills": 0, "shared_bytes": 32, "num_warps": 8}
+OKC_RESOURCE {"layer": "router", "m": 1, "family": "gemv", "kernel": "_gemv_full", "registers": 34, "spills": 0, "shared_bytes": 8192, "num_warps": 8}
+OKC_RESOURCE {"layer": "qkv_gate", "m": 16, "family": "reduce", "kernel": "_reduce", "registers": 26, "spills": 0, "shared_bytes": 2048, "num_warps": 4}
+OKC_RESOURCE {"layer": "o", "m": 16, "family": "orientation", "kernel": "_weight_major_gemm", "registers": 40, "spills": 0, "shared_bytes": 81920, "num_warps": 4}
+OKC_RESOURCE {"layer": "router", "m": 16, "family": "router_cluster", "kernel": "_router_cluster", "registers": 192, "spills": 0, "shared_bytes": 4096, "num_warps": 4}
+OKC_RESOURCE {"layer": "qkv_gate", "m": 32, "family": "weight_major", "kernel": "_weight_major_stream_gemm", "registers": 51, "spills": 0, "shared_bytes": 73728, "num_warps": 4}
+OKC_RESOURCE {"layer": "o", "m": 32, "family": "orientation", "kernel": "_weight_major_gemm", "registers": 48, "spills": 0, "shared_bytes": 98304, "num_warps": 4}
+OKC_RESOURCE {"layer": "pooler", "m": 32, "family": "weight_major", "kernel": "_weight_major_stream_gemm", "registers": 48, "spills": 0, "shared_bytes": 73728, "num_warps": 4}
+OKC_RESOURCE {"layer": "router", "m": 32, "family": "router_cluster", "kernel": "_router_cluster", "registers": 254, "spills": 0, "shared_bytes": 4096, "num_warps": 4}
+OKC_RESOURCE {"layer": "router", "m": 128, "family": "dot", "kernel": "_gemm", "registers": 96, "spills": 0, "shared_bytes": 73728, "num_warps": 4}
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-26 16:45:23 77:77 SyncActivityProfilerHandler.cpp:46] profiler_stop

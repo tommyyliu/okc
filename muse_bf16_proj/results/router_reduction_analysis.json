@@ -1,0 +1,259 @@
+{
+  "job": "3f90adf02bb14808",
+  "status": "passed; 0.24% slower overall than measured keepers, with small-router normalized gains of 4\u20136%; confirmation pending",
+  "score_us": 3848.1217283380397,
+  "speedup": 1.2553656929367378,
+  "speedup_ci": [
+    1.2365352075426868,
+    1.2741961783307887
+  ],
+  "candidate_sha256": "c12d4d6cf2438bc8451be0829b2dd843616802ec2d9e792b83075664e06ff31c",
+  "control_sha256": "8858a1864b2b8a073cd8a618fc6e774d51d92dc12fb2bd649d912f06daa44276",
+  "baseline_job": "34425ce43f3e4f6c",
+  "changed_cases": [
+    {
+      "layer": "router",
+      "m": 16,
+      "previous_us": 6.5887733458468265,
+      "new_us": 5.968027926026893,
+      "previous_paired_ratio": 2.2462451244888237,
+      "new_paired_ratio": 2.4798810800240165,
+      "normalized_latency_change_pct": -9.421256423026946
+    },
+    {
+      "layer": "router",
+      "m": 32,
+      "previous_us": 6.556747445735893,
+      "new_us": 6.285425013339408,
+      "previous_paired_ratio": 2.288939942682094,
+      "new_paired_ratio": 2.4437489128735406,
+      "normalized_latency_change_pct": -6.334896739019335
+    },
+    {
+      "layer": "router",
+      "m": 8,
+      "previous_us": 6.3625452030328775,
+      "new_us": 5.512886501255633,
+      "previous_paired_ratio": 4.15431227464629,
+      "new_paired_ratio": 4.713320232036182,
+      "normalized_latency_change_pct": -11.860173505512005
+    }
+  ],
+  "unchanged_matching_configurations": [
+    {
+      "layer": "qkv_gate",
+      "m": 1,
+      "previous_us": 10.639502264434304,
+      "new_us": 10.513843388813894,
+      "previous_paired_ratio": 1.3474314719174467,
+      "new_paired_ratio": 1.3087506658714037,
+      "normalized_latency_change_pct": 2.9555519668284846
+    },
+    {
+      "layer": "o",
+      "m": 1,
+      "previous_us": 5.842346723218644,
+      "new_us": 5.743207722828905,
+      "previous_paired_ratio": 1.1447454284783576,
+      "new_paired_ratio": 1.1087880445291023,
+      "normalized_latency_change_pct": 3.242944774402412
+    },
+    {
+      "layer": "pooler",
+      "m": 1,
+      "previous_us": 17.26788315177674,
+      "new_us": 16.99239110325298,
+      "previous_paired_ratio": 1.2379051326128616,
+      "new_paired_ratio": 1.2447924102481247,
+      "normalized_latency_change_pct": -0.5532872452114534
+    },
+    {
+      "layer": "unpooler",
+      "m": 1,
+      "previous_us": 4.082227333942129,
+      "new_us": 4.311540188579216,
+      "previous_paired_ratio": 1.7715819155520536,
+      "new_paired_ratio": 1.751578298706339,
+      "normalized_latency_change_pct": 1.1420338365968785
+    },
+    {
+      "layer": "router",
+      "m": 1,
+      "previous_us": 4.89711231353837,
+      "new_us": 4.802261983313403,
+      "previous_paired_ratio": 2.14330397622808,
+      "new_paired_ratio": 2.158982542117546,
+      "normalized_latency_change_pct": -0.72620160578456
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 16,
+      "previous_us": 13.058363333139074,
+      "new_us": 12.336184458262112,
+      "previous_paired_ratio": 1.1100932110569037,
+      "new_paired_ratio": 1.1270907749624448,
+      "normalized_latency_change_pct": -1.50809183103352
+    },
+    {
+      "layer": "o",
+      "m": 16,
+      "previous_us": 6.198527580264608,
+      "new_us": 6.1559336357981085,
+      "previous_paired_ratio": 1.1099409785469116,
+      "new_paired_ratio": 1.1020261701441483,
+      "normalized_latency_change_pct": 0.7182051222729191
+    },
+    {
+      "layer": "pooler",
+      "m": 16,
+      "previous_us": 19.313849214384675,
+      "new_us": 19.13717269204245,
+      "previous_paired_ratio": 1.1241674186806985,
+      "new_paired_ratio": 1.1236769979902301,
+      "normalized_latency_change_pct": 0.04364427601040166
+    },
+    {
+      "layer": "unpooler",
+      "m": 16,
+      "previous_us": 17.812293957578195,
+      "new_us": 17.75953333345018,
+      "previous_paired_ratio": 1.0195205637773086,
+      "new_paired_ratio": 1.0225494162762767,
+      "normalized_latency_change_pct": -0.29620597799546733
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 32,
+      "previous_us": 13.471386800987057,
+      "new_us": 13.602749502740496,
+      "previous_paired_ratio": 1.0629937229694353,
+      "new_paired_ratio": 1.0468471096313428,
+      "normalized_latency_change_pct": 1.5424041571628022
+    },
+    {
+      "layer": "o",
+      "m": 32,
+      "previous_us": 6.455622576601966,
+      "new_us": 6.1069745021958735,
+      "previous_paired_ratio": 1.0706945658045215,
+      "new_paired_ratio": 1.0899013016892378,
+      "normalized_latency_change_pct": -1.7622454303841795
+    },
+    {
+      "layer": "pooler",
+      "m": 32,
+      "previous_us": 19.77662497847886,
+      "new_us": 19.807723258877974,
+      "previous_paired_ratio": 1.1164695484014742,
+      "new_paired_ratio": 1.1187555653836228,
+      "normalized_latency_change_pct": -0.20433569699067622
+    },
+    {
+      "layer": "unpooler",
+      "m": 32,
+      "previous_us": 18.366109240182542,
+      "new_us": 18.22602993250892,
+      "previous_paired_ratio": 1.017526384833537,
+      "new_paired_ratio": 1.0262246064585856,
+      "normalized_latency_change_pct": -0.8475943346423431
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 8,
+      "previous_us": 12.052907746895238,
+      "new_us": 12.231964624735253,
+      "previous_paired_ratio": 1.178802735184324,
+      "new_paired_ratio": 1.1393099887620415,
+      "normalized_latency_change_pct": 3.4663741046626617
+    },
+    {
+      "layer": "o",
+      "m": 8,
+      "previous_us": 6.077790003640683,
+      "new_us": 6.167975854386481,
+      "previous_paired_ratio": 1.1030324872702344,
+      "new_paired_ratio": 1.099874523314527,
+      "normalized_latency_change_pct": 0.28712038407714413
+    },
+    {
+      "layer": "pooler",
+      "m": 8,
+      "previous_us": 18.763960781432367,
+      "new_us": 18.835638578216056,
+      "previous_paired_ratio": 1.1366470579363364,
+      "new_paired_ratio": 1.1306226273331488,
+      "normalized_latency_change_pct": 0.5328418570038407
+    },
+    {
+      "layer": "unpooler",
+      "m": 8,
+      "previous_us": 5.901195839124991,
+      "new_us": 5.988796466808823,
+      "previous_paired_ratio": 1.2038237341473559,
+      "new_paired_ratio": 1.1915582528481798,
+      "normalized_latency_change_pct": 1.0293648061148408
+    },
+    {
+      "layer": "o",
+      "m": 128,
+      "previous_us": 7.521989369240982,
+      "new_us": 7.447541162563804,
+      "previous_paired_ratio": 0.9742104150372748,
+      "new_paired_ratio": 0.9839489605172687,
+      "normalized_latency_change_pct": -0.9897409185608774
+    },
+    {
+      "layer": "unpooler",
+      "m": 128,
+      "previous_us": 19.21669469236965,
+      "new_us": 19.06110684100806,
+      "previous_paired_ratio": 1.0432595566022376,
+      "new_paired_ratio": 1.0316295314750854,
+      "normalized_latency_change_pct": 1.1273451149195868
+    },
+    {
+      "layer": "router",
+      "m": 128,
+      "previous_us": 8.159868462230946,
+      "new_us": 8.793380818067789,
+      "previous_paired_ratio": 1.9882673043974894,
+      "new_paired_ratio": 1.8650392704965562,
+      "normalized_latency_change_pct": 6.607262155296301
+    },
+    {
+      "layer": "o",
+      "m": 256,
+      "previous_us": 9.54505315424784,
+      "new_us": 9.681394988526062,
+      "previous_paired_ratio": 0.9956990812646416,
+      "new_paired_ratio": 0.9750661118740651,
+      "normalized_latency_change_pct": 2.1160585050915337
+    },
+    {
+      "layer": "unpooler",
+      "m": 256,
+      "previous_us": 24.065000733208013,
+      "new_us": 24.24700990947623,
+      "previous_paired_ratio": 1.0105962453624708,
+      "new_paired_ratio": 1.0010306442761019,
+      "normalized_latency_change_pct": 0.9555752504746051
+    },
+    {
+      "layer": "router",
+      "m": 256,
+      "previous_us": 10.065632933734637,
+      "new_us": 10.285803861854438,
+      "previous_paired_ratio": 1.7707778402982872,
+      "new_paired_ratio": 1.72042943283491,
+      "normalized_latency_change_pct": 2.92650233147973
+    }
+  ],
+  "unchanged_variation_pct": {
+    "count": 23,
+    "median": 0.7182051222729191,
+    "minimum": -1.7622454303841795,
+    "maximum": 6.607262155296301
+  },
+  "caveat": "Cross-run comparisons, not paired candidate/control. Aggregate versus round6 also includes rollback of four failed large GEMMs. Default remains PDL.",
+  "measured_keepers_comparison": "results/router_reduction_vs_keepers.json"
+}

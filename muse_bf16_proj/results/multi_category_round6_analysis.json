@@ -1,0 +1,344 @@
+{
+  "job": "34425ce43f3e4f6c",
+  "passed": true,
+  "score_us": 4168.938221977513,
+  "speedup": 1.158760274866471,
+  "speedup_ci": [
+    1.1413788707434738,
+    1.1761416789894679
+  ],
+  "rows": [
+    {
+      "layer": "pooler",
+      "m": 128,
+      "prior_job": "6456b973b73a4a26",
+      "prior_effective_us": 23.00609998999938,
+      "new_effective_us": 36.89125870808041,
+      "prior_normalized_to_current_baseline_us": 22.9765302326615,
+      "normalized_latency_change_pct": 60.56061700577793
+    },
+    {
+      "layer": "pooler",
+      "m": 256,
+      "prior_job": "6456b973b73a4a26",
+      "prior_effective_us": 29.75858156617466,
+      "new_effective_us": 40.38834469893988,
+      "prior_normalized_to_current_baseline_us": 29.913733811386628,
+      "normalized_latency_change_pct": 35.01605969217425
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 128,
+      "prior_job": "6456b973b73a4a26",
+      "prior_effective_us": 17.498664053986246,
+      "new_effective_us": 23.142214331426057,
+      "prior_normalized_to_current_baseline_us": 17.728693759857396,
+      "normalized_latency_change_pct": 30.53536061312283
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 256,
+      "prior_job": "6456b973b73a4a26",
+      "prior_effective_us": 19.872266171417504,
+      "new_effective_us": 35.431444393503945,
+      "prior_normalized_to_current_baseline_us": 20.160733946485575,
+      "normalized_latency_change_pct": 75.7448140903638
+    }
+  ],
+  "resources": [
+    {
+      "layer": "qkv_gate",
+      "m": 1,
+      "family": "gemv",
+      "kernel": "_gemv_full",
+      "registers": 34,
+      "spills": 0,
+      "shared_bytes": 32,
+      "num_warps": 8
+    },
+    {
+      "layer": "pooler",
+      "m": 7,
+      "family": "weight_major",
+      "kernel": "_weight_major_stream_gemm",
+      "registers": 40,
+      "spills": 0,
+      "shared_bytes": 61440,
+      "num_warps": 4
+    },
+    {
+      "layer": "pooler",
+      "m": 7,
+      "family": "reduce",
+      "kernel": "_reduce",
+      "registers": 24,
+      "spills": 0,
+      "shared_bytes": 2048,
+      "num_warps": 4
+    },
+    {
+      "layer": "unpooler",
+      "m": 5,
+      "family": "dot",
+      "kernel": "_gemm",
+      "registers": 40,
+      "spills": 0,
+      "shared_bytes": 20480,
+      "num_warps": 4
+    },
+    {
+      "layer": "unpooler",
+      "m": 5,
+      "family": "reduce",
+      "kernel": "_reduce",
+      "registers": 30,
+      "spills": 0,
+      "shared_bytes": 2048,
+      "num_warps": 4
+    },
+    {
+      "layer": "router",
+      "m": 8,
+      "family": "dot",
+      "kernel": "_gemm",
+      "registers": 64,
+      "spills": 0,
+      "shared_bytes": 36864,
+      "num_warps": 4
+    },
+    {
+      "layer": "router",
+      "m": 8,
+      "family": "reduce",
+      "kernel": "_reduce",
+      "registers": 56,
+      "spills": 0,
+      "shared_bytes": 2048,
+      "num_warps": 4
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 512,
+      "family": "hopper_ws",
+      "kernel": "_hopper_ws_gemm",
+      "registers": 96,
+      "spills": 0,
+      "shared_bytes": 73764,
+      "num_warps": 8
+    },
+    {
+      "layer": "o",
+      "m": 1,
+      "family": "gemv",
+      "kernel": "_gemv_full",
+      "registers": 32,
+      "spills": 0,
+      "shared_bytes": 64,
+      "num_warps": 4
+    },
+    {
+      "layer": "unpooler",
+      "m": 1,
+      "family": "gemv",
+      "kernel": "_gemv_full",
+      "registers": 32,
+      "spills": 0,
+      "shared_bytes": 32,
+      "num_warps": 8
+    },
+    {
+      "layer": "router",
+      "m": 1,
+      "family": "gemv",
+      "kernel": "_gemv_full",
+      "registers": 34,
+      "spills": 0,
+      "shared_bytes": 8192,
+      "num_warps": 8
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 16,
+      "family": "reduce",
+      "kernel": "_reduce",
+      "registers": 26,
+      "spills": 0,
+      "shared_bytes": 2048,
+      "num_warps": 4
+    },
+    {
+      "layer": "o",
+      "m": 16,
+      "family": "orientation",
+      "kernel": "_weight_major_gemm",
+      "registers": 40,
+      "spills": 0,
+      "shared_bytes": 81920,
+      "num_warps": 4
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 32,
+      "family": "weight_major",
+      "kernel": "_weight_major_stream_gemm",
+      "registers": 51,
+      "spills": 0,
+      "shared_bytes": 73728,
+      "num_warps": 4
+    },
+    {
+      "layer": "o",
+      "m": 32,
+      "family": "orientation",
+      "kernel": "_weight_major_gemm",
+      "registers": 48,
+      "spills": 0,
+      "shared_bytes": 98304,
+      "num_warps": 4
+    },
+    {
+      "layer": "pooler",
+      "m": 32,
+      "family": "weight_major",
+      "kernel": "_weight_major_stream_gemm",
+      "registers": 48,
+      "spills": 0,
+      "shared_bytes": 73728,
+      "num_warps": 4
+    },
+    {
+      "layer": "router",
+      "m": 32,
+      "family": "dot",
+      "kernel": "_gemm",
+      "registers": 96,
+      "spills": 0,
+      "shared_bytes": 40960,
+      "num_warps": 4
+    },
+    {
+      "layer": "qkv_gate",
+      "m": 128,
+      "family": "reduce",
+      "kernel": "_reduce",
+      "registers": 23,
+      "spills": 0,
+      "shared_bytes": 2048,
+      "num_warps": 4
+    },
+    {
+      "layer": "router",
+      "m": 128,
+      "family": "dot",
+      "kernel": "_gemm",
+      "registers": 96,
+      "spills": 0,
+      "shared_bytes": 73728,
+      "num_warps": 4
+    }
+  ],
+  "comparison": "Cross-run official paired ratios against same-run SGLang, matched predecessor settings.",
+  "same_config_round5_controls": {
+    "cases": [
+      {
+        "layer": "qkv_gate",
+        "m": 1,
+        "normalized_latency_change_pct": -0.6651998349172628
+      },
+      {
+        "layer": "o",
+        "m": 1,
+        "normalized_latency_change_pct": 0.20626863556201247
+      },
+      {
+        "layer": "pooler",
+        "m": 1,
+        "normalized_latency_change_pct": 0.8093867904958696
+      },
+      {
+        "layer": "unpooler",
+        "m": 1,
+        "normalized_latency_change_pct": 5.517444697723817
+      },
+      {
+        "layer": "router",
+        "m": 1,
+        "normalized_latency_change_pct": 3.060028590999231
+      },
+      {
+        "layer": "o",
+        "m": 16,
+        "normalized_latency_change_pct": -0.9461140194519602
+      },
+      {
+        "layer": "unpooler",
+        "m": 16,
+        "normalized_latency_change_pct": 1.3605680243234275
+      },
+      {
+        "layer": "o",
+        "m": 32,
+        "normalized_latency_change_pct": 3.5595112702808684
+      },
+      {
+        "layer": "unpooler",
+        "m": 32,
+        "normalized_latency_change_pct": 1.5660836297118674
+      },
+      {
+        "layer": "o",
+        "m": 8,
+        "normalized_latency_change_pct": -1.1167892731103968
+      },
+      {
+        "layer": "unpooler",
+        "m": 8,
+        "normalized_latency_change_pct": -4.3620906478283095
+      },
+      {
+        "layer": "o",
+        "m": 128,
+        "normalized_latency_change_pct": 4.7455607759999685
+      },
+      {
+        "layer": "unpooler",
+        "m": 128,
+        "normalized_latency_change_pct": -0.507997030439078
+      },
+      {
+        "layer": "router",
+        "m": 128,
+        "normalized_latency_change_pct": -1.1501575284459054
+      },
+      {
+        "layer": "o",
+        "m": 256,
+        "normalized_latency_change_pct": 0.526770902158602
+      },
+      {
+        "layer": "unpooler",
+        "m": 256,
+        "normalized_latency_change_pct": 0.4585810124678069
+      },
+      {
+        "layer": "router",
+        "m": 256,
+        "normalized_latency_change_pct": 2.1208999147988683
+      }
+    ],
+    "median_pct": 0.526770902158602,
+    "min_pct": -4.3620906478283095,
+    "max_pct": 5.517444697723817
+  },
+  "hypothetical_rollback_four_score_us": 3854.6416059577336,
+  "hypothetical_is_measured": false,
+  "local_candidate_matches_manifest": true,
+  "conclusions": [
+    "Reject all four replacements at these settings.",
+    "Producer/consumer protocol passed, including QKV512 outliers.",
+    "Recorded compiled resource variants have zero spills; spilling does not explain these losses.",
+    "QKV128 producer is 91% of profiled GPU time; reducer is not the dominant bottleneck.",
+    "Full MMA drain at each K tile is a concrete overlap limitation; its runtime contribution is not isolated.",
+    "Next investigate deeper WGMMA overlap and split-K scheduling separately, before expansion."
+  ]
+}

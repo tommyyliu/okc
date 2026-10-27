@@ -1,0 +1,202 @@
+{
+  "board": "muse_bf16_proj",
+  "call_id": "sfo3b:kc-2d1ffa9571c8437d",
+  "cluster": "sfo3b",
+  "content_hash": "93ad46f6bc663f0ce11515ebba30bd8ec77260b22d025f84af31946e4ed3d1cf",
+  "created_at": 1793029210.641741,
+  "dedicated": false,
+  "duplicate_of": null,
+  "finished_at": 1793029261.2991946,
+  "id": "2d1ffa9571c8437d",
+  "limits": {
+    "scored": {
+      "per_day": 10,
+      "used": 0,
+      "left": 10
+    },
+    "checks": {
+      "per_day": 20,
+      "used": 7,
+      "left": 13
+    }
+  },
+  "mode": "check",
+  "output": {
+    "log": "/home/tommy/PycharmProjects/okc-work/muse_bf16_proj/build/router-cluster/profiles/candidate.2d1ffa9571c8437d.log"
+  },
+  "payload_ref": "muse_bf16_proj/93ad46f6bc663f0ce11515ebba30bd8ec77260b22d025f84af31946e4ed3d1cf.py",
+  "result": {
+    "checks": {
+      "flagged": [],
+      "ok": true,
+      "rejected": []
+    },
+    "error": null,
+    "evaluator": {
+      "code_sha256": "986ed3ebb096eab83d16797609f4c0e7895248d6bce33252d25dd306cbe5d018",
+      "files": {
+        "challenge/checks.py": "9a046c3c38db28b325dcd1557baecdf6bc9ef941d2175f9a900ba4c230bb8055",
+        "challenge/nvfp4.py": "cfdf37c7bc14b10f7353aba7d4632f4767401b92b4b073941a8030d9a961aaaf",
+        "configs/muse-spark-open.yaml": "98f07230e4e64fe91b7c76d9a3ce04948053c043d494d5f1fae56cfe2de033af",
+        "harness/eval.py": "0051a1bfac67a9f1fad06086b306653c6643b2bb253e15a794aa672312f070a9",
+        "harness/runner.py": "c905e5c80264c6d27620b6fc7d55b162dccdb8ed7282f8a513a4d2e6f2f226f2",
+        "harness/static_checks.py": "c5588b69e9e86229459a525c61b30096f6f13ff2add6cadf98f272c4ac8ca0c2",
+        "harness/worker.py": "950437610f57ddffbc1176b65d9c2ae909c47bf67b1e3fe0716a81946986f568",
+        "problems/muse_bf16_proj/baseline.py": "39f52ea5b65505958aa9dee9c8129dd394cbba4e670046f862b5a88ce91a0574",
+        "problems/muse_bf16_proj/reference.py": "e62491abc9ddcad33f5faba8b0ee74cf6370b7be5dd2dc05031742f3ebf7147d",
+        "problems/muse_bf16_proj/task.yml": "18e9da6357144b0a1348434a18bd2d1938b1948d9f2130876f6b6706588470c9"
+      },
+      "image": "localhost:30500/kc/judge@sha256:9a7f287b80d772c6f636bbcb57422c619fe326e2aabc53803b85007bca93f68e"
+    },
+    "flags": [],
+    "gpu": "H200",
+    "log_tail": "OKC_RESOURCE {\"layer\": \"qkv_gate\", \"m\": 1, \"family\": \"gemv\", \"kernel\": \"_gemv_full\", \"registers\": 34, \"spills\": 0, \"shared_bytes\": 32, \"num_warps\": 8}\nOKC_RESOURCE {\"layer\": \"pooler\", \"m\": 7, \"family\": \"weight_major\", \"kernel\": \"_weight_major_stream_gemm\", \"registers\": 40, \"spills\": 0, \"shared_bytes\": 61440, \"num_warps\": 4}\nOKC_RESOURCE {\"layer\": \"pooler\", \"m\": 7, \"family\": \"reduce\", \"kernel\": \"_reduce\", \"registers\": 24, \"spills\": 0, \"shared_bytes\": 2048, \"num_warps\": 4}\nOKC_RESOURCE {\"layer\": \"unpooler\", \"m\": 5, \"family\": \"dot\", \"kernel\": \"_gemm\", \"registers\": 40, \"spills\": 0, \"shared_bytes\": 20480, \"num_warps\": 4}\nOKC_RESOURCE {\"layer\": \"unpooler\", \"m\": 5, \"family\": \"reduce\", \"kernel\": \"_reduce\", \"registers\": 30, \"spills\": 0, \"shared_bytes\": 2048, \"num_warps\": 4}\nTraceback (most recent call last):\n  File \"/tmp/muse_bf16_proj-bthtel41/run/worker.py\", line 484, in child_main\n    out = kernel()(state.get(\"data\"))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/muse_bf16_proj-bthtel41/run/worker.py\", line 415, in \u003clambda\u003e\n    return functools.partial(lambda k, p, d: k(d, p), fn, state[\"prep\"])\n                                             ^^^^^^^\n  File \"/tmp/muse_bf16_proj-bthtel41/run/submission.py\", line 998, in kernel_fn\n    return run_config(data, state, select_config(data[\"config\"]))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/muse_bf16_proj-bthtel41/run/submission.py\", line 919, in run_config\n    compiled = _router_cluster[(triton.cdiv(m, bm) * triton.cdiv(n, bn),)](\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 374, in \u003clambda\u003e\n    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 757, in run\n    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 902, in _do_compile\n    kernel = self.compile(src, target=target, options=options.__dict__)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 307, in compile\n    module = src.make_ir(target, options, codegen_fns, module_map, context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/experimental/gluon/_runtime.py\", line 40, in make_ir\n    module = ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntriton.compiler.errors.CompilationError: at 4:44:\ndef _router_cluster(X, WH, WL, Y, M: gl.constexpr, N: gl.constexpr,\n                    K: gl.constexpr, BM: gl.constexpr, BN: gl.constexpr,\n                    BK: gl.constexpr, C: gl.constexpr):\n    gl.static_assert(C == gl.num_ctas() and C in (2, 4, 8))\n                                            ^\nAttributeError(\"'In' object has no attribute '__name__'\")\nTraceback (most recent call last):\n  File \"/tmp/muse_bf16_proj-bthtel41/run/worker.py\", line 484, in child_main\n    out = kernel()(state.get(\"data\"))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/muse_bf16_proj-bthtel41/run/worker.py\", line 415, in \u003clambda\u003e\n    return functools.partial(lambda k, p, d: k(d, p), fn, state[\"prep\"])\n                                             ^^^^^^^\n  File \"/tmp/muse_bf16_proj-bthtel41/run/submission.py\", line 998, in kernel_fn\n    return run_config(data, state, select_config(data[\"config\"]))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/muse_bf16_proj-bthtel41/run/submission.py\", line 919, in run_config\n    compiled = _router_cluster[(triton.cdiv(m, bm) * triton.cdiv(n, bn),)](\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 374, in \u003clambda\u003e\n    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 757, in run\n    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 902, in _do_compile\n    kernel = self.compile(src, target=target, options=options.__dict__)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 307, in compile\n    module = src.make_ir(target, options, codegen_fns, module_map, context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/experimental/gluon/_runtime.py\", line 40, in make_ir\n    module = ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntriton.compiler.errors.CompilationError: at 4:44:\ndef _router_cluster(X, WH, WL, Y, M: gl.constexpr, N: gl.constexpr,\n                    K: gl.constexpr, BM: gl.constexpr, BN: gl.constexpr,\n                    BK: gl.constexpr, C: gl.constexpr):\n    gl.static_assert(C == gl.num_ctas() and C in (2, 4, 8))\n                                            ^\nAttributeError(\"'In' object has no attribute '__name__'\")\n",
+    "machine": {
+      "gpu_after": {
+        "clocks.max.sm": 1980,
+        "clocks.mem": 3201,
+        "clocks.sm": 1980,
+        "driver_version": "580.178.04",
+        "name": "NVIDIA H200",
+        "power.draw": 121.01,
+        "power.limit": 700,
+        "temperature.gpu": 33
+      },
+      "gpu_before": {
+        "clocks.max.sm": 1980,
+        "clocks.mem": 3201,
+        "clocks.sm": 1980,
+        "driver_version": "580.178.04",
+        "name": "NVIDIA H200",
+        "power.draw": 130.65,
+        "power.limit": 700,
+        "temperature.gpu": 33
+      },
+      "node": "n-mcawtvyff5ndtc5n7rfc5engrq"
+    },
+    "passed": false,
+    "records": [
+      {
+        "baseline_copies": 16,
+        "baseline_prepare_pad": 8399360,
+        "copies": 12,
+        "error": null,
+        "event": "setup",
+        "first": "baseline",
+        "prepare_pad": 30342656,
+        "prepare_s": 0.014366317,
+        "status": "pass"
+      },
+      {
+        "case": {
+          "layer": "qkv_gate",
+          "m": 1,
+          "seed": 6285095678788921591
+        },
+        "event": "test",
+        "index": 0,
+        "message": "relative L2 error 0.000e+00 (worst row 0.000e+00)",
+        "status": "pass"
+      },
+      {
+        "case": {
+          "layer": "pooler",
+          "m": 7,
+          "seed": 6285119816647913794
+        },
+        "event": "test",
+        "index": 1,
+        "message": "relative L2 error 8.997e-05 (worst row 1.321e-04); 1 probe rows exact to 0.0e+00",
+        "status": "pass"
+      },
+      {
+        "case": {
+          "layer": "o",
+          "m": 33,
+          "seed": 6285143954506905998
+        },
+        "event": "test",
+        "index": 2,
+        "message": "relative L2 error 4.418e-05 (worst row 1.929e-04); 7 probe rows exact to 0.0e+00",
+        "status": "pass"
+      },
+      {
+        "case": {
+          "layer": "unpooler",
+          "m": 130,
+          "seed": 6285168092365898203
+        },
+        "event": "test",
+        "index": 3,
+        "message": "relative L2 error 1.299e-04 (worst row 2.810e-04); 16 probe rows exact to 0.0e+00",
+        "status": "pass"
+      },
+      {
+        "case": {
+          "layer": "unpooler",
+          "m": 5,
+          "seed": 6285288781660859243
+        },
+        "event": "test",
+        "index": 4,
+        "message": "relative L2 error 6.579e-09 (worst row 1.444e-08)",
+        "status": "pass"
+      },
+      {
+        "case": {
+          "layer": "router",
+          "m": 8,
+          "seed": 6285192230224890409
+        },
+        "event": "test",
+        "index": 5,
+        "message": "CompilationError: at 4:44:\ndef _router_cluster(X, WH, WL, Y, M: gl.constexpr, N: gl.constexpr,\n                    K: gl.constexpr, BM: gl.constexpr, BN: gl.constexpr,\n                    BK: gl.constexpr, C: gl.constexpr):\n    gl.static_assert(C == gl.num_ctas() and C in (2, 4, 8))\n                                            ^\nAttributeError(\"'In' object has no attribute '__name__'\")",
+        "status": "fail"
+      },
+      {
+        "case": {
+          "dist": "outliers",
+          "layer": "router",
+          "m": 9,
+          "seed": 6285216368083882616
+        },
+        "event": "test",
+        "index": 6,
+        "message": "CompilationError: at 4:44:\ndef _router_cluster(X, WH, WL, Y, M: gl.constexpr, N: gl.constexpr,\n                    K: gl.constexpr, BM: gl.constexpr, BN: gl.constexpr,\n                    BK: gl.constexpr, C: gl.constexpr):\n    gl.static_assert(C == gl.num_ctas() and C in (2, 4, 8))\n                                            ^\nAttributeError(\"'In' object has no attribute '__name__'\")",
+        "status": "fail"
+      },
+      {
+        "case": {
+          "dist": "outliers",
+          "layer": "qkv_gate",
+          "m": 512,
+          "seed": 6285240505942874824
+        },
+        "event": "test",
+        "index": 7,
+        "message": "relative L2 error 2.225e-04 (worst row 5.996e-04); 69 probe rows exact to 0.0e+00",
+        "status": "pass"
+      },
+      {
+        "case": {
+          "dist": "outliers",
+          "layer": "unpooler",
+          "m": 1000,
+          "seed": 6285264643801867033
+        },
+        "event": "test",
+        "index": 8,
+        "message": "relative L2 error 1.495e-04 (worst row 3.228e-04); 141 probe rows exact to 0.0e+00",
+        "status": "pass"
+      }
+    ],
+    "returncode": 112,
+    "score_us": null,
+    "speedup": null,
+    "speedup_ci": null,
+    "status": "ok"
+  },
+  "started_at": 1793029227.5380783,
+  "status": "done",
+  "team": "tommyyliu"
+}

@@ -1,0 +1,4235 @@
+{
+  "date": "2026-10-26",
+  "comparison": "Cross-run ratios of official paired speedups against each run's SGLang. These are not paired candidate/control timings.",
+  "control_job": "6ddee3c328e34835",
+  "experiments": {
+    "router_cluster_fixed": {
+      "job": "5e18ccab93f940f7",
+      "source": "build/router-cluster/layout-fixed.py",
+      "sha256": "f243358e1466fe77939e340f28dbda79389402ce3f7f7850814ee13ba008678d",
+      "service_content_hash": "5c6a4363da708439293832536ef1eab8949a1fc9f5d1a9a23723144d579e6aa7",
+      "passed": true,
+      "score_us": 3980.0960239303745,
+      "speedup": 1.2137395607931964,
+      "speedup_ci": [
+        1.1955334673812985,
+        1.2319456542050944
+      ],
+      "rows": [
+        {
+          "layer": "qkv_gate",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 10.373158160439779,
+          "candidate_us": 10.676278723893883,
+          "control_paired_ratio": 1.36814645513978,
+          "candidate_paired_ratio": 1.3278035111217417,
+          "normalized_latency_change_pct": 3.0383218360340303
+        },
+        {
+          "layer": "o",
+          "m": 1,
+          "before": [
+            "gemv",
+            4,
+            4
+          ],
+          "after": [
+            "gemv",
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.22751417454124,
+          "candidate_us": 6.1266494327810275,
+          "control_paired_ratio": 1.1099131720823248,
+          "candidate_paired_ratio": 1.1360205913279744,
+          "normalized_latency_change_pct": -2.298146657282929
+        },
+        {
+          "layer": "pooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 17.120457614205986,
+          "candidate_us": 17.307088863479038,
+          "control_paired_ratio": 1.2438919637750119,
+          "candidate_paired_ratio": 1.2508169435784087,
+          "normalized_latency_change_pct": -0.5536365524107301
+        },
+        {
+          "layer": "unpooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 3.862217436854616,
+          "candidate_us": 3.8145034104674207,
+          "control_paired_ratio": 1.8145015034077197,
+          "candidate_paired_ratio": 1.8539764174597793,
+          "normalized_latency_change_pct": -2.129202598280411
+        },
+        {
+          "layer": "router",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 4.648857683908461,
+          "candidate_us": 4.630217803916703,
+          "control_paired_ratio": 2.2026915938426206,
+          "candidate_paired_ratio": 2.239203371862299,
+          "normalized_latency_change_pct": -1.6305699820964636
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 11.942769933553523,
+          "candidate_us": 12.560114906535421,
+          "control_paired_ratio": 1.1668983904923071,
+          "candidate_paired_ratio": 1.1235566281556422,
+          "normalized_latency_change_pct": 3.857550322836145
+        },
+        {
+          "layer": "o",
+          "m": 16,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.181914834029296,
+          "candidate_us": 6.038304139127047,
+          "control_paired_ratio": 1.1129237384696582,
+          "candidate_paired_ratio": 1.147342030785183,
+          "normalized_latency_change_pct": -2.999828420124262
+        },
+        {
+          "layer": "pooler",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 19.082651763131114,
+          "candidate_us": 18.984463239284384,
+          "control_paired_ratio": 1.1218566874781208,
+          "candidate_paired_ratio": 1.1369296935468207,
+          "normalized_latency_change_pct": -1.325764130733309
+        },
+        {
+          "layer": "unpooler",
+          "m": 16,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 17.7910936977284,
+          "candidate_us": 18.34649230364373,
+          "control_paired_ratio": 1.0270307534433503,
+          "candidate_paired_ratio": 1.0308237565501714,
+          "normalized_latency_change_pct": -0.36795844902868247
+        },
+        {
+          "layer": "router",
+          "m": 16,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "router_cluster",
+            16,
+            16,
+            256,
+            8,
+            4,
+            1
+          ],
+          "changed": true,
+          "control_us": 6.589571748624059,
+          "candidate_us": 10.131522762987354,
+          "control_paired_ratio": 2.258113311447633,
+          "candidate_paired_ratio": 1.4592080804129077,
+          "normalized_latency_change_pct": 54.749232940696245
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 13.307749044040152,
+          "candidate_us": 12.753628051986171,
+          "control_paired_ratio": 1.0844809252521825,
+          "candidate_paired_ratio": 1.1140359873323864,
+          "normalized_latency_change_pct": -2.652971934145043
+        },
+        {
+          "layer": "o",
+          "m": 32,
+          "before": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.286138314178914,
+          "candidate_us": 6.337178458629714,
+          "control_paired_ratio": 1.0868357530002761,
+          "candidate_paired_ratio": 1.095755905614702,
+          "normalized_latency_change_pct": -0.8140638411090029
+        },
+        {
+          "layer": "pooler",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 19.611535467396934,
+          "candidate_us": 19.791253387646528,
+          "control_paired_ratio": 1.1283155480901086,
+          "candidate_paired_ratio": 1.1237287439898682,
+          "normalized_latency_change_pct": 0.4081771623954955
+        },
+        {
+          "layer": "unpooler",
+          "m": 32,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 18.443382713030086,
+          "candidate_us": 17.96066299191369,
+          "control_paired_ratio": 1.0254084302333366,
+          "candidate_paired_ratio": 1.0369327824745747,
+          "normalized_latency_change_pct": -1.1113885524706713
+        },
+        {
+          "layer": "router",
+          "m": 32,
+          "before": [
+            "dot",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "router_cluster",
+            32,
+            16,
+            256,
+            8,
+            4,
+            1
+          ],
+          "changed": true,
+          "control_us": 6.665214906751399,
+          "candidate_us": 12.106164065086439,
+          "control_paired_ratio": 2.287698131837867,
+          "candidate_paired_ratio": 1.2423423215185232,
+          "normalized_latency_change_pct": 84.14394263262308
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 12.43023284769135,
+          "candidate_us": 12.249223159759724,
+          "control_paired_ratio": 1.1739121002606412,
+          "candidate_paired_ratio": 1.149460657735846,
+          "normalized_latency_change_pct": 2.1272100406601657
+        },
+        {
+          "layer": "o",
+          "m": 8,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.09373023114251,
+          "candidate_us": 6.042959240320712,
+          "control_paired_ratio": 1.1080239857826997,
+          "candidate_paired_ratio": 1.1332197767638024,
+          "normalized_latency_change_pct": -2.22338080377098
+        },
+        {
+          "layer": "pooler",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 18.894631100414994,
+          "candidate_us": 18.963267166491118,
+          "control_paired_ratio": 1.136407452017251,
+          "candidate_paired_ratio": 1.1289194405684961,
+          "normalized_latency_change_pct": 0.6632901498254018
+        },
+        {
+          "layer": "unpooler",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 5.997727083375838,
+          "candidate_us": 5.930041424901573,
+          "control_paired_ratio": 1.1631073575048068,
+          "candidate_paired_ratio": 1.2033642504904623,
+          "normalized_latency_change_pct": -3.345362218401271
+        },
+        {
+          "layer": "router",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "router_cluster",
+            16,
+            16,
+            256,
+            8,
+            4,
+            1
+          ],
+          "changed": true,
+          "control_us": 6.29339521471941,
+          "candidate_us": 11.799496162894648,
+          "control_paired_ratio": 4.179619928486062,
+          "candidate_paired_ratio": 2.242807696582663,
+          "normalized_latency_change_pct": 86.35658932571413
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 16.860612564189047,
+          "candidate_us": 17.046147859885117,
+          "control_paired_ratio": 1.005894633033187,
+          "candidate_paired_ratio": 0.9977620863826058,
+          "normalized_latency_change_pct": 0.8150787408715665
+        },
+        {
+          "layer": "o",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 7.199641966135872,
+          "candidate_us": 7.696232921588921,
+          "control_paired_ratio": 1.017828315416172,
+          "candidate_paired_ratio": 0.9937328612897711,
+          "normalized_latency_change_pct": 2.424741604612657
+        },
+        {
+          "layer": "pooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 22.558794586841366,
+          "candidate_us": 23.02871367490008,
+          "control_paired_ratio": 1.107151363679236,
+          "candidate_paired_ratio": 1.138752307893213,
+          "normalized_latency_change_pct": -2.775049850168143
+        },
+        {
+          "layer": "unpooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 19.05373799115159,
+          "candidate_us": 18.82071024478831,
+          "control_paired_ratio": 1.0463038315576563,
+          "candidate_paired_ratio": 1.062659203070579,
+          "normalized_latency_change_pct": -1.5390984678496644
+        },
+        {
+          "layer": "router",
+          "m": 128,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 8.43699964754407,
+          "candidate_us": 8.217155495454255,
+          "control_paired_ratio": 1.962783105281164,
+          "candidate_paired_ratio": 1.9705115599422398,
+          "normalized_latency_change_pct": -0.39220549720105913
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 19.734215566350496,
+          "candidate_us": 20.08779371210812,
+          "control_paired_ratio": 1.0004958307686054,
+          "candidate_paired_ratio": 0.9812923960262802,
+          "normalized_latency_change_pct": 1.9569533831189423
+        },
+        {
+          "layer": "o",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 9.679960376024146,
+          "candidate_us": 9.422473146704172,
+          "control_paired_ratio": 1.001657019140275,
+          "candidate_paired_ratio": 0.9933698239741069,
+          "normalized_latency_change_pct": 0.8342507459119242
+        },
+        {
+          "layer": "pooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 30.27751127551607,
+          "candidate_us": 29.142364673228798,
+          "control_paired_ratio": 1.0193704662593603,
+          "candidate_paired_ratio": 1.025036936857743,
+          "normalized_latency_change_pct": -0.552806478930723
+        },
+        {
+          "layer": "unpooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 24.33004352864194,
+          "candidate_us": 24.03909064069311,
+          "control_paired_ratio": 1.0147125423779122,
+          "candidate_paired_ratio": 1.0156790432391247,
+          "normalized_latency_change_pct": -0.09515809818525511
+        },
+        {
+          "layer": "router",
+          "m": 256,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 10.264400114143337,
+          "candidate_us": 10.11828415873031,
+          "control_paired_ratio": 1.730252133016268,
+          "candidate_paired_ratio": 1.7457505293580744,
+          "normalized_latency_change_pct": -0.8877784128471844
+        }
+      ],
+      "unchanged_median_pct": -0.5536365524107301,
+      "unchanged_range_pct": [
+        -3.345362218401271,
+        3.857550322836145
+      ]
+    },
+    "router_cluster_bk64": {
+      "job": "e40c0396e29b49a0",
+      "source": "build/router-cluster/bk64.py",
+      "sha256": "2728743b446bef060d692a90f56cb93a81c24792e98a7a0df715d5cad1ed7c2b",
+      "service_content_hash": "048141ae27de5974e301397127804ad5019f4999f43e7cc912ed2902d3f0dad4",
+      "passed": true,
+      "score_us": 4187.908349383078,
+      "speedup": 1.1535113944677484,
+      "speedup_ci": [
+        1.136208723550732,
+        1.1708140653847645
+      ],
+      "rows": [
+        {
+          "layer": "qkv_gate",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 10.373158160439779,
+          "candidate_us": 10.637222597561998,
+          "control_paired_ratio": 1.36814645513978,
+          "candidate_paired_ratio": 1.3266620391629473,
+          "normalized_latency_change_pct": 3.1269769355130705
+        },
+        {
+          "layer": "o",
+          "m": 1,
+          "before": [
+            "gemv",
+            4,
+            4
+          ],
+          "after": [
+            "gemv",
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.22751417454124,
+          "candidate_us": 6.115826992476247,
+          "control_paired_ratio": 1.1099131720823248,
+          "candidate_paired_ratio": 1.1249500315252159,
+          "normalized_latency_change_pct": -1.3366690983157792
+        },
+        {
+          "layer": "pooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 17.120457614205986,
+          "candidate_us": 17.43554141337765,
+          "control_paired_ratio": 1.2438919637750119,
+          "candidate_paired_ratio": 1.2471077790438385,
+          "normalized_latency_change_pct": -0.2578618562777524
+        },
+        {
+          "layer": "unpooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 3.862217436854616,
+          "candidate_us": 3.9432551114059615,
+          "control_paired_ratio": 1.8145015034077197,
+          "candidate_paired_ratio": 1.7690969267501948,
+          "normalized_latency_change_pct": 2.566539796150824
+        },
+        {
+          "layer": "router",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 4.648857683908461,
+          "candidate_us": 4.904380633515843,
+          "control_paired_ratio": 2.2026915938426206,
+          "candidate_paired_ratio": 2.1009789000118255,
+          "normalized_latency_change_pct": 4.841204917870545
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 11.942769933553523,
+          "candidate_us": 12.807162741779017,
+          "control_paired_ratio": 1.1668983904923071,
+          "candidate_paired_ratio": 1.128118726172247,
+          "normalized_latency_change_pct": 3.437551688521401
+        },
+        {
+          "layer": "o",
+          "m": 16,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.181914834029296,
+          "candidate_us": 6.391315614136453,
+          "control_paired_ratio": 1.1129237384696582,
+          "candidate_paired_ratio": 1.0714538920343508,
+          "normalized_latency_change_pct": 3.870427532496934
+        },
+        {
+          "layer": "pooler",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 19.082651763131114,
+          "candidate_us": 19.40378958713287,
+          "control_paired_ratio": 1.1218566874781208,
+          "candidate_paired_ratio": 1.1214303725012802,
+          "normalized_latency_change_pct": 0.038015287198778225
+        },
+        {
+          "layer": "unpooler",
+          "m": 16,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 17.7910936977284,
+          "candidate_us": 18.41432203880544,
+          "control_paired_ratio": 1.0270307534433503,
+          "candidate_paired_ratio": 1.0218133875524398,
+          "normalized_latency_change_pct": 0.5105987017265168
+        },
+        {
+          "layer": "router",
+          "m": 16,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "router_cluster",
+            16,
+            16,
+            64,
+            8,
+            4,
+            1
+          ],
+          "changed": true,
+          "control_us": 6.589571748624059,
+          "candidate_us": 17.185983127176726,
+          "control_paired_ratio": 2.258113311447633,
+          "candidate_paired_ratio": 0.8742008066663981,
+          "normalized_latency_change_pct": 158.30602010749993
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 13.307749044040152,
+          "candidate_us": 13.61113640663114,
+          "control_paired_ratio": 1.0844809252521825,
+          "candidate_paired_ratio": 1.072063334564179,
+          "normalized_latency_change_pct": 1.15828890772125
+        },
+        {
+          "layer": "o",
+          "m": 32,
+          "before": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.286138314178914,
+          "candidate_us": 6.302132746072729,
+          "control_paired_ratio": 1.0868357530002761,
+          "candidate_paired_ratio": 1.0764609762540602,
+          "normalized_latency_change_pct": 0.9637856805844169
+        },
+        {
+          "layer": "pooler",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 19.611535467396934,
+          "candidate_us": 19.618822698260775,
+          "control_paired_ratio": 1.1283155480901086,
+          "candidate_paired_ratio": 1.119740974012391,
+          "normalized_latency_change_pct": 0.765764071934627
+        },
+        {
+          "layer": "unpooler",
+          "m": 32,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 18.443382713030086,
+          "candidate_us": 18.543386118293043,
+          "control_paired_ratio": 1.0254084302333366,
+          "candidate_paired_ratio": 1.0181528416029584,
+          "normalized_latency_change_pct": 0.7126227353994485
+        },
+        {
+          "layer": "router",
+          "m": 32,
+          "before": [
+            "dot",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "router_cluster",
+            32,
+            16,
+            64,
+            8,
+            4,
+            1
+          ],
+          "changed": true,
+          "control_us": 6.665214906751399,
+          "candidate_us": 19.428410826652755,
+          "control_paired_ratio": 2.287698131837867,
+          "candidate_paired_ratio": 0.8037713825023078,
+          "normalized_latency_change_pct": 184.62050051045432
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 12.43023284769135,
+          "candidate_us": 12.205967584072656,
+          "control_paired_ratio": 1.1739121002606412,
+          "candidate_paired_ratio": 1.1863049226324593,
+          "normalized_latency_change_pct": -1.0446574177841228
+        },
+        {
+          "layer": "o",
+          "m": 8,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.09373023114251,
+          "candidate_us": 6.173277265541557,
+          "control_paired_ratio": 1.1080239857826997,
+          "candidate_paired_ratio": 1.1248482704765288,
+          "normalized_latency_change_pct": -1.4956936980221935
+        },
+        {
+          "layer": "pooler",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 18.894631100414994,
+          "candidate_us": 18.853987002375792,
+          "control_paired_ratio": 1.136407452017251,
+          "candidate_paired_ratio": 1.1473435972392942,
+          "normalized_latency_change_pct": -0.9531708939116035
+        },
+        {
+          "layer": "unpooler",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 5.997727083375838,
+          "candidate_us": 6.003812062660705,
+          "control_paired_ratio": 1.1631073575048068,
+          "candidate_paired_ratio": 1.1832483209283846,
+          "normalized_latency_change_pct": -1.7021755338537115
+        },
+        {
+          "layer": "router",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "router_cluster",
+            16,
+            16,
+            64,
+            8,
+            4,
+            1
+          ],
+          "changed": true,
+          "control_us": 6.29339521471941,
+          "candidate_us": 16.367776916930755,
+          "control_paired_ratio": 4.179619928486062,
+          "candidate_paired_ratio": 1.591419594373476,
+          "normalized_latency_change_pct": 162.6346906411902
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 16.860612564189047,
+          "candidate_us": 17.032876024679386,
+          "control_paired_ratio": 1.005894633033187,
+          "candidate_paired_ratio": 1.0173267901446814,
+          "normalized_latency_change_pct": -1.123744820468997
+        },
+        {
+          "layer": "o",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 7.199641966135872,
+          "candidate_us": 7.3434115031421925,
+          "control_paired_ratio": 1.017828315416172,
+          "candidate_paired_ratio": 1.0109742837925315,
+          "normalized_latency_change_pct": 0.6779630039577711
+        },
+        {
+          "layer": "pooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 22.558794586841366,
+          "candidate_us": 23.228621692276224,
+          "control_paired_ratio": 1.107151363679236,
+          "candidate_paired_ratio": 1.0945117513613127,
+          "normalized_latency_change_pct": 1.1548174153637625
+        },
+        {
+          "layer": "unpooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 19.05373799115159,
+          "candidate_us": 19.20248358838428,
+          "control_paired_ratio": 1.0463038315576563,
+          "candidate_paired_ratio": 1.051530627537071,
+          "normalized_latency_change_pct": -0.4970655007602742
+        },
+        {
+          "layer": "router",
+          "m": 128,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 8.43699964754407,
+          "candidate_us": 8.472664507681376,
+          "control_paired_ratio": 1.962783105281164,
+          "candidate_paired_ratio": 1.967739767916516,
+          "normalized_latency_change_pct": -0.2518962474697739
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 19.734215566350496,
+          "candidate_us": 19.62447000969705,
+          "control_paired_ratio": 1.0004958307686054,
+          "candidate_paired_ratio": 0.9995684372754237,
+          "normalized_latency_change_pct": 0.09277938944427522
+        },
+        {
+          "layer": "o",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 9.679960376024146,
+          "candidate_us": 8.879952075494188,
+          "control_paired_ratio": 1.001657019140275,
+          "candidate_paired_ratio": 1.019825380548435,
+          "normalized_latency_change_pct": -1.7815168905082168
+        },
+        {
+          "layer": "pooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 30.27751127551607,
+          "candidate_us": 29.98309175128443,
+          "control_paired_ratio": 1.0193704662593603,
+          "candidate_paired_ratio": 1.0304474541980755,
+          "normalized_latency_change_pct": -1.0749687326206847
+        },
+        {
+          "layer": "unpooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 24.33004352864194,
+          "candidate_us": 24.481608651120645,
+          "control_paired_ratio": 1.0147125423779122,
+          "candidate_paired_ratio": 1.013005376049975,
+          "normalized_latency_change_pct": 0.1685249030556779
+        },
+        {
+          "layer": "router",
+          "m": 256,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 10.264400114143337,
+          "candidate_us": 9.757767631263338,
+          "control_paired_ratio": 1.730252133016268,
+          "candidate_paired_ratio": 1.7872940078793667,
+          "normalized_latency_change_pct": -3.1915216305558602
+        }
+      ],
+      "unchanged_median_pct": 0.09277938944427522,
+      "unchanged_range_pct": [
+        -3.1915216305558602,
+        4.841204917870545
+      ]
+    },
+    "small_tma": {
+      "job": "0f311fd4ab4342af",
+      "source": "build/agent-round7/small-tma.py",
+      "sha256": "f724f29975d1c30cdcb8dd12c7a568b4f943dff6ec1a4c2e69437704273133d5",
+      "service_content_hash": "5cac979d015f6cbe83542fb3d168f8a5cece99405d06022ad67b519ad6e101a2",
+      "passed": true,
+      "score_us": 3824.0237788550226,
+      "speedup": 1.2632766633701278,
+      "speedup_ci": [
+        1.244327513419576,
+        1.2822258133206796
+      ],
+      "rows": [
+        {
+          "layer": "qkv_gate",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 10.373158160439779,
+          "candidate_us": 10.556244489928236,
+          "control_paired_ratio": 1.36814645513978,
+          "candidate_paired_ratio": 1.3277448405400651,
+          "normalized_latency_change_pct": 3.0428749083507123
+        },
+        {
+          "layer": "o",
+          "m": 1,
+          "before": [
+            "gemv",
+            4,
+            4
+          ],
+          "after": [
+            "gemv",
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.22751417454124,
+          "candidate_us": 6.149874297490254,
+          "control_paired_ratio": 1.1099131720823248,
+          "candidate_paired_ratio": 1.1005103494410489,
+          "normalized_latency_change_pct": 0.8544056533454247
+        },
+        {
+          "layer": "pooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 17.120457614205986,
+          "candidate_us": 17.26318925747569,
+          "control_paired_ratio": 1.2438919637750119,
+          "candidate_paired_ratio": 1.2391684211655967,
+          "normalized_latency_change_pct": 0.38118648996656734
+        },
+        {
+          "layer": "unpooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 3.862217436854616,
+          "candidate_us": 4.085688800917716,
+          "control_paired_ratio": 1.8145015034077197,
+          "candidate_paired_ratio": 1.715255408034841,
+          "normalized_latency_change_pct": 5.786082638654055
+        },
+        {
+          "layer": "router",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 4.648857683908461,
+          "candidate_us": 4.952768826155665,
+          "control_paired_ratio": 2.2026915938426206,
+          "candidate_paired_ratio": 2.099835545198397,
+          "normalized_latency_change_pct": 4.898290672306205
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 11.942769933553523,
+          "candidate_us": 11.99560506555845,
+          "control_paired_ratio": 1.1668983904923071,
+          "candidate_paired_ratio": 1.1390839055599988,
+          "normalized_latency_change_pct": 2.441829332900114
+        },
+        {
+          "layer": "o",
+          "m": 16,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.181914834029296,
+          "candidate_us": 6.10403499845418,
+          "control_paired_ratio": 1.1129237384696582,
+          "candidate_paired_ratio": 1.0904261625321399,
+          "normalized_latency_change_pct": 2.0631911366905786
+        },
+        {
+          "layer": "pooler",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 19.082651763131114,
+          "candidate_us": 19.114327950289628,
+          "control_paired_ratio": 1.1218566874781208,
+          "candidate_paired_ratio": 1.1225087754369814,
+          "normalized_latency_change_pct": -0.058092014345867415
+        },
+        {
+          "layer": "unpooler",
+          "m": 16,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 17.7910936977284,
+          "candidate_us": 18.401265774849374,
+          "control_paired_ratio": 1.0270307534433503,
+          "candidate_paired_ratio": 1.0260163677491145,
+          "normalized_latency_change_pct": 0.09886642417422653
+        },
+        {
+          "layer": "router",
+          "m": 16,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 6.589571748624059,
+          "candidate_us": 6.0054757176059805,
+          "control_paired_ratio": 2.258113311447633,
+          "candidate_paired_ratio": 2.4724103581730956,
+          "normalized_latency_change_pct": -8.667535549552152
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 13.307749044040152,
+          "candidate_us": 12.509178535601961,
+          "control_paired_ratio": 1.0844809252521825,
+          "candidate_paired_ratio": 1.1268526644660857,
+          "normalized_latency_change_pct": -3.7601844988296995
+        },
+        {
+          "layer": "o",
+          "m": 32,
+          "before": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.286138314178914,
+          "candidate_us": 6.529172544574266,
+          "control_paired_ratio": 1.0868357530002761,
+          "candidate_paired_ratio": 1.0880398032816119,
+          "normalized_latency_change_pct": -0.11066233769244649
+        },
+        {
+          "layer": "pooler",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 19.611535467396934,
+          "candidate_us": 19.284544933711846,
+          "control_paired_ratio": 1.1283155480901086,
+          "candidate_paired_ratio": 1.1424692778692305,
+          "normalized_latency_change_pct": -1.238871806296571
+        },
+        {
+          "layer": "unpooler",
+          "m": 32,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 18.443382713030086,
+          "candidate_us": 18.208901623355505,
+          "control_paired_ratio": 1.0254084302333366,
+          "candidate_paired_ratio": 1.0245538371939311,
+          "normalized_latency_change_pct": 0.08341123798296657
+        },
+        {
+          "layer": "router",
+          "m": 32,
+          "before": [
+            "dot",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 6.665214906751399,
+          "candidate_us": 5.918336698544153,
+          "control_paired_ratio": 2.287698131837867,
+          "candidate_paired_ratio": 2.5088128184113985,
+          "normalized_latency_change_pct": -8.813518687039512
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 12.43023284769135,
+          "candidate_us": 12.1219744578823,
+          "control_paired_ratio": 1.1739121002606412,
+          "candidate_paired_ratio": 1.1641667346638789,
+          "normalized_latency_change_pct": 0.8371108112426917
+        },
+        {
+          "layer": "o",
+          "m": 8,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.09373023114251,
+          "candidate_us": 6.509880190366283,
+          "control_paired_ratio": 1.1080239857826997,
+          "candidate_paired_ratio": 1.0716019080723647,
+          "normalized_latency_change_pct": 3.3988440516919516
+        },
+        {
+          "layer": "pooler",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 18.894631100414994,
+          "candidate_us": 18.872379107896606,
+          "control_paired_ratio": 1.136407452017251,
+          "candidate_paired_ratio": 1.139443001436732,
+          "normalized_latency_change_pct": -0.26640642977784346
+        },
+        {
+          "layer": "unpooler",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 5.997727083375838,
+          "candidate_us": 5.904168707618641,
+          "control_paired_ratio": 1.1631073575048068,
+          "candidate_paired_ratio": 1.159858532973687,
+          "normalized_latency_change_pct": 0.28010524031669704
+        },
+        {
+          "layer": "router",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 6.29339521471941,
+          "candidate_us": 5.928107185377269,
+          "control_paired_ratio": 4.179619928486062,
+          "candidate_paired_ratio": 4.415574684363881,
+          "normalized_latency_change_pct": -5.343693012675443
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 16.860612564189047,
+          "candidate_us": 17.290721400707053,
+          "control_paired_ratio": 1.005894633033187,
+          "candidate_paired_ratio": 1.003081329924047,
+          "normalized_latency_change_pct": 0.2804661023202426
+        },
+        {
+          "layer": "o",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 7.199641966135872,
+          "candidate_us": 7.399798850990381,
+          "control_paired_ratio": 1.017828315416172,
+          "candidate_paired_ratio": 0.992459415366665,
+          "normalized_latency_change_pct": 2.5561649833443667
+        },
+        {
+          "layer": "pooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 22.558794586841366,
+          "candidate_us": 22.8593686130737,
+          "control_paired_ratio": 1.107151363679236,
+          "candidate_paired_ratio": 1.0862942008272944,
+          "normalized_latency_change_pct": 1.9200289236614987
+        },
+        {
+          "layer": "unpooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 19.05373799115159,
+          "candidate_us": 19.07146519778361,
+          "control_paired_ratio": 1.0463038315576563,
+          "candidate_paired_ratio": 1.0621102764733084,
+          "normalized_latency_change_pct": -1.4882112776591017
+        },
+        {
+          "layer": "router",
+          "m": 128,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 8.43699964754407,
+          "candidate_us": 8.508660443853788,
+          "control_paired_ratio": 1.962783105281164,
+          "candidate_paired_ratio": 1.9406109393204276,
+          "normalized_latency_change_pct": 1.1425353486103962
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 19.734215566350496,
+          "candidate_us": 19.41516776309146,
+          "control_paired_ratio": 1.0004958307686054,
+          "candidate_paired_ratio": 1.0086958994944002,
+          "normalized_latency_change_pct": -0.8129376484929729
+        },
+        {
+          "layer": "o",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 9.679960376024146,
+          "candidate_us": 9.226114003323357,
+          "control_paired_ratio": 1.001657019140275,
+          "candidate_paired_ratio": 1.0266510844728063,
+          "normalized_latency_change_pct": -2.434523832930635
+        },
+        {
+          "layer": "pooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 30.27751127551607,
+          "candidate_us": 29.74297202429606,
+          "control_paired_ratio": 1.0193704662593603,
+          "candidate_paired_ratio": 1.0452216815023931,
+          "normalized_latency_change_pct": -2.4732758323453896
+        },
+        {
+          "layer": "unpooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 24.33004352864194,
+          "candidate_us": 23.903090114706824,
+          "control_paired_ratio": 1.0147125423779122,
+          "candidate_paired_ratio": 1.021457875688332,
+          "normalized_latency_change_pct": -0.6603633366549011
+        },
+        {
+          "layer": "router",
+          "m": 256,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 10.264400114143337,
+          "candidate_us": 10.120291177179974,
+          "control_paired_ratio": 1.730252133016268,
+          "candidate_paired_ratio": 1.7517282494736546,
+          "normalized_latency_change_pct": -1.2259958965575635
+        }
+      ],
+      "unchanged_median_pct": 0.2804661023202426,
+      "unchanged_range_pct": [
+        -2.4732758323453896,
+        5.786082638654055
+      ]
+    },
+    "hopper_overlap": {
+      "job": "c02532ce190544f5",
+      "source": "build/agent-round7/hopper-overlap.py",
+      "sha256": "1f876b5052e32846eee49808330d90efe4ab3088538037fbbe471c7d83145f26",
+      "service_content_hash": "54c033e9105ad3d9b3e86f5d409f79e5adb38924eb72e58af9e308a0afc1af74",
+      "passed": true,
+      "score_us": 4582.376962100434,
+      "speedup": 1.0542127022622112,
+      "speedup_ci": [
+        1.038399511728278,
+        1.0700258927961444
+      ],
+      "rows": [
+        {
+          "layer": "qkv_gate",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 10.373158160439779,
+          "candidate_us": 10.750705802819127,
+          "control_paired_ratio": 1.36814645513978,
+          "candidate_paired_ratio": 1.342423489304307,
+          "normalized_latency_change_pct": 1.9161588008865582
+        },
+        {
+          "layer": "o",
+          "m": 1,
+          "before": [
+            "gemv",
+            4,
+            4
+          ],
+          "after": [
+            "gemv",
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.22751417454124,
+          "candidate_us": 6.200791069595908,
+          "control_paired_ratio": 1.1099131720823248,
+          "candidate_paired_ratio": 1.1430800265526244,
+          "normalized_latency_change_pct": -2.901533899627873
+        },
+        {
+          "layer": "pooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 17.120457614205986,
+          "candidate_us": 17.416422084179768,
+          "control_paired_ratio": 1.2438919637750119,
+          "candidate_paired_ratio": 1.2365341152657492,
+          "normalized_latency_change_pct": 0.5950380517953935
+        },
+        {
+          "layer": "unpooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 3.862217436854616,
+          "candidate_us": 3.7774753471583953,
+          "control_paired_ratio": 1.8145015034077197,
+          "candidate_paired_ratio": 1.8128508845137898,
+          "normalized_latency_change_pct": 0.09105100193458338
+        },
+        {
+          "layer": "router",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 4.648857683908461,
+          "candidate_us": 5.002526006764419,
+          "control_paired_ratio": 2.2026915938426206,
+          "candidate_paired_ratio": 2.117330340509687,
+          "normalized_latency_change_pct": 4.031551038577441
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 11.942769933553523,
+          "candidate_us": 12.544657908547997,
+          "control_paired_ratio": 1.1668983904923071,
+          "candidate_paired_ratio": 1.1147374772789147,
+          "normalized_latency_change_pct": 4.679210511583198
+        },
+        {
+          "layer": "o",
+          "m": 16,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.181914834029296,
+          "candidate_us": 6.327456118092433,
+          "control_paired_ratio": 1.1129237384696582,
+          "candidate_paired_ratio": 1.1075542227160962,
+          "normalized_latency_change_pct": 0.48480838621103306
+        },
+        {
+          "layer": "pooler",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 19.082651763131114,
+          "candidate_us": 19.23468688502505,
+          "control_paired_ratio": 1.1218566874781208,
+          "candidate_paired_ratio": 1.1229712354422994,
+          "normalized_latency_change_pct": -0.09924991210834566
+        },
+        {
+          "layer": "unpooler",
+          "m": 16,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 17.7910936977284,
+          "candidate_us": 18.102896843832497,
+          "control_paired_ratio": 1.0270307534433503,
+          "candidate_paired_ratio": 1.0217149425044665,
+          "normalized_latency_change_pct": 0.5202831746645042
+        },
+        {
+          "layer": "router",
+          "m": 16,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 6.589571748624059,
+          "candidate_us": 6.068182723848309,
+          "control_paired_ratio": 2.258113311447633,
+          "candidate_paired_ratio": 2.457407783998449,
+          "normalized_latency_change_pct": -8.109947150348173
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 13.307749044040152,
+          "candidate_us": 13.281300681314109,
+          "control_paired_ratio": 1.0844809252521825,
+          "candidate_paired_ratio": 1.0697747528066164,
+          "normalized_latency_change_pct": 1.3746980293733557
+        },
+        {
+          "layer": "o",
+          "m": 32,
+          "before": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.286138314178914,
+          "candidate_us": 6.418997496976725,
+          "control_paired_ratio": 1.0868357530002761,
+          "candidate_paired_ratio": 1.0768037346282608,
+          "normalized_latency_change_pct": 0.93164780631807
+        },
+        {
+          "layer": "pooler",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 19.611535467396934,
+          "candidate_us": 19.66932113818321,
+          "control_paired_ratio": 1.1283155480901086,
+          "candidate_paired_ratio": 1.1225603264855262,
+          "normalized_latency_change_pct": 0.5126870662355065
+        },
+        {
+          "layer": "unpooler",
+          "m": 32,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 18.443382713030086,
+          "candidate_us": 18.455886673370614,
+          "control_paired_ratio": 1.0254084302333366,
+          "candidate_paired_ratio": 1.0195121038416293,
+          "normalized_latency_change_pct": 0.5783478557527033
+        },
+        {
+          "layer": "router",
+          "m": 32,
+          "before": [
+            "dot",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 6.665214906751399,
+          "candidate_us": 6.347041071963481,
+          "control_paired_ratio": 2.287698131837867,
+          "candidate_paired_ratio": 2.420025389648954,
+          "normalized_latency_change_pct": -5.468011136456797
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 12.43023284769135,
+          "candidate_us": 12.324076352383594,
+          "control_paired_ratio": 1.1739121002606412,
+          "candidate_paired_ratio": 1.148970506883469,
+          "normalized_latency_change_pct": 2.170777511498101
+        },
+        {
+          "layer": "o",
+          "m": 8,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.09373023114251,
+          "candidate_us": 6.1238087406677115,
+          "control_paired_ratio": 1.1080239857826997,
+          "candidate_paired_ratio": 1.092130728802093,
+          "normalized_latency_change_pct": 1.4552522478732177
+        },
+        {
+          "layer": "pooler",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 18.894631100414994,
+          "candidate_us": 18.61890231844382,
+          "control_paired_ratio": 1.136407452017251,
+          "candidate_paired_ratio": 1.1446431660754004,
+          "normalized_latency_change_pct": -0.719500565961273
+        },
+        {
+          "layer": "unpooler",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 5.997727083375838,
+          "candidate_us": 5.962078739501397,
+          "control_paired_ratio": 1.1631073575048068,
+          "candidate_paired_ratio": 1.1861634409711286,
+          "normalized_latency_change_pct": -1.943752662571141
+        },
+        {
+          "layer": "router",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 6.29339521471941,
+          "candidate_us": 5.9225122220597495,
+          "control_paired_ratio": 4.179619928486062,
+          "candidate_paired_ratio": 4.452164817219625,
+          "normalized_latency_change_pct": -6.121626218316134
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "hopper_overlap",
+            64,
+            64,
+            128,
+            2,
+            4,
+            2
+          ],
+          "changed": true,
+          "control_us": 16.860612564189047,
+          "candidate_us": 32.73003636385683,
+          "control_paired_ratio": 1.005894633033187,
+          "candidate_paired_ratio": 0.5220892375839894,
+          "normalized_latency_change_pct": 92.66718419403676
+        },
+        {
+          "layer": "o",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 7.199641966135872,
+          "candidate_us": 7.543343193121627,
+          "control_paired_ratio": 1.017828315416172,
+          "candidate_paired_ratio": 0.9969055175920113,
+          "normalized_latency_change_pct": 2.0987744028841293
+        },
+        {
+          "layer": "pooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "hopper_overlap",
+            64,
+            64,
+            128,
+            1,
+            4,
+            2
+          ],
+          "changed": true,
+          "control_us": 22.558794586841366,
+          "candidate_us": 60.181229085463706,
+          "control_paired_ratio": 1.107151363679236,
+          "candidate_paired_ratio": 0.4205962690459314,
+          "normalized_latency_change_pct": 163.2337576818422
+        },
+        {
+          "layer": "unpooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 19.05373799115159,
+          "candidate_us": 19.165896028277782,
+          "control_paired_ratio": 1.0463038315576563,
+          "candidate_paired_ratio": 1.039346154826216,
+          "normalized_latency_change_pct": 0.669428245742032
+        },
+        {
+          "layer": "router",
+          "m": 128,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 8.43699964754407,
+          "candidate_us": 8.443720286426926,
+          "control_paired_ratio": 1.962783105281164,
+          "candidate_paired_ratio": 1.9384821160450114,
+          "normalized_latency_change_pct": 1.253609153007429
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "hopper_overlap",
+            64,
+            64,
+            128,
+            1,
+            4,
+            2
+          ],
+          "changed": true,
+          "control_us": 19.734215566350496,
+          "candidate_us": 56.17034379371443,
+          "control_paired_ratio": 1.0004958307686054,
+          "candidate_paired_ratio": 0.35007797577918404,
+          "normalized_latency_change_pct": 185.79228057456558
+        },
+        {
+          "layer": "o",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 9.679960376024146,
+          "candidate_us": 9.628458142947126,
+          "control_paired_ratio": 1.001657019140275,
+          "candidate_paired_ratio": 0.9937208158294544,
+          "normalized_latency_change_pct": 0.798635108010326
+        },
+        {
+          "layer": "pooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "hopper_overlap",
+            64,
+            64,
+            128,
+            1,
+            4,
+            2
+          ],
+          "changed": true,
+          "control_us": 30.27751127551607,
+          "candidate_us": 58.572564216890456,
+          "control_paired_ratio": 1.0193704662593603,
+          "candidate_paired_ratio": 0.5206532931817507,
+          "normalized_latency_change_pct": 95.78680853623574
+        },
+        {
+          "layer": "unpooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 24.33004352864194,
+          "candidate_us": 24.32618024264558,
+          "control_paired_ratio": 1.0147125423779122,
+          "candidate_paired_ratio": 0.9984304522821339,
+          "normalized_latency_change_pct": 1.630768578678854
+        },
+        {
+          "layer": "router",
+          "m": 256,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 10.264400114143337,
+          "candidate_us": 10.174044538764381,
+          "control_paired_ratio": 1.730252133016268,
+          "candidate_paired_ratio": 1.7361826812332901,
+          "normalized_latency_change_pct": -0.34158549564665686
+        }
+      ],
+      "unchanged_median_pct": 0.669428245742032,
+      "unchanged_range_pct": [
+        -2.901533899627873,
+        4.679210511583198
+      ]
+    },
+    "occupancy": {
+      "job": "ed6f332cdf94424b",
+      "source": "build/agent-round7/occupancy.py",
+      "sha256": "6f3b6cfb084106c22960ca7eba02ba1f2f2d6498903fefc2e2e75b1262b653d4",
+      "service_content_hash": "ae1e9d6bf85510f2801a1e81efa3829a0e36bfff078068b1001dfcdb368530f3",
+      "passed": true,
+      "score_us": 3865.9603887103985,
+      "speedup": 1.249573072219566,
+      "speedup_ci": [
+        1.2308294761362724,
+        1.2683166683028593
+      ],
+      "rows": [
+        {
+          "layer": "qkv_gate",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            16
+          ],
+          "changed": true,
+          "control_us": 10.373158160439779,
+          "candidate_us": 10.152949492750993,
+          "control_paired_ratio": 1.36814645513978,
+          "candidate_paired_ratio": 1.3852131868201263,
+          "normalized_latency_change_pct": -1.2320653486936894
+        },
+        {
+          "layer": "o",
+          "m": 1,
+          "before": [
+            "gemv",
+            4,
+            4
+          ],
+          "after": [
+            "gemv",
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.22751417454124,
+          "candidate_us": 5.853315426715826,
+          "control_paired_ratio": 1.1099131720823248,
+          "candidate_paired_ratio": 1.148067204839328,
+          "normalized_latency_change_pct": -3.323327466909287
+        },
+        {
+          "layer": "pooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            16
+          ],
+          "changed": true,
+          "control_us": 17.120457614205986,
+          "candidate_us": 16.43299665055576,
+          "control_paired_ratio": 1.2438919637750119,
+          "candidate_paired_ratio": 1.2667196751209897,
+          "normalized_latency_change_pct": -1.8021123216387602
+        },
+        {
+          "layer": "unpooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            16
+          ],
+          "changed": true,
+          "control_us": 3.862217436854616,
+          "candidate_us": 4.270878830124523,
+          "control_paired_ratio": 1.8145015034077197,
+          "candidate_paired_ratio": 1.6783432284287394,
+          "normalized_latency_change_pct": 8.112659715405846
+        },
+        {
+          "layer": "router",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            16
+          ],
+          "changed": true,
+          "control_us": 4.648857683908461,
+          "candidate_us": 4.138511739000975,
+          "control_paired_ratio": 2.2026915938426206,
+          "candidate_paired_ratio": 2.5052484816226497,
+          "normalized_latency_change_pct": -12.076921311376786
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            16,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 11.942769933553523,
+          "candidate_us": 13.08188246700728,
+          "control_paired_ratio": 1.1668983904923071,
+          "candidate_paired_ratio": 1.0689593650784546,
+          "normalized_latency_change_pct": 9.16209059141031
+        },
+        {
+          "layer": "o",
+          "m": 16,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.181914834029296,
+          "candidate_us": 6.04763085756089,
+          "control_paired_ratio": 1.1129237384696582,
+          "candidate_paired_ratio": 1.1164702921435956,
+          "normalized_latency_change_pct": -0.3176576841223522
+        },
+        {
+          "layer": "pooler",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 19.082651763131114,
+          "candidate_us": 20.42563087670279,
+          "control_paired_ratio": 1.1218566874781208,
+          "candidate_paired_ratio": 1.0402615911952589,
+          "normalized_latency_change_pct": 7.843709406699273
+        },
+        {
+          "layer": "unpooler",
+          "m": 16,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 17.7910936977284,
+          "candidate_us": 18.19289394916434,
+          "control_paired_ratio": 1.0270307534433503,
+          "candidate_paired_ratio": 1.0280937407239985,
+          "normalized_latency_change_pct": -0.1033940037315717
+        },
+        {
+          "layer": "router",
+          "m": 16,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 6.589571748624059,
+          "candidate_us": 6.0638880828021655,
+          "control_paired_ratio": 2.258113311447633,
+          "candidate_paired_ratio": 2.496088399656037,
+          "normalized_latency_change_pct": -9.53392068330582
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            32,
+            64,
+            128,
+            16,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 13.307749044040152,
+          "candidate_us": 14.073787193227677,
+          "control_paired_ratio": 1.0844809252521825,
+          "candidate_paired_ratio": 1.014083774871526,
+          "normalized_latency_change_pct": 6.941946230189444
+        },
+        {
+          "layer": "o",
+          "m": 32,
+          "before": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.286138314178914,
+          "candidate_us": 5.963819234680511,
+          "control_paired_ratio": 1.0868357530002761,
+          "candidate_paired_ratio": 1.108014730068503,
+          "normalized_latency_change_pct": -1.9114346130504556
+        },
+        {
+          "layer": "pooler",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 19.611535467396934,
+          "candidate_us": 21.491604624353293,
+          "control_paired_ratio": 1.1283155480901086,
+          "candidate_paired_ratio": 0.9998322639488348,
+          "normalized_latency_change_pct": 12.850483903552924
+        },
+        {
+          "layer": "unpooler",
+          "m": 32,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 18.443382713030086,
+          "candidate_us": 18.309497542635743,
+          "control_paired_ratio": 1.0254084302333366,
+          "candidate_paired_ratio": 1.0259156245673209,
+          "normalized_latency_change_pct": -0.04943821127572079
+        },
+        {
+          "layer": "router",
+          "m": 32,
+          "before": [
+            "dot",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 6.665214906751399,
+          "candidate_us": 6.112148054907238,
+          "control_paired_ratio": 2.287698131837867,
+          "candidate_paired_ratio": 2.4973216740144277,
+          "normalized_latency_change_pct": -8.393934364073818
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            16,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 12.43023284769135,
+          "candidate_us": 12.850911467142312,
+          "control_paired_ratio": 1.1739121002606412,
+          "candidate_paired_ratio": 1.074476235048055,
+          "normalized_latency_change_pct": 9.254356864220359
+        },
+        {
+          "layer": "o",
+          "m": 8,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.09373023114251,
+          "candidate_us": 5.772179804661666,
+          "control_paired_ratio": 1.1080239857826997,
+          "candidate_paired_ratio": 1.125398085902703,
+          "normalized_latency_change_pct": -1.54381816866761
+        },
+        {
+          "layer": "pooler",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 18.894631100414994,
+          "candidate_us": 20.066904923626115,
+          "control_paired_ratio": 1.136407452017251,
+          "candidate_paired_ratio": 1.0421138714572764,
+          "normalized_latency_change_pct": 9.048299148740412
+        },
+        {
+          "layer": "unpooler",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 5.997727083375838,
+          "candidate_us": 5.698451278174327,
+          "control_paired_ratio": 1.1631073575048068,
+          "candidate_paired_ratio": 1.2073455456818678,
+          "normalized_latency_change_pct": -3.664086750912454
+        },
+        {
+          "layer": "router",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 6.29339521471941,
+          "candidate_us": 5.666064964991892,
+          "control_paired_ratio": 4.179619928486062,
+          "candidate_paired_ratio": 4.631079899732501,
+          "normalized_latency_change_pct": -9.748481585742363
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 16.860612564189047,
+          "candidate_us": 17.212337596151823,
+          "control_paired_ratio": 1.005894633033187,
+          "candidate_paired_ratio": 0.9797623783183158,
+          "normalized_latency_change_pct": 2.6672033232920445
+        },
+        {
+          "layer": "o",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 7.199641966135872,
+          "candidate_us": 7.343859437837149,
+          "control_paired_ratio": 1.017828315416172,
+          "candidate_paired_ratio": 1.0152700350216235,
+          "normalized_latency_change_pct": 0.2519802915776914
+        },
+        {
+          "layer": "pooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 22.558794586841366,
+          "candidate_us": 23.003589027403116,
+          "control_paired_ratio": 1.107151363679236,
+          "candidate_paired_ratio": 1.0954812313314655,
+          "normalized_latency_change_pct": 1.0652973336281235
+        },
+        {
+          "layer": "unpooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 19.05373799115159,
+          "candidate_us": 18.876587166996604,
+          "control_paired_ratio": 1.0463038315576563,
+          "candidate_paired_ratio": 1.056123112752914,
+          "normalized_latency_change_pct": -0.9297477800350951
+        },
+        {
+          "layer": "router",
+          "m": 128,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 8.43699964754407,
+          "candidate_us": 7.773392733628766,
+          "control_paired_ratio": 1.962783105281164,
+          "candidate_paired_ratio": 2.058303408592881,
+          "normalized_latency_change_pct": -4.640729977560376
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 19.734215566350496,
+          "candidate_us": 19.392351880903224,
+          "control_paired_ratio": 1.0004958307686054,
+          "candidate_paired_ratio": 1.0115327944283918,
+          "normalized_latency_change_pct": -1.0911127865135928
+        },
+        {
+          "layer": "o",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 9.679960376024146,
+          "candidate_us": 8.935764723264102,
+          "control_paired_ratio": 1.001657019140275,
+          "candidate_paired_ratio": 1.017036604972767,
+          "normalized_latency_change_pct": -1.5121958990752304
+        },
+        {
+          "layer": "pooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 30.27751127551607,
+          "candidate_us": 27.238375675428212,
+          "control_paired_ratio": 1.0193704662593603,
+          "candidate_paired_ratio": 1.062031041228079,
+          "normalized_latency_change_pct": -4.0168858830517795
+        },
+        {
+          "layer": "unpooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 24.33004352864194,
+          "candidate_us": 23.815881378231914,
+          "control_paired_ratio": 1.0147125423779122,
+          "candidate_paired_ratio": 1.0225109361640392,
+          "normalized_latency_change_pct": -0.762670941729271
+        },
+        {
+          "layer": "router",
+          "m": 256,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 10.264400114143337,
+          "candidate_us": 9.525896737378549,
+          "control_paired_ratio": 1.730252133016268,
+          "candidate_paired_ratio": 1.8173616669991062,
+          "normalized_latency_change_pct": -4.793186494721036
+        }
+      ],
+      "unchanged_median_pct": -1.0911127865135928,
+      "unchanged_range_pct": [
+        -4.793186494721036,
+        2.6672033232920445
+      ]
+    },
+    "round7_selected": {
+      "job": "f5ab0410cf1e4449",
+      "source": "results/round7_selected_source.py",
+      "build_source": "build/agent-round7/selected.py",
+      "sha256": "b1115afac8b8a47bf8951ce782818d490dd53ecc19cf34959d21831e32494944",
+      "service_content_hash": "18202b10a2a8d0e22bc5b7c72d574e803a7cb6c69dddfd64ffe767508736ee4d",
+      "passed": true,
+      "score_us": 3764.8793644202005,
+      "speedup": 1.283122122226074,
+      "speedup_ci": [
+        1.2638752903926829,
+        1.302368954059465
+      ],
+      "rows": [
+        {
+          "layer": "qkv_gate",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 10.373158160439779,
+          "candidate_us": 10.398443361145755,
+          "control_paired_ratio": 1.36814645513978,
+          "candidate_paired_ratio": 1.3694356906200738,
+          "normalized_latency_change_pct": -0.0941435577533456
+        },
+        {
+          "layer": "o",
+          "m": 1,
+          "before": [
+            "gemv",
+            4,
+            4
+          ],
+          "after": [
+            "gemv",
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.22751417454124,
+          "candidate_us": 6.169901049320732,
+          "control_paired_ratio": 1.1099131720823248,
+          "candidate_paired_ratio": 1.1462096031129008,
+          "normalized_latency_change_pct": -3.1666486593727172
+        },
+        {
+          "layer": "pooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 17.120457614205986,
+          "candidate_us": 16.90779295385198,
+          "control_paired_ratio": 1.2438919637750119,
+          "candidate_paired_ratio": 1.2566986004986749,
+          "normalized_latency_change_pct": -1.0190698643717133
+        },
+        {
+          "layer": "unpooler",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            8
+          ],
+          "changed": false,
+          "control_us": 3.862217436854616,
+          "candidate_us": 3.3083192207696266,
+          "control_paired_ratio": 1.8145015034077197,
+          "candidate_paired_ratio": 1.9925525511373552,
+          "normalized_latency_change_pct": -8.935826943585678
+        },
+        {
+          "layer": "router",
+          "m": 1,
+          "before": [
+            "gemv",
+            1,
+            8
+          ],
+          "after": [
+            "gemv",
+            1,
+            16
+          ],
+          "changed": true,
+          "control_us": 4.648857683908461,
+          "candidate_us": 3.80507553932176,
+          "control_paired_ratio": 2.2026915938426206,
+          "candidate_paired_ratio": 2.6827324167844484,
+          "normalized_latency_change_pct": -17.893727303493424
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 11.942769933553523,
+          "candidate_us": 12.590239058315602,
+          "control_paired_ratio": 1.1668983904923071,
+          "candidate_paired_ratio": 1.1602639793519858,
+          "normalized_latency_change_pct": 0.5718018708144923
+        },
+        {
+          "layer": "o",
+          "m": 16,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.181914834029296,
+          "candidate_us": 6.203252181468216,
+          "control_paired_ratio": 1.1129237384696582,
+          "candidate_paired_ratio": 1.1168335464712396,
+          "normalized_latency_change_pct": -0.35007974231565653
+        },
+        {
+          "layer": "pooler",
+          "m": 16,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 19.082651763131114,
+          "candidate_us": 18.81939299042297,
+          "control_paired_ratio": 1.1218566874781208,
+          "candidate_paired_ratio": 1.1511530185184966,
+          "normalized_latency_change_pct": -2.544955411581973
+        },
+        {
+          "layer": "unpooler",
+          "m": 16,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 17.7910936977284,
+          "candidate_us": 17.90970851172129,
+          "control_paired_ratio": 1.0270307534433503,
+          "candidate_paired_ratio": 1.0389895059408931,
+          "normalized_latency_change_pct": -1.1509983911447863
+        },
+        {
+          "layer": "router",
+          "m": 16,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 6.589571748624059,
+          "candidate_us": 5.674141786175155,
+          "control_paired_ratio": 2.258113311447633,
+          "candidate_paired_ratio": 2.6196032080749627,
+          "normalized_latency_change_pct": -13.799414182767544
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "tma",
+            32,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 13.307749044040152,
+          "candidate_us": 12.230554025394502,
+          "control_paired_ratio": 1.0844809252521825,
+          "candidate_paired_ratio": 1.1904610872428232,
+          "normalized_latency_change_pct": -8.902446550025156
+        },
+        {
+          "layer": "o",
+          "m": 32,
+          "before": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            32,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.286138314178914,
+          "candidate_us": 6.097495618566134,
+          "control_paired_ratio": 1.0868357530002761,
+          "candidate_paired_ratio": 1.120460064458792,
+          "normalized_latency_change_pct": -3.0009379651346424
+        },
+        {
+          "layer": "pooler",
+          "m": 32,
+          "before": [
+            "weight_major",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            32,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 19.611535467396934,
+          "candidate_us": 19.24409993922496,
+          "control_paired_ratio": 1.1283155480901086,
+          "candidate_paired_ratio": 1.1448703375430114,
+          "normalized_latency_change_pct": -1.445996888034562
+        },
+        {
+          "layer": "unpooler",
+          "m": 32,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 18.443382713030086,
+          "candidate_us": 18.163088017766807,
+          "control_paired_ratio": 1.0254084302333366,
+          "candidate_paired_ratio": 1.0271381172103948,
+          "normalized_latency_change_pct": -0.1683986747328503
+        },
+        {
+          "layer": "router",
+          "m": 32,
+          "before": [
+            "dot",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            32,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 6.665214906751399,
+          "candidate_us": 6.326998724524366,
+          "control_paired_ratio": 2.287698131837867,
+          "candidate_paired_ratio": 2.452979773618786,
+          "normalized_latency_change_pct": -6.737994481588627
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            8,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 12.43023284769135,
+          "candidate_us": 11.978469573799256,
+          "control_paired_ratio": 1.1739121002606412,
+          "candidate_paired_ratio": 1.1700993633861598,
+          "normalized_latency_change_pct": 0.3258472736407336
+        },
+        {
+          "layer": "o",
+          "m": 8,
+          "before": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "after": [
+            "orientation",
+            16,
+            64,
+            128,
+            1,
+            4,
+            4
+          ],
+          "changed": false,
+          "control_us": 6.09373023114251,
+          "candidate_us": 6.106129110114961,
+          "control_paired_ratio": 1.1080239857826997,
+          "candidate_paired_ratio": 1.121496177390651,
+          "normalized_latency_change_pct": -1.2012695076051627
+        },
+        {
+          "layer": "pooler",
+          "m": 8,
+          "before": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "after": [
+            "weight_major",
+            16,
+            64,
+            128,
+            4,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 18.894631100414994,
+          "candidate_us": 18.721167058524365,
+          "control_paired_ratio": 1.136407452017251,
+          "candidate_paired_ratio": 1.1554835125930416,
+          "normalized_latency_change_pct": -1.6509158605804597
+        },
+        {
+          "layer": "unpooler",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            16,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 5.997727083375838,
+          "candidate_us": 6.158136895090339,
+          "control_paired_ratio": 1.1631073575048068,
+          "candidate_paired_ratio": 1.1847739447733416,
+          "normalized_latency_change_pct": -1.8287528489394522
+        },
+        {
+          "layer": "router",
+          "m": 8,
+          "before": [
+            "dot",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "after": [
+            "dot_reduce32",
+            16,
+            64,
+            64,
+            32,
+            4,
+            3
+          ],
+          "changed": true,
+          "control_us": 6.29339521471941,
+          "candidate_us": 5.568645603827137,
+          "control_paired_ratio": 4.179619928486062,
+          "candidate_paired_ratio": 4.671872212588605,
+          "normalized_latency_change_pct": -10.53651002645456
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 16.860612564189047,
+          "candidate_us": 17.448893401476163,
+          "control_paired_ratio": 1.005894633033187,
+          "candidate_paired_ratio": 0.9949054690579621,
+          "normalized_latency_change_pct": 1.1045435287063254
+        },
+        {
+          "layer": "o",
+          "m": 128,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 7.199641966135872,
+          "candidate_us": 7.569108537009903,
+          "control_paired_ratio": 1.017828315416172,
+          "candidate_paired_ratio": 0.9808288715484305,
+          "normalized_latency_change_pct": 3.772262923840186
+        },
+        {
+          "layer": "pooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 22.558794586841366,
+          "candidate_us": 23.015205744933674,
+          "control_paired_ratio": 1.107151363679236,
+          "candidate_paired_ratio": 1.0865859429462676,
+          "normalized_latency_change_pct": 1.8926639780747934
+        },
+        {
+          "layer": "unpooler",
+          "m": 128,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 19.05373799115159,
+          "candidate_us": 19.185083258515057,
+          "control_paired_ratio": 1.0463038315576563,
+          "candidate_paired_ratio": 1.0316348399829096,
+          "normalized_latency_change_pct": 1.421917039462306
+        },
+        {
+          "layer": "router",
+          "m": 128,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 8.43699964754407,
+          "candidate_us": 8.334761019971646,
+          "control_paired_ratio": 1.962783105281164,
+          "candidate_paired_ratio": 1.9542251606585008,
+          "normalized_latency_change_pct": 0.4379200920624493
+        },
+        {
+          "layer": "qkv_gate",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 19.734215566350496,
+          "candidate_us": 19.75419296754719,
+          "control_paired_ratio": 1.0004958307686054,
+          "candidate_paired_ratio": 1.0148731437116327,
+          "normalized_latency_change_pct": -1.416661090315785
+        },
+        {
+          "layer": "o",
+          "m": 256,
+          "before": [
+            "torch"
+          ],
+          "after": [
+            "torch"
+          ],
+          "changed": false,
+          "control_us": 9.679960376024146,
+          "candidate_us": 9.54405037430874,
+          "control_paired_ratio": 1.001657019140275,
+          "candidate_paired_ratio": 0.995803649174873,
+          "normalized_latency_change_pct": 0.5878036267744191
+        },
+        {
+          "layer": "pooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 30.27751127551607,
+          "candidate_us": 29.937893787459977,
+          "control_paired_ratio": 1.0193704662593603,
+          "candidate_paired_ratio": 1.0336064615505518,
+          "normalized_latency_change_pct": -1.3773129155786767
+        },
+        {
+          "layer": "unpooler",
+          "m": 256,
+          "before": [
+            "torch_transposed"
+          ],
+          "after": [
+            "torch_transposed"
+          ],
+          "changed": false,
+          "control_us": 24.33004352864194,
+          "candidate_us": 23.911644145629246,
+          "control_paired_ratio": 1.0147125423779122,
+          "candidate_paired_ratio": 1.0117246696328543,
+          "normalized_latency_change_pct": 0.2953246900801787
+        },
+        {
+          "layer": "router",
+          "m": 256,
+          "before": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "after": [
+            "dot",
+            64,
+            64,
+            64,
+            16,
+            4,
+            3
+          ],
+          "changed": false,
+          "control_us": 10.264400114143337,
+          "candidate_us": 10.191411914109594,
+          "control_paired_ratio": 1.730252133016268,
+          "candidate_paired_ratio": 1.7395038649240286,
+          "normalized_latency_change_pct": -0.5318603823949997
+        }
+      ],
+      "unchanged_median_pct": -0.5318603823949997,
+      "unchanged_range_pct": [
+        -8.935826943585678,
+        3.772262923840186
+      ],
+      "score_change_pct": -1.710577697911242,
+      "counterfactual_control_on_changed_cases_us": 3812.017723419951,
+      "counterfactual_note": "Keeps selected-run timings for the 25 unchanged cases; replaces only changed cases with earlier control normalized ratios. Order-dependent diagnostic, not measured gain."
+    }
+  }
+}
