@@ -17,6 +17,5 @@ checks.py
 nvfp4.py
 AGENTS.md
 !muse_decode_layer/AGENTS.md
+!muse_bf16_proj/AGENTS.md
 
-# separate repository with its own history
-muse_bf16_proj/
